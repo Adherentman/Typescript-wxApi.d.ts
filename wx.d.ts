@@ -57,7 +57,7 @@ interface PageOpts<Data = {}> {
     onReachBottom?: ZeroParamVoidFunc;
     onShareAppMessage?: ZeroParamVoidFunc;
     onPageScroll?: ZeroParamVoidFunc;
-    onTabItemTap?: (item: TabItem) => void;
+    onTabItemTap?: (item: any) => void;
     
     [key: string]: any;
 }
@@ -120,7 +120,7 @@ interface uploadTask {
 interface NetworkAPIs {
     request: (options: NetworkRequestOpts) => requestTask;
     uploadFile: (options: uploadFileOpts) => uploadTask;
-};
+}
 
 // Media APIs
 
@@ -222,7 +222,7 @@ interface getBackgroundAudioPlayerStateRes {
     duration: number;
     currentPosition: number;
     status: '2' | '1' | '0';
-    downloadPercent: int;
+    downloadPercent: number;
     dataUrl: string;
 }
 
@@ -404,14 +404,13 @@ interface MediaAPIs {
     createCameraContext: () => createCameraContextOpts;
     createLivePlayerContext: (domid: string) => createLivePlayerContextOpts;
     createLivePusherContext: () => createLivePusherContextOpts;
-    
-};
+}
 
 // File APIs
 
 interface FileAPIs {
 
-};
+}
 
 // Storage APIs
 
@@ -453,7 +452,7 @@ interface StorageAPIs {
     removeStorageSync: (key: string) => object | string;
     clearStorage: (options: ClearStorageOpts) => void;
     clearStorageSync: () => void;
-};
+}
 
 // Location APIs
 
@@ -504,7 +503,7 @@ interface ShowActionSheetRes {
 }
 
 interface ShowActionSheetOpts extends WxApiCallback<ShowActionSheetRes> {
-    itemList: string | array;
+    itemList: string | any[];
     itemColor?: string;
 }
 
@@ -583,9 +582,9 @@ interface navigateOpts extends WxApiCallback {
 // animation 动画
 
 interface createAnimationOpts {
-    duration?: int;
+    duration?: number;
     timingFunction?: 'linear' | 'ease' | 'ease-in' | 'ease-in-out' | 'ease-out' | 'step-start' | 'step-end';
-    delay?: int;
+    delay?: number;
     transformOrigin?: string;
 }
 // todo animation实例
@@ -669,7 +668,7 @@ interface AuthorizeOpts extends WxApiCallback<AuthorizeRes> {
 interface OpenInterfaceAPIs {
     login: (options: LoginOpts) => void;
     checkSession: (options: CheckSessionOpts) => void;
-    authorize: (optiona: AuthorizeOpts) => vois;
+    authorize: (optiona: AuthorizeOpts) => void;
 }
 
 // Multithreading APIs
