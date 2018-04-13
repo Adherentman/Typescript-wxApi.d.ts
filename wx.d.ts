@@ -224,6 +224,7 @@ interface SocketTaskAPIs {
   onError: (options?: onErrorOpts) => void;
   onMessage: (options?: onMessageOpts) => void;
 }
+
 // Media APIs
 
 // picture 图片
@@ -805,7 +806,7 @@ declare let wx: NetworkAPIs &
   OpenInterfaceAPIs &
   MultithreadingAPIs &
   DebuggingAPIs;
-  
+
 declare let SocketTask: SocketTaskAPIs;
 
 declare function App(app: AppOpts): void;
