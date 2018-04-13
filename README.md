@@ -1,6 +1,4 @@
-# Typescript-wxApi.d.ts
-
-[![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.png?v=102)](https://github.com/ellerbrock/open-source-badge/)
+# Typescript-wxApi.d.ts	[![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.png?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
 * git clone
 * 在app.ts中`<reference path="./typings/wx.d.ts" />`
