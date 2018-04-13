@@ -117,9 +117,30 @@ interface uploadTask {
     onProgressUpdate: (progress: number, totalBytesSent: number, totalBytesExpectedToSend: number) => void;
     abort: ZeroParamVoidFunc;
 }
+
+interface downloadRes {
+    tempFilePath: string;
+    statusCode: number;
+}
+
+interface downloadFileOpts extends WxApiCallback<downloadRes>{
+    url: string;
+    header: object;
+}
+
+interface downloadTask {
+    onProgressUpdate: (progress: number, totalBytesWritten: number, totalBytesExpectedToWrite: number) => void;
+    abort: ZeroParamVoidFunc;
+}
+
 interface NetworkAPIs {
+    // 发起请求
     request: (options: NetworkRequestOpts) => requestTask;
+    // 上传、下载
     uploadFile: (options: uploadFileOpts) => uploadTask;
+    downloadFile: (options: downloadFileOpts) => downloadTask;
+    // WebSocket
+    
 }
 
 // Media APIs
