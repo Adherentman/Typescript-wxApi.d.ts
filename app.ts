@@ -2,5 +2,8 @@
 
 //在微信小程序的app.ts中这样用
 Page({
-  data:{}
+  data:{},
+  a(){
+    SocketTask.onError();
+  }
 })

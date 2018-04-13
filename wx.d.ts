@@ -71,14 +71,15 @@ interface IPage<Data = {}> extends PageOpts<Data> {
 interface IComponent {
 }
 
-// Network APIs
-
 interface WxApiCallback<Res = undefined> {
     success?: (res: Res) => void;
     fail?: (err: any) => void;
     complete?: (obj: any) => void;
 }
 
+// Network APIs
+
+// 发起请求
 type NetworkRequestData = string | object | ArrayBuffer;
 
 interface NetworkRequestRes {
@@ -100,6 +101,7 @@ interface requestTask {
     abort: ZeroParamVoidFunc;
 }
 
+// 上传
 interface uploadFileRes {
     data: string;
     statusCode: number;
@@ -118,6 +120,7 @@ interface uploadTask {
     abort: ZeroParamVoidFunc;
 }
 
+// 下载
 interface downloadRes {
     tempFilePath: string;
     statusCode: number;
@@ -125,12 +128,43 @@ interface downloadRes {
 
 interface downloadFileOpts extends WxApiCallback<downloadRes>{
     url: string;
-    header: object;
+    header?: object;
 }
 
 interface downloadTask {
     onProgressUpdate: (progress: number, totalBytesWritten: number, totalBytesExpectedToWrite: number) => void;
     abort: ZeroParamVoidFunc;
+}
+
+// Webscoket connectSocket
+interface connectSocketOpts extends WxApiCallback {
+    url: string;
+    header?: object;
+    method?: string;
+    protocols?: string[];
+}
+
+// sendSocketMessage
+interface sendSocketMessageOpts extends WxApiCallback<sendSocketMessageRes> {
+
+}
+
+interface sendSocketMessageRes{
+    data:	string | ArrayBuffer;
+}
+
+//onSocketMessage
+interface onSocketMessageOpts {
+    data: string | ArrayBuffer;
+}
+
+//closeSocket
+interface closeSocketOpts extends WxApiCallback<closeSocketRes> {
+}
+
+interface closeSocketRes {
+    code?: number;
+    reason?: string;
 }
 
 interface NetworkAPIs {
@@ -140,9 +174,50 @@ interface NetworkAPIs {
     uploadFile: (options: uploadFileOpts) => uploadTask;
     downloadFile: (options: downloadFileOpts) => downloadTask;
     // WebSocket
-    
+    connectSocket: ZeroParamVoidFunc;
+    onSocketOpen: ZeroParamVoidFunc;
+    sendSocketMessageRes: (options: sendSocketMessageOpts) => void;
+    onSocketMessage: (options: onSocketMessageOpts) => void;
+    closeSocket: (options: closeSocketOpts) => void;
+    onSocketClose: ZeroParamVoidFunc;
 }
 
+//SocketTask APIs
+
+//send
+interface sendOpts extends WxApiCallback<sendRes> {
+}
+
+interface sendRes {
+    data?: string | ArrayBuffer;
+}
+
+//close
+interface closeOpts extends WxApiCallback<closeRes> {
+}
+
+interface closeRes {
+    code?: number;
+    reason?: string;
+}
+
+//onError
+interface onErrorOpts {
+    errMsg?: string;
+}
+
+//onMessage
+interface onMessageOpts {
+    data?: string | ArrayBuffer;
+}
+interface SocketTaskAPIs {
+    send: (options?: sendOpts) => void;
+    close: (options?: closeOpts) => void;
+    onOpen: ZeroParamVoidFunc;
+    onClose: ZeroParamVoidFunc;
+    onError: (options?: onErrorOpts) => void;
+    onMessage: (options?: onMessageOpts) => void;
+}
 // Media APIs
 
 // picture 图片
@@ -706,7 +781,8 @@ interface DebuggingAPIs {
 
 // Declares
 
-declare let wx: NetworkAPIs & MediaAPIs & StorageAPIs & LocationAPIs & DeviceAPIs & UIAPIs & NodeInformationAPIs & ThirdPartyAPIs & OpenInterfaceAPIs & MultithreadingAPIs & DebuggingAPIs;
+declare let wx: NetworkAPIs  & MediaAPIs & StorageAPIs & LocationAPIs & DeviceAPIs & UIAPIs & NodeInformationAPIs & ThirdPartyAPIs & OpenInterfaceAPIs & MultithreadingAPIs & DebuggingAPIs;
+declare let SocketTask: SocketTaskAPIs;
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
