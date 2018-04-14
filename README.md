@@ -1,4 +1,6 @@
-# Typescript-wxApi.d.ts
+# Typescript-wxApi.d.ts	
+
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 * git clone
 * 在app.ts中`<reference path="./typings/wx.d.ts" />`
