@@ -521,7 +521,58 @@ interface MediaAPIs {
 
 // File APIs
 
-interface FileAPIs {}
+// save
+interface saveFileRes {
+    savedFilePath: string
+}
+
+interface saveFileOpts extends WxApiCallback<saveFileRes> {
+    tempFilePath: string;
+}
+
+// getSavedFileList
+interface fileListOpts {
+    filePath: string;
+    createTime: number;
+    size: number;
+}
+
+interface getSavedFileListRes {
+    errMsg: string
+    fileList: fileListOpts;
+}
+
+interface getSavedFileListOpts extends WxApiCallback<getSavedFileListRes> {}
+
+// getSavedFileInfo
+interface getSavedFileInfoRes {
+    errMsg: string;
+    size: number;
+    createTime: number;
+}
+
+interface getSavedFileInfoOpts extends WxApiCallback<getSavedFileInfoRes> {
+    filePath: String;
+}
+
+// removeSavedFile
+interface removeSavedFileOpts extends WxApiCallback {
+    filePath: string;
+}
+
+// openDocument
+interface openDocumentOpts extends WxApiCallback {
+    filePath: string;
+    fileType: string;
+}
+
+interface FileAPIs {
+    saveFile: (options: saveFileOpts) => void;
+    getSavedFileList: (options: getSavedFileListOpts) => void;
+    getSavedFileInfoRes: (options: getSavedFileInfoOpts) => void;
+    removeSavedFile: (options: removeSavedFileOpts) => void;
+    openDocument: (options: openDocumentOpts) => void;
+}
 
 // Storage APIs
 
