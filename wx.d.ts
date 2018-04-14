@@ -887,10 +887,46 @@ interface AuthorizeOpts extends WxApiCallback<AuthorizeRes> {
     | "scope.camera";
 }
 
+//用户信息
+// getUserInfo
+interface userInfoOpts {
+    nickName: string;
+    avatarUrl: string;
+    gender: string;
+    city: string;
+    province: string;
+    country: string;
+    language: string;
+}
+
+interface getUserInfoRes {
+    userInfo: userInfoOpts;
+    rawData: string;
+    signature: string;
+    encryptedData: string;
+    iv: string;
+}
+interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
+    withCredentials: boolean;
+    lang?: string;
+    timeout?: number;
+}
+
+// 微信支付
+interface requestPaymentOpts extends WxApiCallback {
+    timeStamp: string;
+    nonceStr: string;
+    package: string;
+    signType: string;
+    paySign: string;
+}
+
 interface OpenInterfaceAPIs {
   login: (options: LoginOpts) => void;
   checkSession: (options: CheckSessionOpts) => void;
   authorize: (optiona: AuthorizeOpts) => void;
+  getUserInfo: (options: getUserInfoOpts) => void;
+  requestPayment: (options: requestPaymentOpts) => void;
 }
 
 // Multithreading APIs
