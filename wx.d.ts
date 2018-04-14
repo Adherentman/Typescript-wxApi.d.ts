@@ -530,6 +530,18 @@ interface saveFileOpts extends WxApiCallback<saveFileRes> {
     tempFilePath: string;
 }
 
+//getFileInfo
+interface getFileInfoRes {
+    size: number;
+    digest: string;
+    errMsg: string;
+}
+
+interface getFileInfoOpts extends WxApiCallback<getFileInfoRes> {
+    filePath: string;
+    digestAlgorithm?: string;
+}
+
 // getSavedFileList
 interface fileListOpts {
     filePath: string;
@@ -568,10 +580,57 @@ interface openDocumentOpts extends WxApiCallback {
 
 interface FileAPIs {
     saveFile: (options: saveFileOpts) => void;
+    getFileInfo: (options: getFileInfoOpts) => void;
     getSavedFileList: (options: getSavedFileListOpts) => void;
     getSavedFileInfoRes: (options: getSavedFileInfoOpts) => void;
     removeSavedFile: (options: removeSavedFileOpts) => void;
     openDocument: (options: openDocumentOpts) => void;
+}
+
+
+// Location APIs
+
+//获取位置
+// getLocation
+interface getLocationRes {
+    latitude: number;
+    longitude: number;
+    speed: number;
+    accuracy: number;
+    altitude: number;
+    verticalAccuracy: number;
+    horizontalAccuracy: number;
+}
+
+interface getLocationOpts extends WxApiCallback<getLocationRes> {
+    type?: string;
+    altitude?: boolean;
+}
+
+//chooseLocation
+interface chooseLocationRes {
+    name: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+}
+
+interface chooseLocationOpts extends WxApiCallback<chooseLocationRes> {}
+
+//查看位置
+interface openLocationOpts extends WxApiCallback {
+    latitude: number;
+    longitude: number;
+    scale?: number;
+    name?: string;
+    address?: string;
+}
+
+interface LocationAPIs {
+    getLocation: (options: getLocationOpts) => void;
+    chooseLocation: (options: chooseLocationOpts) => void;
+    openLocation: (options: openLocationOpts) => void;
+    createMapContext: any;
 }
 
 // Storage APIs
@@ -614,9 +673,6 @@ interface StorageAPIs {
   clearStorageSync: () => void;
 }
 
-// Location APIs
-
-interface LocationAPIs {}
 
 //  Device APIs
 
