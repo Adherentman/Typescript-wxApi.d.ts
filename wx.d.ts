@@ -676,7 +676,99 @@ interface StorageAPIs {
 
 //  Device APIs
 
-interface DeviceAPIs {}
+// 系统信息
+// getSystemInfo
+interface getSystemInfoRes {
+  brand: string;
+  model: string;
+  pixelRatio: any;
+  screenWidth: number;
+  screenHeight: number;
+  windowWidth: number;
+  windowHeight: number;
+  statusBarHeight: number;
+  language: string;
+  version: number;
+  system: any;
+  platform: string;
+  fontSizeSetting: number;
+  SDKVersion: any;
+}
+
+interface getSystemInfoOpts extends WxApiCallback<getSystemInfoRes> {}
+
+// getSystemInfoSync
+interface getSystemInfoSyncRes {
+  brand: string;
+  model: string;
+  pixelRatio: any;
+  screenWidth: number;
+  screenHeight: number;
+  windowWidth: number;
+  windowHeight: number;
+  statusBarHeight: number;
+  language: string;
+  version: number;
+  system: any;
+  platform: string;
+  fontSizeSetting: number;
+  SDKVersion: any;
+}
+
+// 网络状态
+// getNetworkType
+interface getNetworkTypeRes {
+  networkType: string;
+}
+
+interface getNetworkTypeOpts extends WxApiCallback<getNetworkTypeRes> {}
+
+// onNetworkStatusChange
+interface onNetworkStatusChangeOpts {
+  isConnected: boolean;
+  networkType: 'wifi' | '2g' | '3g' | '4g' | 'none' | 'unknown'
+}
+
+// 屏幕亮度
+// setScreenBrightness
+interface setScreenBrightnessOpts extends WxApiCallback{
+  value: number
+}
+
+// getScreenBrightness
+interface getScreenBrightnessRes {
+  value: number;
+}
+
+interface getScreenBrightnessOpts extends WxApiCallback<getScreenBrightnessRes> {}
+
+// setKeepScreenOn
+interface setKeepScreenOnRes {
+  errMsg: string;
+}
+interface setKeepScreenOnOpts extends WxApiCallback<setKeepScreenOnRes>{
+  keepScreenOn: boolean;
+}
+
+// 震动
+// vibrateLong
+interface vibrateLongOpts extends WxApiCallback {}
+
+// vibrateShort
+interface vibrateShortOpts extends WxApiCallback {}
+
+interface DeviceAPIs {
+  getSystemInfo: (options: getSystemInfoOpts) => void;
+  getSystemInfoSync: () => getSystemInfoSyncRes;
+  canIUse: (string: any) => void;
+  getNetworkType: (options: getNetworkTypeOpts) => void;
+  onNetworkStatusChange: (res: onNetworkStatusChangeOpts) => void;
+  setScreenBrightness: (options: setScreenBrightnessOpts) => void;
+  getScreenBrightness: (options: getScreenBrightnessOpts) => void;
+  setKeepScreenOn: (options: setKeepScreenOnOpts) => void;
+  vibrateLong: (options: vibrateLongOpts) => void;
+  vibrateShort: (options: vibrateShortOpts) => void;
+}
 
 // UI APIs
 
