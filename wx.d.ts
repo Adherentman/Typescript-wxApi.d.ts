@@ -729,6 +729,166 @@ interface onNetworkStatusChangeOpts {
   networkType: 'wifi' | '2g' | '3g' | '4g' | 'none' | 'unknown'
 }
 
+//加速度计
+
+interface onAccelerometerChangeOpts {
+  x: number;
+  y: number;
+  z: number;
+}
+
+//罗盘
+interface onCompassChangeOpts {
+  direction: number
+}
+
+// 拨打电话
+interface makePhoneCallOpts extends WxApiCallback {
+  phoneNumber: string
+}
+
+// 扫码
+interface scanCodeRes {
+  result: string;
+  scanType: string;
+  charSet: string;
+  path: string;
+}
+
+interface scanCodeOpts extends WxApiCallback<scanCodeRes> {
+  onlyFromCamera?: boolean;
+  scanType?: any[];
+}
+
+// 剪贴板
+interface setClipboardDataOpts extends WxApiCallback {
+  data: string
+}
+
+interface getClipboardDataRes {
+  data: string
+}
+
+interface getClipboardDataOpts extends WxApiCallback<getClipboardDataRes> {}
+
+// 蓝牙
+interface getBluetoothAdapterStateRes {
+  discovering: boolean;
+  available: boolean;
+  errMsg: string;
+}
+
+interface getBluetoothAdapterStateOpts extends WxApiCallback<getBluetoothAdapterStateRes> {}
+
+interface onBluetoothAdapterStateChangeCb {
+  available: boolean;
+  discovering: boolean;
+}
+
+interface startBluetoothDevicesDiscoveryRes {
+  errMsg: string;
+}
+
+interface startBluetoothDevicesDiscoveryOpts extends WxApiCallback<startBluetoothDevicesDiscoveryRes> {
+  services?: any[];
+  allowDuplicatesKey?: boolean;
+  interval: number;
+}
+
+interface stopBluetoothDevicesDiscoveryRes {
+  errMsg: string;
+}
+
+interface stopBluetoothDevicesDiscoveryOpts extends WxApiCallback<stopBluetoothDevicesDiscoveryRes> {}
+
+interface getBluetoothDevicesRes {
+  devices: any[];
+  errMsg: string;
+}
+
+interface getBluetoothDevicesOpts extends WxApiCallback<getBluetoothDevicesRes> {}
+
+interface getConnectedBluetoothDevicesRes {
+  devices: any[];
+  errMsg: string;	
+}
+
+interface getConnectedBluetoothDevicesOpts extends WxApiCallback<getConnectedBluetoothDevicesRes> {
+  services: any[];
+}
+
+interface createBLEConnectionRes {
+  errMsg: string;
+}
+
+interface createBLEConnectionOpts extends WxApiCallback<createBLEConnectionRes> {
+  deviceId: string;
+}
+
+interface closeBLEConnectionRes {
+  errMsg: string;
+}
+
+interface closeBLEConnectionOpts extends WxApiCallback<closeBLEConnectionRes> {
+  deviceId: string;
+}
+
+interface getBLEDeviceServicesArray {
+  uuid: string;
+  isPrimary: boolean;
+}
+interface getBLEDeviceServicesRes {
+  services: getBLEDeviceServicesArray
+  errMsg: string;
+}
+
+interface getBLEDeviceServicesOpts extends WxApiCallback<getBLEDeviceServicesRes> {
+  deviceId: string;
+}
+
+interface getBLEDeviceCharacteristicsRes {
+  characteristics: any[];
+  errMsg: string;	
+}
+
+interface getBLEDeviceCharacteristicsOpts extends WxApiCallback<getBLEDeviceCharacteristicsRes> {
+  deviceId: string;
+  serviceId: string;
+}
+
+interface readBLECharacteristicValueRes {
+  errCode: number;
+  errMsg: string;	
+}
+
+interface readBLECharacteristicValueOpts extends WxApiCallback<readBLECharacteristicValueRes> {
+  deviceId: string;
+  serviceId: string;
+  characteristicId: string;
+}
+
+interface writeBLECharacteristicValueRes {
+  errMsg: string;
+}
+
+interface writeBLECharacteristicValueOpts extends WxApiCallback<writeBLECharacteristicValueRes> {
+  deviceId: string;
+  serviceId: string;
+  characteristicId: string;
+  value: ArrayBuffer;
+}
+
+interface notifyBLECharacteristicValueChangeRes {
+  errMsg: string;
+}
+
+interface notifyBLECharacteristicValueChangeOpts extends WxApiCallback<notifyBLECharacteristicValueChangeRes> {
+  deviceId: string;
+  serviceId: string;
+  characteristicId: string;
+  state: boolean;
+}
+
 // 屏幕亮度
 // setScreenBrightness
 interface setScreenBrightnessOpts extends WxApiCallback{
@@ -763,6 +923,35 @@ interface DeviceAPIs {
   canIUse: (string: any) => void;
   getNetworkType: (options: getNetworkTypeOpts) => void;
   onNetworkStatusChange: (res: onNetworkStatusChangeOpts) => void;
+  onAccelerometerChange: (res) => onAccelerometerChangeOpts;
+  startAccelerometer: (options: WxApiCallback) => void;
+  stopAccelerometer: (options: WxApiCallback) => void;
+  onCompassChange: (cb) => onCompassChangeOpts;
+  startCompass: (options: WxApiCallback) => void;
+  stopCompass: (options: WxApiCallback) => void;
+  makePhoneCall: (options: makePhoneCallOpts) => void;
+  scanCode: (options: scanCodeOpts) => void;
+  setClipboardData: (options: setClipboardDataOpts) => void;
+  getClipboardData: (options: getClipboardDataOpts) => void;
+  openBluetoothAdapter: (options: WxApiCallback) => void;
+  closeBluetoothAdapter: (options: WxApiCallback) => void;
+  getBluetoothAdapterState: (options: getBluetoothAdapterStateOpts) => void;
+  onBluetoothAdapterStateChange: (cb) => onBluetoothAdapterStateChangeCb;
+  startBluetoothDevicesDiscovery: (options: startBluetoothDevicesDiscoveryOpts) => void;
+  stopBluetoothDevicesDiscovery: (options: stopBluetoothDevicesDiscoveryOpts) => void;
+  getBluetoothDevices: (options: getBluetoothDevicesRes) => void;
+  getConnectedBluetoothDevices: (options: getConnectedBluetoothDevicesOpts) => void;
+  onBluetoothDeviceFound: any;
+  createBLEConnection: (options: createBLEConnectionOpts) => void;
+  closeBLEConnection: (options: closeBLEConnectionOpts) => void;
+  getBLEDeviceServices: (options: getBLEDeviceServicesOpts) => void;
+  getBLEDeviceCharacteristics: (options: getBLEDeviceCharacteristicsOpts) => void;
+  readBLECharacteristicValue: (options: readBLECharacteristicValueOpts) => void;
+  writeBLECharacteristicValue: (options: writeBLECharacteristicValueOpts) => void;
+  notifyBLECharacteristicValueChange: (options: notifyBLECharacteristicValueChangeOpts) => void;
+  onBLEConnectionStateChange: any;
+  onBLECharacteristicValueChange: any;
+
   setScreenBrightness: (options: setScreenBrightnessOpts) => void;
   getScreenBrightness: (options: getScreenBrightnessOpts) => void;
   setKeepScreenOn: (options: setKeepScreenOnOpts) => void;

@@ -5,5 +5,5 @@ Page({
   data:{},
   a(){
     SocketTask.onError();
-  }
+  },
 })
