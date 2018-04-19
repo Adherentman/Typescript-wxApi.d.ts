@@ -523,114 +523,113 @@ interface MediaAPIs {
 
 // save
 interface saveFileRes {
-    savedFilePath: string
+  savedFilePath: string;
 }
 
 interface saveFileOpts extends WxApiCallback<saveFileRes> {
-    tempFilePath: string;
+  tempFilePath: string;
 }
 
 //getFileInfo
 interface getFileInfoRes {
-    size: number;
-    digest: string;
-    errMsg: string;
+  size: number;
+  digest: string;
+  errMsg: string;
 }
 
 interface getFileInfoOpts extends WxApiCallback<getFileInfoRes> {
-    filePath: string;
-    digestAlgorithm?: string;
+  filePath: string;
+  digestAlgorithm?: string;
 }
 
 // getSavedFileList
 interface fileListOpts {
-    filePath: string;
-    createTime: number;
-    size: number;
+  filePath: string;
+  createTime: number;
+  size: number;
 }
 
 interface getSavedFileListRes {
-    errMsg: string
-    fileList: fileListOpts;
+  errMsg: string;
+  fileList: fileListOpts;
 }
 
 interface getSavedFileListOpts extends WxApiCallback<getSavedFileListRes> {}
 
 // getSavedFileInfo
 interface getSavedFileInfoRes {
-    errMsg: string;
-    size: number;
-    createTime: number;
+  errMsg: string;
+  size: number;
+  createTime: number;
 }
 
 interface getSavedFileInfoOpts extends WxApiCallback<getSavedFileInfoRes> {
-    filePath: String;
+  filePath: String;
 }
 
 // removeSavedFile
 interface removeSavedFileOpts extends WxApiCallback {
-    filePath: string;
+  filePath: string;
 }
 
 // openDocument
 interface openDocumentOpts extends WxApiCallback {
-    filePath: string;
-    fileType: string;
+  filePath: string;
+  fileType: string;
 }
 
 interface FileAPIs {
-    saveFile: (options: saveFileOpts) => void;
-    getFileInfo: (options: getFileInfoOpts) => void;
-    getSavedFileList: (options: getSavedFileListOpts) => void;
-    getSavedFileInfoRes: (options: getSavedFileInfoOpts) => void;
-    removeSavedFile: (options: removeSavedFileOpts) => void;
-    openDocument: (options: openDocumentOpts) => void;
+  saveFile: (options: saveFileOpts) => void;
+  getFileInfo: (options: getFileInfoOpts) => void;
+  getSavedFileList: (options: getSavedFileListOpts) => void;
+  getSavedFileInfoRes: (options: getSavedFileInfoOpts) => void;
+  removeSavedFile: (options: removeSavedFileOpts) => void;
+  openDocument: (options: openDocumentOpts) => void;
 }
-
 
 // Location APIs
 
 //获取位置
 // getLocation
 interface getLocationRes {
-    latitude: number;
-    longitude: number;
-    speed: number;
-    accuracy: number;
-    altitude: number;
-    verticalAccuracy: number;
-    horizontalAccuracy: number;
+  latitude: number;
+  longitude: number;
+  speed: number;
+  accuracy: number;
+  altitude: number;
+  verticalAccuracy: number;
+  horizontalAccuracy: number;
 }
 
 interface getLocationOpts extends WxApiCallback<getLocationRes> {
-    type?: string;
-    altitude?: boolean;
+  type?: string;
+  altitude?: boolean;
 }
 
 //chooseLocation
 interface chooseLocationRes {
-    name: string;
-    address: string;
-    latitude: number;
-    longitude: number;
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
 }
 
 interface chooseLocationOpts extends WxApiCallback<chooseLocationRes> {}
 
 //查看位置
 interface openLocationOpts extends WxApiCallback {
-    latitude: number;
-    longitude: number;
-    scale?: number;
-    name?: string;
-    address?: string;
+  latitude: number;
+  longitude: number;
+  scale?: number;
+  name?: string;
+  address?: string;
 }
 
 interface LocationAPIs {
-    getLocation: (options: getLocationOpts) => void;
-    chooseLocation: (options: chooseLocationOpts) => void;
-    openLocation: (options: openLocationOpts) => void;
-    createMapContext: any;
+  getLocation: (options: getLocationOpts) => void;
+  chooseLocation: (options: chooseLocationOpts) => void;
+  openLocation: (options: openLocationOpts) => void;
+  createMapContext: any;
 }
 
 // Storage APIs
@@ -672,7 +671,6 @@ interface StorageAPIs {
   clearStorage: (options: ClearStorageOpts) => void;
   clearStorageSync: () => void;
 }
-
 
 //  Device APIs
 
@@ -726,7 +724,7 @@ interface getNetworkTypeOpts extends WxApiCallback<getNetworkTypeRes> {}
 // onNetworkStatusChange
 interface onNetworkStatusChangeOpts {
   isConnected: boolean;
-  networkType: 'wifi' | '2g' | '3g' | '4g' | 'none' | 'unknown'
+  networkType: "wifi" | "2g" | "3g" | "4g" | "none" | "unknown";
 }
 
 //加速度计
@@ -739,12 +737,12 @@ interface onAccelerometerChangeOpts {
 
 //罗盘
 interface onCompassChangeOpts {
-  direction: number
+  direction: number;
 }
 
 // 拨打电话
 interface makePhoneCallOpts extends WxApiCallback {
-  phoneNumber: string
+  phoneNumber: string;
 }
 
 // 扫码
@@ -762,11 +760,11 @@ interface scanCodeOpts extends WxApiCallback<scanCodeRes> {
 
 // 剪贴板
 interface setClipboardDataOpts extends WxApiCallback {
-  data: string
+  data: string;
 }
 
 interface getClipboardDataRes {
-  data: string
+  data: string;
 }
 
 interface getClipboardDataOpts extends WxApiCallback<getClipboardDataRes> {}
@@ -778,7 +776,8 @@ interface getBluetoothAdapterStateRes {
   errMsg: string;
 }
 
-interface getBluetoothAdapterStateOpts extends WxApiCallback<getBluetoothAdapterStateRes> {}
+interface getBluetoothAdapterStateOpts
+  extends WxApiCallback<getBluetoothAdapterStateRes> {}
 
 interface onBluetoothAdapterStateChangeCb {
   available: boolean;
@@ -789,7 +788,8 @@ interface startBluetoothDevicesDiscoveryRes {
   errMsg: string;
 }
 
-interface startBluetoothDevicesDiscoveryOpts extends WxApiCallback<startBluetoothDevicesDiscoveryRes> {
+interface startBluetoothDevicesDiscoveryOpts
+  extends WxApiCallback<startBluetoothDevicesDiscoveryRes> {
   services?: any[];
   allowDuplicatesKey?: boolean;
   interval: number;
@@ -799,21 +799,24 @@ interface stopBluetoothDevicesDiscoveryRes {
   errMsg: string;
 }
 
-interface stopBluetoothDevicesDiscoveryOpts extends WxApiCallback<stopBluetoothDevicesDiscoveryRes> {}
+interface stopBluetoothDevicesDiscoveryOpts
+  extends WxApiCallback<stopBluetoothDevicesDiscoveryRes> {}
 
 interface getBluetoothDevicesRes {
   devices: any[];
   errMsg: string;
 }
 
-interface getBluetoothDevicesOpts extends WxApiCallback<getBluetoothDevicesRes> {}
+interface getBluetoothDevicesOpts
+  extends WxApiCallback<getBluetoothDevicesRes> {}
 
 interface getConnectedBluetoothDevicesRes {
   devices: any[];
-  errMsg: string;	
+  errMsg: string;
 }
 
-interface getConnectedBluetoothDevicesOpts extends WxApiCallback<getConnectedBluetoothDevicesRes> {
+interface getConnectedBluetoothDevicesOpts
+  extends WxApiCallback<getConnectedBluetoothDevicesRes> {
   services: any[];
 }
 
@@ -821,7 +824,8 @@ interface createBLEConnectionRes {
   errMsg: string;
 }
 
-interface createBLEConnectionOpts extends WxApiCallback<createBLEConnectionRes> {
+interface createBLEConnectionOpts
+  extends WxApiCallback<createBLEConnectionRes> {
   deviceId: string;
 }
 
@@ -838,30 +842,33 @@ interface getBLEDeviceServicesArray {
   isPrimary: boolean;
 }
 interface getBLEDeviceServicesRes {
-  services: getBLEDeviceServicesArray
+  services: getBLEDeviceServicesArray;
   errMsg: string;
 }
 
-interface getBLEDeviceServicesOpts extends WxApiCallback<getBLEDeviceServicesRes> {
+interface getBLEDeviceServicesOpts
+  extends WxApiCallback<getBLEDeviceServicesRes> {
   deviceId: string;
 }
 
 interface getBLEDeviceCharacteristicsRes {
   characteristics: any[];
-  errMsg: string;	
+  errMsg: string;
 }
 
-interface getBLEDeviceCharacteristicsOpts extends WxApiCallback<getBLEDeviceCharacteristicsRes> {
+interface getBLEDeviceCharacteristicsOpts
+  extends WxApiCallback<getBLEDeviceCharacteristicsRes> {
   deviceId: string;
   serviceId: string;
 }
 
 interface readBLECharacteristicValueRes {
   errCode: number;
-  errMsg: string;	
+  errMsg: string;
 }
 
-interface readBLECharacteristicValueOpts extends WxApiCallback<readBLECharacteristicValueRes> {
+interface readBLECharacteristicValueOpts
+  extends WxApiCallback<readBLECharacteristicValueRes> {
   deviceId: string;
   serviceId: string;
   characteristicId: string;
@@ -871,7 +878,8 @@ interface writeBLECharacteristicValueRes {
   errMsg: string;
 }
 
-interface writeBLECharacteristicValueOpts extends WxApiCallback<writeBLECharacteristicValueRes> {
+interface writeBLECharacteristicValueOpts
+  extends WxApiCallback<writeBLECharacteristicValueRes> {
   deviceId: string;
   serviceId: string;
   characteristicId: string;
@@ -882,7 +890,8 @@ interface notifyBLECharacteristicValueChangeRes {
   errMsg: string;
 }
 
-interface notifyBLECharacteristicValueChangeOpts extends WxApiCallback<notifyBLECharacteristicValueChangeRes> {
+interface notifyBLECharacteristicValueChangeOpts
+  extends WxApiCallback<notifyBLECharacteristicValueChangeRes> {
   deviceId: string;
   serviceId: string;
   characteristicId: string;
@@ -891,8 +900,8 @@ interface notifyBLECharacteristicValueChangeOpts extends WxApiCallback<notifyBLE
 
 // 屏幕亮度
 // setScreenBrightness
-interface setScreenBrightnessOpts extends WxApiCallback{
-  value: number
+interface setScreenBrightnessOpts extends WxApiCallback {
+  value: number;
 }
 
 // getScreenBrightness
@@ -900,13 +909,14 @@ interface getScreenBrightnessRes {
   value: number;
 }
 
-interface getScreenBrightnessOpts extends WxApiCallback<getScreenBrightnessRes> {}
+interface getScreenBrightnessOpts
+  extends WxApiCallback<getScreenBrightnessRes> {}
 
 // setKeepScreenOn
 interface setKeepScreenOnRes {
   errMsg: string;
 }
-interface setKeepScreenOnOpts extends WxApiCallback<setKeepScreenOnRes>{
+interface setKeepScreenOnOpts extends WxApiCallback<setKeepScreenOnRes> {
   keepScreenOn: boolean;
 }
 
@@ -937,18 +947,30 @@ interface DeviceAPIs {
   closeBluetoothAdapter: (options: WxApiCallback) => void;
   getBluetoothAdapterState: (options: getBluetoothAdapterStateOpts) => void;
   onBluetoothAdapterStateChange: (cb) => onBluetoothAdapterStateChangeCb;
-  startBluetoothDevicesDiscovery: (options: startBluetoothDevicesDiscoveryOpts) => void;
-  stopBluetoothDevicesDiscovery: (options: stopBluetoothDevicesDiscoveryOpts) => void;
+  startBluetoothDevicesDiscovery: (
+    options: startBluetoothDevicesDiscoveryOpts
+  ) => void;
+  stopBluetoothDevicesDiscovery: (
+    options: stopBluetoothDevicesDiscoveryOpts
+  ) => void;
   getBluetoothDevices: (options: getBluetoothDevicesRes) => void;
-  getConnectedBluetoothDevices: (options: getConnectedBluetoothDevicesOpts) => void;
+  getConnectedBluetoothDevices: (
+    options: getConnectedBluetoothDevicesOpts
+  ) => void;
   onBluetoothDeviceFound: any;
   createBLEConnection: (options: createBLEConnectionOpts) => void;
   closeBLEConnection: (options: closeBLEConnectionOpts) => void;
   getBLEDeviceServices: (options: getBLEDeviceServicesOpts) => void;
-  getBLEDeviceCharacteristics: (options: getBLEDeviceCharacteristicsOpts) => void;
+  getBLEDeviceCharacteristics: (
+    options: getBLEDeviceCharacteristicsOpts
+  ) => void;
   readBLECharacteristicValue: (options: readBLECharacteristicValueOpts) => void;
-  writeBLECharacteristicValue: (options: writeBLECharacteristicValueOpts) => void;
-  notifyBLECharacteristicValueChange: (options: notifyBLECharacteristicValueChangeOpts) => void;
+  writeBLECharacteristicValue: (
+    options: writeBLECharacteristicValueOpts
+  ) => void;
+  notifyBLECharacteristicValueChange: (
+    options: notifyBLECharacteristicValueChangeOpts
+  ) => void;
   onBLEConnectionStateChange: any;
   onBLECharacteristicValueChange: any;
 
@@ -1115,7 +1137,7 @@ interface UIAPIs {
   setTabBarItem: (options: setTabBarItemOpts) => void; //1.9.0
   showTabBar: (options: showTabBarOpts) => void; //1.9.0
   hideTabBar: (options: hideTabBarOpts) => void; //1.9.0
-  setTopBarText: (options: setTopBarTextOpts) => void;  
+  setTopBarText: (options: setTopBarTextOpts) => void;
   navigateTo: (options: navigateOpts) => void;
   redirectTo: (options: navigateOpts) => void;
   switchTab: (options: navigateOpts) => void;
@@ -1171,35 +1193,35 @@ interface AuthorizeOpts extends WxApiCallback<AuthorizeRes> {
 //用户信息
 // getUserInfo
 interface userInfoOpts {
-    nickName: string;
-    avatarUrl: string;
-    gender: string;
-    city: string;
-    province: string;
-    country: string;
-    language: string;
+  nickName: string;
+  avatarUrl: string;
+  gender: string;
+  city: string;
+  province: string;
+  country: string;
+  language: string;
 }
 
 interface getUserInfoRes {
-    userInfo: userInfoOpts;
-    rawData: string;
-    signature: string;
-    encryptedData: string;
-    iv: string;
+  userInfo: userInfoOpts;
+  rawData: string;
+  signature: string;
+  encryptedData: string;
+  iv: string;
 }
 interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
-    withCredentials: boolean;
-    lang?: string;
-    timeout?: number;
+  withCredentials: boolean;
+  lang?: string;
+  timeout?: number;
 }
 
 // 微信支付
 interface requestPaymentOpts extends WxApiCallback {
-    timeStamp: string;
-    nonceStr: string;
-    package: string;
-    signType: string;
-    paySign: string;
+  timeStamp: string;
+  nonceStr: string;
+  package: string;
+  signType: string;
+  paySign: string;
 }
 
 interface OpenInterfaceAPIs {
