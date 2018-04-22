@@ -1,10 +1,10 @@
 // Common Types
 
-interface String2AnyMap {
+interface string2AnyMap {
   [key: string]: any;
 }
 
-interface String2StringMap {
+interface string2stringMap {
   [key: string]: string | null;
 }
 
@@ -21,7 +21,7 @@ interface AppReferrerInfo {
 
 interface AppLaunchShowFuncOpts {
   path: string;
-  query: String2StringMap;
+  query: string2stringMap;
   scene: number;
   shareTicket: string;
   referrerInfo: AppReferrerInfo;
@@ -44,7 +44,7 @@ interface IApp extends AppOpts {}
 
 interface PageOpts<Data = {}> {
   data?: Data;
-  onLoad?: (options: String2StringMap) => void;
+  onLoad?: (options: string2stringMap) => void;
   onReady?: ZeroParamVoidFunc;
   onShow?: ZeroParamVoidFunc;
   onHide?: ZeroParamVoidFunc;
@@ -59,7 +59,7 @@ interface PageOpts<Data = {}> {
 }
 
 interface IPage<Data = {}> extends PageOpts<Data> {
-  setData: (data: String2AnyMap) => void;
+  setData: (data: string2AnyMap) => void;
 }
 
 // Component Types
@@ -80,13 +80,13 @@ type NetworkRequestData = string | object | ArrayBuffer;
 interface NetworkRequestRes {
   data: NetworkRequestData;
   statusCode: number;
-  header: String2StringMap;
+  header: string2stringMap;
 }
 
 interface NetworkRequestOpts extends WxApiCallback<NetworkRequestRes> {
   url: string;
   data?: NetworkRequestData;
-  header?: String2StringMap;
+  header?: string2stringMap;
   method?:
     | "OPTIONS"
     | "GET"
@@ -564,7 +564,7 @@ interface getSavedFileInfoRes {
 }
 
 interface getSavedFileInfoOpts extends WxApiCallback<getSavedFileInfoRes> {
-  filePath: String;
+  filePath: string;
 }
 
 // removeSavedFile
@@ -898,13 +898,33 @@ interface notifyBLECharacteristicValueChangeOpts
   state: boolean;
 }
 
+// iBeacon
+interface startBeaconDiscoveryRes {
+  errMsg: string;
+}
+
+interface startBeaconDiscoveryOpts extends WxApiCallback<startBeaconDiscoveryRes> {
+  uuid: any
+} 
+
+interface stopBeaconDiscoveryRes {
+  errMsg: string
+}
+
+interface stopBeaconDiscoveryOpts extends WxApiCallback<stopBeaconDiscoveryRes> {}
+
+interface getBeaconsRes {
+  beacons: any;
+  errMsg: string;
+}
+
+interface getBeaconsOpts extends WxApiCallback<getBeaconsRes> {}
+
 // 屏幕亮度
-// setScreenBrightness
 interface setScreenBrightnessOpts extends WxApiCallback {
   value: number;
 }
 
-// getScreenBrightness
 interface getScreenBrightnessRes {
   value: number;
 }
@@ -912,7 +932,6 @@ interface getScreenBrightnessRes {
 interface getScreenBrightnessOpts
   extends WxApiCallback<getScreenBrightnessRes> {}
 
-// setKeepScreenOn
 interface setKeepScreenOnRes {
   errMsg: string;
 }
@@ -921,12 +940,62 @@ interface setKeepScreenOnOpts extends WxApiCallback<setKeepScreenOnRes> {
 }
 
 // 震动
-// vibrateLong
 interface vibrateLongOpts extends WxApiCallback {}
 
-// vibrateShort
 interface vibrateShortOpts extends WxApiCallback {}
 
+//手机联系人
+interface addPhoneContactOpts extends WxApiCallback {
+  photoFilePath: string;
+  nickName: string;
+  lastName:	string;
+  middleName: string;
+  firstName: string;
+  remark: string;
+  mobilePhoneNumber: string;
+  weChatNumber: string;
+  addressCountry: string;
+  addressState: string;
+  addressCity: string;
+  addressStreet: string;
+  addressPostalCode: string;
+  organization: string;
+  title: string;
+  workFaxNumber: string;
+  workPhoneNumber: string;
+  hostNumber: string;
+  email: string;
+  url: string;
+  workAddressCountry: string;
+  workAddressState: string;
+  workAddressCity: string;
+  workAddressStreet: string;
+  workAddressPostalCode: string;
+  homeFaxNumber: string;
+  homePhoneNumber: string;
+  homeAddressCountry: string;
+  homeAddressState: string;
+  homeAddressCity: string;
+  homeAddressStreet: string;
+  homeAddressPostalCode: string;
+}
+
+// NFC
+interface getHCEStateRes {
+  errMsg: string;
+  errCode: number;
+}
+
+interface getHCEStateOpts extends WxApiCallback<getHCEStateRes> {}
+
+interface startHCERes {
+  errMsg: string;
+  errCode: number;
+}
+
+interface startHCEOpts extends WxApiCallback<startHCERes> {
+  aid_list: any[];  
+}
 interface DeviceAPIs {
   getSystemInfo: (options: getSystemInfoOpts) => void;
   getSystemInfoSync: () => getSystemInfoSyncRes;
@@ -973,6 +1042,14 @@ interface DeviceAPIs {
   ) => void;
   onBLEConnectionStateChange: any;
   onBLECharacteristicValueChange: any;
+  startBeaconDiscovery: (options: startBeaconDiscoveryOpts) => void;
+  stopBeaconDiscovery: (options: stopBeaconDiscoveryOpts) => void;
+  getBeacons: (options: getBeaconsOpts) => void;
+  onBeaconUpdate: any;
+  onBeaconServiceChange: any;
+  onUserCaptureScreen: any;
+  addPhoneContact: (options: addPhoneContactOpts) => void;
+  getHCEState: (options: getHCEStateOpts) => void;
 
   setScreenBrightness: (options: setScreenBrightnessOpts) => void;
   getScreenBrightness: (options: getScreenBrightnessOpts) => void;
