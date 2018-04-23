@@ -996,6 +996,62 @@ interface startHCERes {
 interface startHCEOpts extends WxApiCallback<startHCERes> {
   aid_list: any[];  
 }
+
+interface stopHCERes {
+  errMsg: string;
+  errCode: number;
+}
+
+interface stopHCEOpts extends WxApiCallback<stopHCERes> {}
+
+interface sendHCEMessageRes {
+  errMsg: string;
+  errCode: number;
+}
+interface sendHCEMessageOpts extends WxApiCallback<sendHCEMessageRes> {
+  data: ArrayBuffer;
+}
+
+// Wifi
+interface startWifiOpts extends WxApiCallback {}
+
+interface stopWifiOpts extends WxApiCallback {}
+
+interface connectWifiOpts extends WxApiCallback {
+  SSID: string;
+  BSSID: string;
+  password?: string;
+}
+
+interface getWifiListOpts extends WxApiCallback {}
+
+
+interface wifiLs {
+  SSID: string;
+  BSSID: string;
+  secure: boolean;
+  signalStrength: number;
+}
+
+interface onGetWifiListCb {
+  wifiList: wifiLs
+}
+
+interface setWifiListOpts extends WxApiCallback {
+  wifiList: wifiLs
+}
+
+interface wifiInfo {
+  SSID: string;
+  BSSID: string;
+  secure: boolean;
+  signalStrength: number;
+}
+
+interface onWifiConnectedCb {
+  wifi: wifiInfo
+}
+
 interface DeviceAPIs {
   getSystemInfo: (options: getSystemInfoOpts) => void;
   getSystemInfoSync: () => getSystemInfoSyncRes;
@@ -1050,7 +1106,18 @@ interface DeviceAPIs {
   onUserCaptureScreen: any;
   addPhoneContact: (options: addPhoneContactOpts) => void;
   getHCEState: (options: getHCEStateOpts) => void;
-
+  startHCE: (options: startHCEOpts) => void;
+  stopHCE: (options: startHCEOpts) => void;
+  onHCEMessage: any;
+  sendHCEMessage: (options: sendHCEMessageOpts) => void;
+  startWifi: (options: startWifiOpts) => void;
+  stopWifi: (options: stopWifiOpts) => void;
+  connectWifi: (options: connectWifiOpts) => void;
+  getWifiList: (options: getWifiListOpts) => void;
+  onGetWifiList: (options: onGetWifiListCb) => void;
+  setWifiList: (options: setWifiListOpts) => void;
+  onWifiConnected: (cb: onWifiConnectedCb) => void;
+  getConnectedWifi: any;
   setScreenBrightness: (options: setScreenBrightnessOpts) => void;
   getScreenBrightness: (options: getScreenBrightnessOpts) => void;
   setKeepScreenOn: (options: setKeepScreenOnOpts) => void;
