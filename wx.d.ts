@@ -1262,6 +1262,27 @@ interface startPullDownRefreshRes {
 interface startPullDownRefreshOpts
   extends WxApiCallback<startPullDownRefreshRes> {}
 
+  // WXML节点信息
+  interface selectorQueryAPIs {
+    in: any;
+    select: any;
+    selectAll: any;
+    selectViewport: any;
+    exec: any;
+  }
+
+  interface nodesRefAPIs {
+    boundingClientRect: any;
+    scrollOffset: any;
+    fields: any;
+  }
+
+  interface createIntersectionObserverAPIs {
+    relativeTo: any;
+    relativeToViewport: any;
+    observe: any;
+    disconnect: any;
+  }
 interface UIAPIs {
   showToast: (options: ShowToastOpts) => void;
   showLoading: (options: ShowLoadingOpts) => void;
@@ -1292,8 +1313,8 @@ interface UIAPIs {
   //todo 绘图
   startPullDownRefresh: (options: startPullDownRefreshOpts) => void;
   stopPullDownRefresh: ZeroParamVoidFunc;
-  //todo WXML节点信息API
-  //todo WXML节点布局相交状态
+  createSelectorQuery: ZeroParamVoidFunc;
+  createIntersectionObserver: createIntersectionObserverAPIs;
 }
 
 // Third party APIs
@@ -1398,6 +1419,8 @@ declare let wx: NetworkAPIs &
   DebuggingAPIs;
 
 declare let SocketTask: SocketTaskAPIs;
+declare let selectorQuery: selectorQueryAPIs;
+declare let nodesRef: nodesRefAPIs;
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
