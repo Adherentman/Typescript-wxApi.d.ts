@@ -1318,7 +1318,15 @@ interface UIAPIs {
 }
 
 // Third party APIs
-interface ThirdPartyAPIs {}
+interface getExtConfigRes {
+  errMsg: string;
+  extConfig: any;
+}
+interface getExtConfigOpts extends WxApiCallback<getExtConfigRes>{}
+interface ThirdPartyAPIs {
+  getExtConfig: (options: getExtConfigOpts) => void;
+  getExtConfigSync: any;
+}
 
 // Open Interface APIs
 
@@ -1374,6 +1382,7 @@ interface getUserInfoRes {
   encryptedData: string;
   iv: string;
 }
+
 interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
   withCredentials: boolean;
   lang?: string;
@@ -1406,7 +1415,6 @@ interface MultithreadingAPIs {}
 interface DebuggingAPIs {}
 
 // Declares
-
 declare let wx: NetworkAPIs &
   MediaAPIs &
   StorageAPIs &
