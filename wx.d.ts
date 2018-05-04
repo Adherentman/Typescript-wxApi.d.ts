@@ -1323,9 +1323,108 @@ interface getExtConfigRes {
   extConfig: any;
 }
 interface getExtConfigOpts extends WxApiCallback<getExtConfigRes>{}
+
+interface showShareMenuOpts extends WxApiCallback {
+  withShareTicket?: boolean; 
+}
+
+interface updateShareMenuOpts extends WxApiCallback {
+  withShareTicket?: boolean; 
+}
+
+interface getShareInfoOpts extends WxApiCallback {
+  shareTicket:	string;
+  timeout: number;
+}
+
+interface chooseAddressRes {
+  errMsg:	string;
+  userName:	string;
+  postalCode:	string;
+  provinceName:	string;
+  cityName:	string;
+  countyName:	string;
+  detailInfo:	string;
+  nationalCode:	string;
+  telNumber: string;
+}
+interface chooseAddressOpts extends WxApiCallback<chooseAddressRes>{}
+
+interface openSettingRes {
+  authSetting: any;
+}
+
+interface openSettingOpts extends WxApiCallback<openSettingRes>{}
+
+interface getSettingRes {
+  authSetting: any;
+}
+
+interface getSettingOpts extends WxApiCallback<getSettingRes>{}
+
+interface getWeRunDataRes {
+  errMsg: string;
+  encryptedData: string;
+  iv:	string;
+}
+interface getWeRunDataOpts extends WxApiCallback<getWeRunDataRes>{
+  timeout?: number
+}
+
+interface navigateToMiniProgramRes {
+  errMsg: string
+}
+interface navigateToMiniProgramOpts extends WxApiCallback<navigateToMiniProgramRes>{
+  appId: string;
+  path:	string;
+  extraData:	any;
+  envVersion:	string;
+}
+interface navigateBackMiniProgramRes {
+  errMsg: string;
+}
+interface navigateBackMiniProgramOpts extends WxApiCallback<navigateBackMiniProgramRes>{
+  extraData: any;
+}
+
+interface chooseInvoiceTitleRes{
+  type:	string;
+  title: string;
+  taxNumber: string;
+  companyAddress:	string;
+  telephone: string;
+  bankName:	string;
+  bankAccount: string;
+  errMsg:	string;
+}
+
+interface chooseInvoiceTitleOpts extends WxApiCallback<chooseInvoiceTitleRes>{}
+
+interface checkIsSupportSoterAuthenticationRes{
+  supportMode: 'fingerPrint' | 'facial' |	'speech'; // 人脸识别（暂未支持）声纹识别（暂未支持）
+  errMsg:	string;
+}
+interface checkIsSupportSoterAuthenticationOpts extends WxApiCallback<checkIsSupportSoterAuthenticationRes>{}
+
 interface ThirdPartyAPIs {
   getExtConfig: (options: getExtConfigOpts) => void;
   getExtConfigSync: any;
+  showShareMenu: (options: showShareMenuOpts) => void;
+  hideShareMenu: () => WxApiCallback;
+  updateShareMenu: (options: updateShareMenuOpts) => void;
+  getShareInfo: (options: getShareInfoOpts) => void;
+  chooseAddress: (options: chooseAddressOpts) => void;
+  addCard: any;
+  openCard: any;
+  openSetting: (options: openSettingOpts) => void;
+  getSetting: (options: getSettingOpts) => void;
+  getWeRunData: (options: getWeRunDataOpts) => void;
+  navigateToMiniProgram: (options: navigateToMiniProgramOpts) => void;
+  navigateBackMiniProgram: (options: navigateBackMiniProgramOpts) => void;
+  chooseInvoiceTitle: (options: chooseInvoiceTitleOpts) => void;
+  checkIsSupportSoterAuthentication: (options: checkIsSupportSoterAuthenticationOpts) => void;
+  startSoterAuthentication: any;
+  checkIsSoterEnrolledInDevice: any;
 }
 
 // Open Interface APIs
