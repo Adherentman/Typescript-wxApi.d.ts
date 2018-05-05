@@ -1324,6 +1324,81 @@ interface getExtConfigRes {
 }
 interface getExtConfigOpts extends WxApiCallback<getExtConfigRes>{}
 
+interface ThirdPartyAPIs {
+  getExtConfig: (options: getExtConfigOpts) => void;
+  getExtConfigSync: any;
+}
+
+// Open Interface APIs
+
+interface LoginRes {
+  errMsg?: string;
+  code?: string;
+}
+
+interface LoginOpts extends WxApiCallback<LoginRes> {
+  timeout?: number;
+}
+
+interface CheckSessionOpts extends WxApiCallback {}
+
+interface AuthorizeRes {
+  errMsg: string;
+}
+
+interface AuthorizeOpts extends WxApiCallback<AuthorizeRes> {
+  scope:
+    | "scope.userInfo"
+    | "scope.userLocation"
+    | "scope.address"
+    | "wx.chooseAddress"
+    | "scope.invoiceTitle"
+    | "wx.chooseInvoiceTitle"
+    | "scope.werun"
+    | "wx.getWeRunData"
+    | "scope.record"
+    | "wx.startRecord"
+    | "scope.writePhotosAlbum"
+    | "wx.saveImageToPhotosAlbum"
+    | "wx.saveVideoToPhotosAlbum"
+    | "scope.camera";
+}
+
+//用户信息
+// getUserInfo
+interface userInfoOpts {
+  nickName: string;
+  avatarUrl: string;
+  gender: string;
+  city: string;
+  province: string;
+  country: string;
+  language: string;
+}
+
+interface getUserInfoRes {
+  userInfo: userInfoOpts;
+  rawData: string;
+  signature: string;
+  encryptedData: string;
+  iv: string;
+}
+
+interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
+  withCredentials: boolean;
+  lang?: string;
+  timeout?: number;
+}
+
+// 微信支付
+interface requestPaymentOpts extends WxApiCallback {
+  timeStamp: string;
+  nonceStr: string;
+  package: string;
+  signType: string;
+  paySign: string;
+}
+
 interface showShareMenuOpts extends WxApiCallback {
   withShareTicket?: boolean; 
 }
@@ -1406,9 +1481,12 @@ interface checkIsSupportSoterAuthenticationRes{
 }
 interface checkIsSupportSoterAuthenticationOpts extends WxApiCallback<checkIsSupportSoterAuthenticationRes>{}
 
-interface ThirdPartyAPIs {
-  getExtConfig: (options: getExtConfigOpts) => void;
-  getExtConfigSync: any;
+interface OpenInterfaceAPIs {
+  login: (options: LoginOpts) => void;
+  checkSession: (options: CheckSessionOpts) => void;
+  authorize: (optiona: AuthorizeOpts) => void;
+  getUserInfo: (options: getUserInfoOpts) => void;
+  requestPayment: (options: requestPaymentOpts) => void;
   showShareMenu: (options: showShareMenuOpts) => void;
   hideShareMenu: () => WxApiCallback;
   updateShareMenu: (options: updateShareMenuOpts) => void;
@@ -1427,91 +1505,49 @@ interface ThirdPartyAPIs {
   checkIsSoterEnrolledInDevice: any;
 }
 
-// Open Interface APIs
-
-interface LoginRes {
-  errMsg?: string;
-  code?: string;
+// Data APIs
+interface reportAnalyticsOpts {
+  eventName: string;
+  data: any;
 }
 
-interface LoginOpts extends WxApiCallback<LoginRes> {
-  timeout?: number;
+interface DataAPIs {
+  reportAnalytics: (options: reportAnalyticsOpts) => void;
 }
 
-interface CheckSessionOpts extends WxApiCallback {}
+// Update APIs
+interface UpdateAPIs {
+  getUpdateManager: any;
+}
 
-interface AuthorizeRes {
+interface updateManagerAPIs {
+  onCheckForUpdate: ZeroParamVoidFunc;
+  onUpdateReady: ZeroParamVoidFunc;
+  onUpdateFailed: ZeroParamVoidFunc;
+  applyUpdate: any;
+}
+// Multithreading APIs
+interface MultithreadingAPIs {
+  createWorker: (scriptPath: string) => void;
+}
+
+interface workerAPIs {
+  postMessage: any;
+  onMessage: ZeroParamVoidFunc;
+  terminate: ZeroParamVoidFunc;
+}
+
+// Debugging APIs
+interface setEnableDebugRes {
   errMsg: string;
 }
 
-interface AuthorizeOpts extends WxApiCallback<AuthorizeRes> {
-  scope:
-    | "scope.userInfo"
-    | "scope.userLocation"
-    | "scope.address"
-    | "wx.chooseAddress"
-    | "scope.invoiceTitle"
-    | "wx.chooseInvoiceTitle"
-    | "scope.werun"
-    | "wx.getWeRunData"
-    | "scope.record"
-    | "wx.startRecord"
-    | "scope.writePhotosAlbum"
-    | "wx.saveImageToPhotosAlbum"
-    | "wx.saveVideoToPhotosAlbum"
-    | "scope.camera";
+interface setEnableDebugOpts extends WxApiCallback<setEnableDebugRes>{
+  enableDebug: boolean;
 }
-
-//用户信息
-// getUserInfo
-interface userInfoOpts {
-  nickName: string;
-  avatarUrl: string;
-  gender: string;
-  city: string;
-  province: string;
-  country: string;
-  language: string;
+interface DebuggingAPIs {
+  setEnableDebug: (options: setEnableDebugOpts) => void;
 }
-
-interface getUserInfoRes {
-  userInfo: userInfoOpts;
-  rawData: string;
-  signature: string;
-  encryptedData: string;
-  iv: string;
-}
-
-interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
-  withCredentials: boolean;
-  lang?: string;
-  timeout?: number;
-}
-
-// 微信支付
-interface requestPaymentOpts extends WxApiCallback {
-  timeStamp: string;
-  nonceStr: string;
-  package: string;
-  signType: string;
-  paySign: string;
-}
-
-interface OpenInterfaceAPIs {
-  login: (options: LoginOpts) => void;
-  checkSession: (options: CheckSessionOpts) => void;
-  authorize: (optiona: AuthorizeOpts) => void;
-  getUserInfo: (options: getUserInfoOpts) => void;
-  requestPayment: (options: requestPaymentOpts) => void;
-}
-
-// Multithreading APIs
-
-interface MultithreadingAPIs {}
-
-// Debugging APIs
-
-interface DebuggingAPIs {}
 
 // Declares
 declare let wx: NetworkAPIs &
@@ -1522,12 +1558,16 @@ declare let wx: NetworkAPIs &
   UIAPIs &
   ThirdPartyAPIs &
   OpenInterfaceAPIs &
+  DataAPIs &
+  UpdateAPIs &
   MultithreadingAPIs &
   DebuggingAPIs;
 
 declare let SocketTask: SocketTaskAPIs;
 declare let selectorQuery: selectorQueryAPIs;
 declare let nodesRef: nodesRefAPIs;
+declare let updateManager: updateManagerAPIs;
+declare let worker: workerAPIs;
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
