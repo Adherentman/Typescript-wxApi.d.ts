@@ -1311,12 +1311,68 @@ interface UIAPIs {
   createAnimation: (options: createAnimationOpts) => void;
   pageScrollTo: (scrollTop: number, duration: number) => void;
   //todo 绘图
+  createCanvasContext: any;
+  createLinearGradient: any;
+  createContext: any; // 不推荐使用
+  drawCanvas: any;  // 不推荐使用
+  canvasToTempFilePath: any;
+  canvasGetImageData: any;
+  canvasPutImageData: any;
+
+
+
   startPullDownRefresh: (options: startPullDownRefreshOpts) => void;
   stopPullDownRefresh: ZeroParamVoidFunc;
   createSelectorQuery: ZeroParamVoidFunc;
   createIntersectionObserver: createIntersectionObserverAPIs;
 }
-
+interface canvasContextApi {
+  setFillStyle: any;
+  setStrokeStyle: any;
+  setShadow: any;
+  createLinearGradient: any;
+  createCircularGradient: any;
+  addColorStop: any;
+  setLineWidth: any;
+  setLineCap: any;
+  setLineJoin: any;
+  setMiterLimit: any;
+  rect: any;
+  fillRect: any;
+  strokeRect: any;
+  clearRect: any;
+  fill: any;
+  stroke: any;
+  beginPath: any;
+  closePath: any;
+  moveTo: any;
+  lineTo: any;
+  arc: any;
+  quadraticCurveTo: any;
+  bezierCurveTo: any;
+  scale: any;
+  rotate: any;
+  translate: any;
+  fillText: any;
+  setFontSize: any;
+  setTextBaseline: any;
+  setTextAlign: any;
+  drawImage: any;
+  setGlobalAlpha: any;
+  save: any;
+  restore: any;
+  draw: any;
+  getActions: any;  //不推荐使用
+  clearActions: any;  //不推荐使用
+  measureText: any;
+  globalCompositeOperation: any;
+  arcTo: any;
+  strokeText: any;
+  lineDashOffset: any;
+  createPattern: any;
+  font: any;
+  setTransform: any;
+}
 // Third party APIs
 interface getExtConfigRes {
   errMsg: string;
@@ -1568,6 +1624,7 @@ declare let selectorQuery: selectorQueryAPIs;
 declare let nodesRef: nodesRefAPIs;
 declare let updateManager: updateManagerAPIs;
 declare let worker: workerAPIs;
+declare let canvasContext: canvasContextApi;
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
