@@ -663,7 +663,7 @@ interface ClearStorageOpts extends WxApiCallback {}
 interface StorageAPIs {
   setStorage: (options: SetStorageOpts) => void;
   setStorageSync: (key: string, data: object | string) => void;
-  getStorage: (options: SetStorageOpts) => void;
+  getStorage: (options: GetStorageOpts) => void;
   getStorageSync: (key: string) => object | string;
   getStorageInfo: (options: GetStorageInfoOpts) => void;
   getStorageInfoSync: () => GetStorageInfoRes;
