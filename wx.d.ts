@@ -184,7 +184,8 @@ interface NetworkAPIs {
   // WebSocket
   connectSocket: ZeroParamVoidFunc;
   onSocketOpen: ZeroParamVoidFunc;
-  sendSocketMessageRes: (options: sendSocketMessageOpts) => void;
+  onSocketError: ZeroParamVoidFunc;
+  sendSocketMessage: (options: sendSocketMessageOpts) => void;
   onSocketMessage: (options: onSocketMessageOpts) => void;
   closeSocket: (options: closeSocketOpts) => void;
   onSocketClose: ZeroParamVoidFunc;
