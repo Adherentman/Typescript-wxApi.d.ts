@@ -11,10 +11,10 @@
 
 * [x] 网络
 
-    * [x] 发起请求
-    * [x] 上传、下载
-    * [x] WebSocket
-    * [x] SocketTask
+* [x] 发起请求
+* [x] 上传、下载
+* [x] WebSocket
+* [x] SocketTask
 
 * [x] 媒体
 
