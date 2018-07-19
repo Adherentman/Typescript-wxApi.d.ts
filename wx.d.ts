@@ -850,12 +850,12 @@ interface closeBLEConnectionOpts extends WxApiCallback<closeBLEConnectionRes> {
   deviceId: string;
 }
 
-interface getBLEDeviceServicesArray {
+interface BLEDeviceService {
   uuid: string;
   isPrimary: boolean;
 }
 interface getBLEDeviceServicesRes {
-  services: getBLEDeviceServicesArray;
+  services: BLEDeviceService[];
   errMsg: string;
 }
 
@@ -865,8 +865,26 @@ interface getBLEDeviceServicesOpts
 }
 
 interface getBLEDeviceCharacteristicsRes {
-  characteristics: any[];
+  characteristics: BLEDeviceCharacteristic[];
   errMsg: string;
+}
+
+interface BLEDeviceCharacteristic {
+  /**
+   * 蓝牙设备特征值的uuid
+   */
+  uuid: string;
+  /**
+   * 该特征值支持的操作类型
+   */
+  properties: BLEDeviceCharasteristicProperties;
+}
+
+interface BLEDeviceCharasteristicProperties {
+  read: boolean;
+  write: boolean;
+  notify: boolean;
+  indicate: boolean;
 }
 
 interface getBLEDeviceCharacteristicsOpts
@@ -909,6 +927,14 @@ interface notifyBLECharacteristicValueChangeOpts
   serviceId: string;
   characteristicId: string;
   state: boolean;
+}
+
+interface onBLEConnectionStateChangeCallback {
+  (deviceId: string, connected: boolean): void
+}
+
+interface onBLECharacteristicValueChangeCallback {
+  (deviceId: string, serviceId: string, characteristicId: string, value: ArrayBuffer): void;
 }
 
 // iBeacon
@@ -1109,8 +1135,8 @@ interface DeviceAPIs {
   notifyBLECharacteristicValueChange: (
     options: notifyBLECharacteristicValueChangeOpts
   ) => void;
-  onBLEConnectionStateChange: any;
-  onBLECharacteristicValueChange: any;
+  onBLEConnectionStateChange: (callback: onBLEConnectionStateChangeCallback) => void;
+  onBLECharacteristicValueChange: (callback: onBLECharacteristicValueChangeCallback) => void;
   startBeaconDiscovery: (options: startBeaconDiscoveryOpts) => void;
   stopBeaconDiscovery: (options: stopBeaconDiscoveryOpts) => void;
   getBeacons: (options: getBeaconsOpts) => void;
