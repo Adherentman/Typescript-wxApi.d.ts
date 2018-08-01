@@ -971,12 +971,21 @@ interface notifyBLECharacteristicValueChangeOpts
   state: boolean;
 }
 
-interface onBLEConnectionStateChangeCallback {
-  (deviceId: string, connected: boolean): void
+interface onBLEConnectionStateChangeOpts {
+  deviceId: string;
+  connected: boolean;
 }
-
+interface onBLEConnectionStateChangeCallback {
+  (res: onBLEConnectionStateChangeOpts): void
+}
+interface onBLECharacteristicValueChangeOpts {
+  deviceId: string;
+  serviceId: string;
+  characteristicId: string;
+  value: ArrayBuffer;
+}
 interface onBLECharacteristicValueChangeCallback {
-  (deviceId: string, serviceId: string, characteristicId: string, value: ArrayBuffer): void;
+  (res: onBLECharacteristicValueChangeOpts): void;
 }
 
 // iBeacon

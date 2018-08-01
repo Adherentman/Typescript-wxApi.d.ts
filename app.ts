@@ -5,6 +5,10 @@ Page({
   data:{},
   a(){
     SocketTask.onError();
-    wx.onAccelerometerChange((res) => console.log(res.x))
+    wx.onAccelerometerChange((res) => console.log(res.x));
+    wx.onBLEConnectionStateChange(function(res){
+      res.deviceId
+    })
+    wx.onBLECharacteristicValueChange((res) => console.log(res.deviceId))
   },
 })
