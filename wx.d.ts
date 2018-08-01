@@ -782,6 +782,14 @@ interface onAccelerometerChangeCallback {
   (res: onAccelerometerChangeOpts): void;
 }
 
+interface startAccelerometerOpts extends WxApiCallback {
+  /**
+   * 基础库2.1.0开始支持。
+   * 监听加速度数据回调函数的执行频率。game约为20ms/次，ui约为60ms/次，normal约为200ms/次
+   */
+  interval?: "game" | "ui" | "normal";
+}
+
 //罗盘
 interface onCompassChangeOpts {
   direction: number;
@@ -884,12 +892,12 @@ interface closeBLEConnectionOpts extends WxApiCallback<closeBLEConnectionRes> {
   deviceId: string;
 }
 
-interface getBLEDeviceServicesArray {
+interface BLEDeviceService {
   uuid: string;
   isPrimary: boolean;
 }
 interface getBLEDeviceServicesRes {
-  services: getBLEDeviceServicesArray;
+  services: BLEDeviceService[];
   errMsg: string;
 }
 
@@ -899,8 +907,26 @@ interface getBLEDeviceServicesOpts
 }
 
 interface getBLEDeviceCharacteristicsRes {
-  characteristics: any[];
+  characteristics: BLEDeviceCharacteristic[];
   errMsg: string;
+}
+
+interface BLEDeviceCharacteristic {
+  /**
+   * 蓝牙设备特征值的uuid
+   */
+  uuid: string;
+  /**
+   * 该特征值支持的操作类型
+   */
+  properties: BLEDeviceCharasteristicProperties;
+}
+
+interface BLEDeviceCharasteristicProperties {
+  read: boolean;
+  write: boolean;
+  notify: boolean;
+  indicate: boolean;
 }
 
 interface getBLEDeviceCharacteristicsOpts
@@ -943,6 +969,14 @@ interface notifyBLECharacteristicValueChangeOpts
   serviceId: string;
   characteristicId: string;
   state: boolean;
+}
+
+interface onBLEConnectionStateChangeCallback {
+  (deviceId: string, connected: boolean): void
+}
+
+interface onBLECharacteristicValueChangeCallback {
+  (deviceId: string, serviceId: string, characteristicId: string, value: ArrayBuffer): void;
 }
 
 // iBeacon
@@ -1106,7 +1140,7 @@ interface DeviceAPIs {
   getNetworkType: (options: getNetworkTypeOpts) => void;
   onNetworkStatusChange: (res: onNetworkStatusChangeOpts) => void;
   onAccelerometerChange: (res: onAccelerometerChangeCallback) => void;
-  startAccelerometer: (options: WxApiCallback) => void;
+  startAccelerometer: (options: startAccelerometerOpts) => void;
   stopAccelerometer: (options: WxApiCallback) => void;
   onCompassChange: (cb) => onCompassChangeOpts;
   startCompass: (options: WxApiCallback) => void;
@@ -1143,8 +1177,8 @@ interface DeviceAPIs {
   notifyBLECharacteristicValueChange: (
     options: notifyBLECharacteristicValueChangeOpts
   ) => void;
-  onBLEConnectionStateChange: any;
-  onBLECharacteristicValueChange: any;
+  onBLEConnectionStateChange: (callback: onBLEConnectionStateChangeCallback) => void;
+  onBLECharacteristicValueChange: (callback: onBLECharacteristicValueChangeCallback) => void;
   startBeaconDiscovery: (options: startBeaconDiscoveryOpts) => void;
   stopBeaconDiscovery: (options: stopBeaconDiscoveryOpts) => void;
   getBeacons: (options: getBeaconsOpts) => void;
