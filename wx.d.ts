@@ -736,6 +736,18 @@ interface onAccelerometerChangeOpts {
   z: number;
 }
 
+interface onAccelerometerChangeCallback {
+  (res: onAccelerometerChangeOpts): void;
+}
+
+interface startAccelerometerOpts extends WxApiCallback {
+  /**
+   * 基础库2.1.0开始支持。
+   * 监听加速度数据回调函数的执行频率。game约为20ms/次，ui约为60ms/次，normal约为200ms/次
+   */
+  interval?: "game" | "ui" | "normal";
+}
+
 //罗盘
 interface onCompassChangeOpts {
   direction: number;
@@ -1059,8 +1071,8 @@ interface DeviceAPIs {
   canIUse: (string: any) => void;
   getNetworkType: (options: getNetworkTypeOpts) => void;
   onNetworkStatusChange: (res: onNetworkStatusChangeOpts) => void;
-  onAccelerometerChange: (res) => onAccelerometerChangeOpts;
-  startAccelerometer: (options: WxApiCallback) => void;
+  onAccelerometerChange: (res: onAccelerometerChangeCallback) => void;
+  startAccelerometer: (options: startAccelerometerOpts) => void;
   stopAccelerometer: (options: WxApiCallback) => void;
   onCompassChange: (cb) => onCompassChangeOpts;
   startCompass: (options: WxApiCallback) => void;
