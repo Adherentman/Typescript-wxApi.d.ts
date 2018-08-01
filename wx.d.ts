@@ -492,22 +492,58 @@ interface MediaAPIs {
   startRecord: (options: startRecordOpts) => void;
   stopRecord: ZeroParamVoidFunc;
   getRecorderManager: getRecorderManagerOpts;
-  playVoice: (options: playVoiceOpts) => void; //注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
-  pauseVoice: ZeroParamVoidFunc; //注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
-  stopVoice: ZeroParamVoidFunc; //注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+  /**
+   * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+   */
+  playVoice: (options: playVoiceOpts) => void;
+  /**
+   * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+   */ 
+  pauseVoice: ZeroParamVoidFunc;
+  /**
+   * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+   */
+  stopVoice: ZeroParamVoidFunc; 
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
   getBackgroundAudioPlayerState: (
     options: getBackgroundAudioPlayerStateOpts
-  ) => void; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
-  playBackgroundAudio: (options: playBackgroundAudioOpts) => void; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
-  pauseBackgroundAudio: ZeroParamVoidFunc; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
-  seekBackgroundAudio: (options: seekBackgroundAudioOpts) => void; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
-  stopBackgroundAudio: ZeroParamVoidFunc; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+  ) => void;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  playBackgroundAudio: (options: playBackgroundAudioOpts) => void;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  pauseBackgroundAudio: ZeroParamVoidFunc;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  seekBackgroundAudio: (options: seekBackgroundAudioOpts) => void;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
   //callback
-  onBackgroundAudioPlay: (callback: any) => void; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
-  onBackgroundAudioPause: (callback: any) => void; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
-  onBackgroundAudioStop: (callback: any) => void; //注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  stopBackgroundAudio: ZeroParamVoidFunc;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  onBackgroundAudioPlay: (callback: any) => void;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  onBackgroundAudioPause: (callback: any) => void;
+  /**
+   * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
+   */
+  onBackgroundAudioStop: (callback: any) => void;
   getBackgroundAudioManager: getBackgroundAudioManagerOpts;
-  createAudioContext: (audioId: string, that: IComponent) => void; //注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+  /**
+   * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
+   */
+  createAudioContext: (audioId: string, that: IComponent) => void;
   createInnerAudioContext: createInnerAudioContextOpts;
   chooseVideo: (options: chooseVideoOpts) => void;
   saveVideoToPhotosAlbum: (options: saveVideoToPhotosAlbumOpts) => void;
@@ -675,7 +711,9 @@ interface StorageAPIs {
 
 //  Device APIs
 
-// 系统信息
+/**
+ * 系统信息
+ */ 
 // getSystemInfo
 interface getSystemInfoRes {
   brand: string;
@@ -714,7 +752,10 @@ interface getSystemInfoSyncRes {
   SDKVersion: any;
 }
 
-// 网络状态
+ 
+/**
+ * 网络状态
+ */
 // getNetworkType
 interface getNetworkTypeRes {
   networkType: string;
@@ -728,12 +769,17 @@ interface onNetworkStatusChangeOpts {
   networkType: "wifi" | "2g" | "3g" | "4g" | "none" | "unknown";
 }
 
-//加速度计
-
+/**
+ * 加速度计
+ */
 interface onAccelerometerChangeOpts {
   x: number;
   y: number;
   z: number;
+}
+
+interface onAccelerometerChangeCallback {
+  (res: onAccelerometerChangeOpts): void;
 }
 
 //罗盘
@@ -1059,7 +1105,7 @@ interface DeviceAPIs {
   canIUse: (string: any) => void;
   getNetworkType: (options: getNetworkTypeOpts) => void;
   onNetworkStatusChange: (res: onNetworkStatusChangeOpts) => void;
-  onAccelerometerChange: (res) => onAccelerometerChangeOpts;
+  onAccelerometerChange: (res: onAccelerometerChangeCallback) => void;
   startAccelerometer: (options: WxApiCallback) => void;
   stopAccelerometer: (options: WxApiCallback) => void;
   onCompassChange: (cb) => onCompassChangeOpts;

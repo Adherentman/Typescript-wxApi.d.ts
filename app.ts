@@ -5,5 +5,6 @@ Page({
   data:{},
   a(){
     SocketTask.onError();
+    wx.onAccelerometerChange((res) => console.log(res.x))
   },
 })
