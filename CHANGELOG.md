@@ -13,3 +13,4 @@ a.onProgressUpdate(res => console.log(res.progress, res.totalBytesExpectedToSend
 let a = wx.downloadTask({url: 'dada'});
 a.onProgressUpdate(res => console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent))
 ```
+3. `playVoiceOpts`中的`duration`必填改为可选。

@@ -330,7 +330,7 @@ interface getRecorderManagerOpts {
 // Voice 音频
 interface playVoiceOpts extends WxApiCallback {
   filePath: string;
-  duration: number;
+  duration?: number;
 }
 
 interface getBackgroundAudioPlayerStateRes {
