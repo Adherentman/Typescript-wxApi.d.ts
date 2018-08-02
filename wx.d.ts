@@ -141,11 +141,7 @@ interface downloadFileOpts extends WxApiCallback<downloadRes> {
 }
 
 interface downloadTask {
-  onProgressUpdate: (
-    progress: number,
-    totalBytesWritten: number,
-    totalBytesExpectedToWrite: number
-  ) => void;
+  onProgressUpdate(res: onProgressUpdateCallback): void 
   abort: ZeroParamVoidFunc;
 }
 
