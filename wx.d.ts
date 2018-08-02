@@ -1,5 +1,4 @@
 // Common Types
-
 interface string2AnyMap {
   [key: string]: any;
 }
@@ -13,7 +12,6 @@ type ZeroParamVoidFunc = () => void;
 interface createLiveObj extends WxApiCallback {}
 
 // App Types
-
 interface AppReferrerInfo {
   appId: string;
   extraData: any;
@@ -41,7 +39,6 @@ interface AppOpts {
 interface IApp extends AppOpts {}
 
 // Page Types
-
 interface PageOpts<Data = {}> {
   data?: Data;
   onLoad?: (options: string2stringMap) => void;
@@ -63,7 +60,6 @@ interface IPage<Data = {}> extends PageOpts<Data> {
 }
 
 // Component Types
-
 interface IComponent {}
 
 interface WxApiCallback<Res = undefined> {
@@ -72,8 +68,9 @@ interface WxApiCallback<Res = undefined> {
   complete?: (obj: any) => void;
 }
 
-// Network APIs
-
+/**
+ * Network APIs
+ */
 // 发起请求
 type NetworkRequestData = string | object | ArrayBuffer;
 
@@ -191,8 +188,9 @@ interface NetworkAPIs {
   onSocketClose: ZeroParamVoidFunc;
 }
 
-//SocketTask APIs
-
+/**
+ * SocketTask APIs
+ */
 //send
 interface sendOpts extends WxApiCallback<sendRes> {}
 
@@ -217,6 +215,7 @@ interface onErrorOpts {
 interface onMessageOpts {
   data?: string | ArrayBuffer;
 }
+
 interface SocketTaskAPIs {
   send: (options?: sendOpts) => void;
   close: (options?: closeOpts) => void;
@@ -226,10 +225,10 @@ interface SocketTaskAPIs {
   onMessage: (options?: onMessageOpts) => void;
 }
 
-// Media APIs
-
+/**
+ * Media APIs
+ */
 // picture 图片
-
 interface tempFilesStruct {
   path: string;
   size: number;
@@ -255,6 +254,9 @@ interface getImageInfoRes {
   width: number;
   height: number;
   path: string;
+  /**
+   * 1.9.90
+  */
   orientation:
     | "up"
     | "down"
@@ -263,8 +265,11 @@ interface getImageInfoRes {
     | "up-mirrored"
     | "down-mirrored"
     | "left-mirrored"
-    | "right-mirrored"; //1.9.90
-  type: string; //1.9.90
+    | "right-mirrored";
+  /**
+   * 1.9.90
+  */
+  type: string;
 }
 
 interface getImageInfoOpts extends WxApiCallback<getImageInfoRes> {
@@ -280,7 +285,6 @@ interface saveImageToPhotosAlbumOpts extends WxApiCallback {
 }
 
 // Record 录音
-
 interface startRecordRes {
   tempFilePath: string;
 }
@@ -323,7 +327,6 @@ interface getRecorderManagerOpts {
 }
 
 // Voice 音频
-
 interface playVoiceOpts extends WxApiCallback {
   filePath: string;
   duration: number;
@@ -1215,8 +1218,9 @@ interface DeviceAPIs {
   vibrateShort: (options: vibrateShortOpts) => void;
 }
 
-// UI APIs
-
+/**
+ * UI APIs
+ */
 // Interactive feedback 交互反馈
 interface ShowToastOpts extends WxApiCallback {
   title: string;
@@ -1353,26 +1357,27 @@ interface startPullDownRefreshOpts
   extends WxApiCallback<startPullDownRefreshRes> {}
 
   // WXML节点信息
-  interface selectorQueryAPIs {
-    in: any;
-    select: any;
-    selectAll: any;
-    selectViewport: any;
-    exec: any;
-  }
+interface selectorQueryAPIs {
+  in: any;
+  select: any;
+  selectAll: any;
+  selectViewport: any;
+  exec: any;
+}
 
-  interface nodesRefAPIs {
-    boundingClientRect: any;
-    scrollOffset: any;
-    fields: any;
-  }
+interface nodesRefAPIs {
+  boundingClientRect: any;
+  scrollOffset: any;
+  fields: any;
+}
 
-  interface createIntersectionObserverAPIs {
-    relativeTo: any;
-    relativeToViewport: any;
-    observe: any;
-    disconnect: any;
-  }
+interface createIntersectionObserverAPIs {
+  relativeTo: any;
+  relativeToViewport: any;
+  observe: any;
+  disconnect: any;
+}
+
 interface UIAPIs {
   showToast: (options: ShowToastOpts) => void;
   showLoading: (options: ShowLoadingOpts) => void;
@@ -1408,14 +1413,12 @@ interface UIAPIs {
   canvasToTempFilePath: any;
   canvasGetImageData: any;
   canvasPutImageData: any;
-
-
-
   startPullDownRefresh: (options: startPullDownRefreshOpts) => void;
   stopPullDownRefresh: ZeroParamVoidFunc;
   createSelectorQuery: ZeroParamVoidFunc;
   createIntersectionObserver: createIntersectionObserverAPIs;
 }
+
 interface canvasContextApi {
   setFillStyle: any;
   setStrokeStyle: any;
@@ -1463,7 +1466,10 @@ interface canvasContextApi {
   font: any;
   setTransform: any;
 }
-// Third party APIs
+
+/**
+ * Third party APIs
+ */
 interface getExtConfigRes {
   errMsg: string;
   extConfig: any;
@@ -1475,8 +1481,9 @@ interface ThirdPartyAPIs {
   getExtConfigSync: any;
 }
 
-// Open Interface APIs
-
+/**
+ *  Open Interface APIs
+ */
 interface LoginRes {
   errMsg?: string;
   code?: string;
@@ -1651,7 +1658,9 @@ interface OpenInterfaceAPIs {
   checkIsSoterEnrolledInDevice: any;
 }
 
-// Data APIs
+/**
+ * Data APIs
+ */
 interface reportAnalyticsOpts {
   eventName: string;
   data: any;
@@ -1661,7 +1670,9 @@ interface DataAPIs {
   reportAnalytics: (options: reportAnalyticsOpts) => void;
 }
 
-// Update APIs
+/**
+ * Update APIs
+ */
 interface UpdateAPIs {
   getUpdateManager: any;
 }
@@ -1672,7 +1683,10 @@ interface updateManagerAPIs {
   onUpdateFailed: ZeroParamVoidFunc;
   applyUpdate: any;
 }
-// Multithreading APIs
+
+/**
+ * Multithreading APIs
+ */
 interface MultithreadingAPIs {
   createWorker: (scriptPath: string) => void;
 }
@@ -1683,7 +1697,9 @@ interface workerAPIs {
   terminate: ZeroParamVoidFunc;
 }
 
-// Debugging APIs
+/**
+ * Debugging APIs
+ */
 interface setEnableDebugRes {
   errMsg: string;
 }
