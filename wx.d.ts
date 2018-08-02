@@ -115,12 +115,17 @@ interface uploadFileOpts extends WxApiCallback<uploadFileRes> {
   formData?: object;
 }
 
+interface onProgressUpdateRes {
+  progress: number,
+  totalBytesSent: number,
+  totalBytesExpectedToSend: number
+}
+
+interface onProgressUpdateCallback {
+  (res: onProgressUpdateRes): void
+}
 interface uploadTask {
-  onProgressUpdate: (
-    progress: number,
-    totalBytesSent: number,
-    totalBytesExpectedToSend: number
-  ) => void;
+  onProgressUpdate(res: onProgressUpdateCallback): void 
   abort: ZeroParamVoidFunc;
 }
 

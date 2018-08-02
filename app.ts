@@ -10,5 +10,9 @@ Page({
       res.deviceId
     })
     wx.onBLECharacteristicValueChange((res) => console.log(res.deviceId))
-  },
+    let a = wx.request({url: "da", dataType: 'dada'})
+    a.abort()
+    let b = wx.uploadFile({url: 'dada', filePath: "daada", name: "dada"});
+    b.onProgressUpdate(res => console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent))
+  }
 })
