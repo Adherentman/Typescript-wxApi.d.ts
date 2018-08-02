@@ -8,3 +8,8 @@
 let a = wx.uploadFile({url: 'dada', filePath: "daada", name: "dada"});
 a.onProgressUpdate(res => console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent))
 ```
+2. 修复`downloadTask`中的`onProgressUpdate`方法无法`res.`出后面三个`progress `，`totalBytesExpectedToSend`， `totalBytesSent`
+```typescript
+let a = wx.downloadTask({url: 'dada'});
+a.onProgressUpdate(res => console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent))
+```
