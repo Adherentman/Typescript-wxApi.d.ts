@@ -153,6 +153,17 @@ interface connectSocketOpts extends WxApiCallback {
   protocols?: string[];
 }
 
+// 监听WebSocket连接打开事件。
+interface onSocketOpenRes {
+  header?: object
+}
+interface onSocketOpenCallBack {
+  (res: onSocketOpenRes): void;
+}
+
+interface onSocketErrorCallBack {
+  (res: any): void;
+}
 // sendSocketMessage
 interface sendSocketMessageOpts extends WxApiCallback<sendSocketMessageRes> {}
 
@@ -161,8 +172,11 @@ interface sendSocketMessageRes {
 }
 
 //onSocketMessage
-interface onSocketMessageOpts {
+interface onSocketMessageRes {
   data: string | ArrayBuffer;
+}
+interface onSocketMessageCallback {
+  (res: onSocketMessageRes): void
 }
 
 //closeSocket
@@ -173,6 +187,10 @@ interface closeSocketRes {
   reason?: string;
 }
 
+interface onSocketCloseCallBack {
+  (res: any): void;
+}
+
 interface NetworkAPIs {
   // 发起请求
   request: (options: NetworkRequestOpts) => requestTask;
@@ -180,13 +198,13 @@ interface NetworkAPIs {
   uploadFile: (options: uploadFileOpts) => uploadTask;
   downloadFile: (options: downloadFileOpts) => downloadTask;
   // WebSocket
-  connectSocket: ZeroParamVoidFunc;
-  onSocketOpen: ZeroParamVoidFunc;
-  onSocketError: ZeroParamVoidFunc;
+  connectSocket: (options: connectSocketOpts) => void;
+  onSocketOpen: (callback: onSocketOpenCallBack) => void;
+  onSocketError: (callback: onSocketErrorCallBack) => void;
   sendSocketMessage: (options: sendSocketMessageOpts) => void;
-  onSocketMessage: (options: onSocketMessageOpts) => void;
+  onSocketMessage: (options: onSocketMessageCallback) => void;
   closeSocket: (options: closeSocketOpts) => void;
-  onSocketClose: ZeroParamVoidFunc;
+  onSocketClose: (callback: onSocketCloseCallBack) => void;
 }
 
 /**
