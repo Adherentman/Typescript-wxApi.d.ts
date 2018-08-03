@@ -217,6 +217,13 @@ interface sendRes {
   data?: string | ArrayBuffer;
 }
 
+interface onOpenRes {
+  header: object
+}
+
+interface onOpenCallBack {
+  (res: onOpenRes): void;
+}
 //close
 interface closeOpts extends WxApiCallback<closeRes> {}
 
@@ -225,9 +232,18 @@ interface closeRes {
   reason?: string;
 }
 
+// onClose
+interface onCloseCallBack {
+  (res: any): void
+}
+
 //onError
 interface onErrorOpts {
   errMsg?: string;
+}
+
+interface onErrorCallBack {
+  (res: onErrorOpts): void
 }
 
 //onMessage
@@ -235,13 +251,16 @@ interface onMessageOpts {
   data?: string | ArrayBuffer;
 }
 
+interface onMessageCallBack {
+  (res: onMessageOpts): void
+}
 interface SocketTaskAPIs {
   send: (options?: sendOpts) => void;
   close: (options?: closeOpts) => void;
-  onOpen: ZeroParamVoidFunc;
-  onClose: ZeroParamVoidFunc;
-  onError: (options?: onErrorOpts) => void;
-  onMessage: (options?: onMessageOpts) => void;
+  onOpen: (res: onOpenCallBack) => void;
+  onClose: (res: onCloseCallBack) => void;
+  onError: (res: onErrorCallBack) => void;
+  onMessage: (res: onMessageCallBack) => void;
 }
 
 /**

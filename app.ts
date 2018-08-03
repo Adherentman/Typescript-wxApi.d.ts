@@ -4,7 +4,7 @@
 Page({
   data:{},
   a(){
-    SocketTask.onError();
+    SocketTask.onError(res => res.errMsg);
     wx.onAccelerometerChange((res) => console.log(res.x));
     wx.onBLEConnectionStateChange(function(res){
       res.deviceId

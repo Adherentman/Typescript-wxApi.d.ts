@@ -7,6 +7,10 @@
 - 修复`onSocketError`返回一个回调函数
 - 修复`onSocketMessage`返回一个`res.data`的回调函数
 - 修复`onSocketClose`返回一个回调函数
+- 修复`onOpen`返回一个回调函数
+- 修复`onClose`返回一个回调函数
+- 修复`onError`返回一个回调函数
+- 修复`onMessage`返回一个回调函数
 #### *2018-08-02*
 ### Api Fixes
 - 修复`uploadTask`中的`onProgressUpdate`方法无法`res.`出后面三个`progress `，`totalBytesExpectedToSend`， `totalBytesSent`
