@@ -9,6 +9,9 @@ interface string2stringMap {
 
 type ZeroParamVoidFunc = () => void;
 
+interface ReturnCallBack {
+  (res: ZeroParamVoidFunc)
+}
 interface createLiveObj extends WxApiCallback {}
 
 // App Types
@@ -332,36 +335,52 @@ interface startRecordOpts extends WxApiCallback<startRecordRes> {}
 interface RecordStartOpts {
   duration?: number;
   sampleRate?: number;
-  numberOfChannels?: "1" | "2";
+  /**
+   * numberOfChannels有效值 1/2
+   */
+  numberOfChannels?: number;
   encodeBitRate?: number;
-  format?: "aac" | "mp3";
+  /**
+   * format有效值aac/mp3
+   */
+  format?: string;
   frameSize?: number;
+  audioSource?: string
 }
 
 interface RecordOnStopRes {
   tempFilePath: string;
 }
 
+interface RecordOnStopCallBack {
+  (res: RecordOnStopRes): void
+}
+
+
 interface onFrameRecordedRes {
   frameBuffer: ArrayBuffer;
   isLastFrame: boolean;
 }
 
-interface RecordOnError {
+interface onFrameRecordedCallBack {
+  (res: onFrameRecordedRes): void
+}
+
+interface RecordOnErrorRes {
   errMsg: string;
 }
 
-//不确定
+interface RecordOnErrorCallBack {
+  (res: RecordOnErrorRes): void
+}
+
 interface getRecorderManagerOpts {
-  start?: RecordStartOpts;
-  pause?: ZeroParamVoidFunc;
-  resume?: ZeroParamVoidFunc;
-  stop?: ZeroParamVoidFunc;
-  onStart?: ZeroParamVoidFunc;
-  onPause?: ZeroParamVoidFunc;
-  onStop?: RecordOnStopRes;
-  onFrameRecorded?: onFrameRecordedRes;
-  onError?: RecordOnError;
+  start: (options: RecordStartOpts) => void;
+  onStart: ReturnCallBack;
+  onPause: ReturnCallBack;
+  onStop: (res: RecordOnStopCallBack) => void;
+  onFrameRecorded: (res: onFrameRecordedRes) => void;
+  onError: (res: RecordOnErrorCallBack) => void;
 }
 
 // Voice 音频
@@ -532,7 +551,7 @@ interface MediaAPIs {
   saveImageToPhotosAlbum: (options: saveImageToPhotosAlbumOpts) => void;
   startRecord: (options: startRecordOpts) => void;
   stopRecord: ZeroParamVoidFunc;
-  getRecorderManager: getRecorderManagerOpts;
+  getRecorderManager: () => getRecorderManagerOpts;
   /**
    * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
    */

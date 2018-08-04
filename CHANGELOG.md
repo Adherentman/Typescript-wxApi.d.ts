@@ -1,6 +1,16 @@
 # CHANGELOG
 利用业余时间每周一更新，与小程序文档核对API
 
+#### *2018-08-04*
+- 增加一基础类型`ReturnCallBack`
+- `RecordStart`增加一个`options` `audioSource`.
+- 修复录音管理中`getRecorderManager`的所有APIS
+  - start: (options: RecordStartOpts) => void;
+  - onStart: ReturnCallBack;
+  - onPause: ReturnCallBack;
+  - onStop: (res: RecordOnStopCallBack) => void;
+  - onFrameRecorded: (res: onFrameRecordedRes) => void;
+  - onError: (res: RecordOnErrorCallBack) => void;
 #### *2018-08-03*
 - 修复`connectSocket`返回空函数
 - 修复`onSocketOpen`返回一个回调函数
