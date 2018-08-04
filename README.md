@@ -6,11 +6,13 @@
 * 在app.ts中`<reference path="./typings/wx.d.ts" />`
 * 完成🦉就可以愉快的感受到提示和类型约束啦！
 
-- [x] 网络
-	- [x] 发起请求
-	- [x] 上传、下载
-	- [x] WebSocket
-	- [x] SocketTask
+<details>
+<summary><b>网络</b></summary>
+- [x] 发起请求
+- [x] 上传、下载
+- [x] WebSocket
+- [x] SocketTask
+</details>
 - [x] 媒体
 	- [x] 图片
 	- [x] 录音
