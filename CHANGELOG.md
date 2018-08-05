@@ -1,6 +1,31 @@
 # CHANGELOG
 利用业余时间每周一更新，与小程序文档核对API
 
+
+#### *2018-08-05*
+- 规范化`onBackgroundAudioPlay`, `onBackgroundAudioPause`, `onBackgroundAudioStop`返回`callback`值
+- 修复`BackgroundAudioManager`返回的值，并且它的对象属性列表增加一个`protocol`
+- 修复`createInnerAudioContext`返回的值
+- 增加版本1.9.0`innerAudioContext`所支持的对象方法
+  - offCanplay
+  - offPlay
+  - offPause
+  - offStop
+  - offEnded
+  - offTimeUpdate
+  - offError
+  - offWaiting
+  - offSeeking
+  - offSeeked
+- 增加版本2.1.0有的API`getAvailableAudioSources`
+- 增加版本2.1.0里有的`createVideoContext`对象方法
+  - showStatusBar
+  - hideStatusBar
+- 增加支持在版本1.9.90里的`createLivePlayerContext`两个方法
+  - pause
+  - resume
+- 增加支持在版本2.1.0里的`createLivePusherContext`的一个方法`toggleTorch`
+- 增加在版本2.1.0中添加的`loadFontFaceRes`动态加载字体Api
 #### *2018-08-04*
 - 增加一基础类型`ReturnCallBack`
 - `RecordStart`增加一个`options` `audioSource`.

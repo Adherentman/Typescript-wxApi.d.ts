@@ -414,57 +414,90 @@ interface getBackgroundAudioManagerOpts {
   duration: number;
   currentTime: number;
   paused: boolean;
-  src?: string;
-  startTime?: number;
+  src: string;
+  startTime: number;
   buffered: number;
-  title?: string;
-  epname?: string;
-  singer?: string;
-  coverImgUrl?: string;
-  webUrl?: string;
+  title: string;
+  epname: string;
+  singer: string;
+  coverImgUrl: string;
+  webUrl: string;
+  /**
+   * 支持版本1.9.94
+   */
+  protocol: string;
   play: ZeroParamVoidFunc;
   pause: ZeroParamVoidFunc;
   stop: ZeroParamVoidFunc;
-  seek: (position: number) => void;
-  onCanplay: WxApiCallback;
-  onPlay: WxApiCallback;
-  onPause: WxApiCallback;
-  onStop: WxApiCallback;
-  onEnded: WxApiCallback;
-  onTimeUpdate: WxApiCallback;
-  onPrev: WxApiCallback;
-  onNext: WxApiCallback;
-  onError: WxApiCallback;
-  onWaiting: WxApiCallback;
+  seek: (position: any) => void;
+  onCanplay: (callback: ReturnCallBack) => void;
+  onPlay: (callback: ReturnCallBack) => void;
+  onPause: (callback: ReturnCallBack) => void;
+  onStop: (callback: ReturnCallBack) => void;
+  onEnded: (callback: ReturnCallBack) => void;
+  onTimeUpdate: (callback: ReturnCallBack) => void;
+  onPrev: (callback: ReturnCallBack) => void;
+  onNext: (callback: ReturnCallBack) => void;
+  onError: (callback: ReturnCallBack) => void;
+  onWaiting: (callback: ReturnCallBack) => void;
 }
 
+interface createInnerAudioContextonErrorRes {
+  errMsg: any;
+  errCode: any
+}
+interface createInnerAudioContextonErrorCallBack {
+  (callback: createInnerAudioContextonErrorRes)
+}
 interface createInnerAudioContextOpts {
-  src?: string;
-  startTime?: number;
-  autoplay?: boolean;
-  loop?: boolean;
-  obeyMuteSwitch?: boolean;
+  src: string;
+  startTime: number;
+  autoplay: boolean;
+  loop: boolean;
+  obeyMuteSwitch: boolean;
   duration: number;
   currentTime: number;
   paused: boolean;
   buffered: number;
-  volume: number; //1.9.90
+  /**
+   * 支持版本1.9.90
+   */
+  volume: number; 
   play: ZeroParamVoidFunc;
   pause: ZeroParamVoidFunc;
   stop: ZeroParamVoidFunc;
-  seek: (position: number) => void;
+  seek: (position: any) => void;
   destroy: ZeroParamVoidFunc;
-  onCanplay: WxApiCallback;
-  onPlay: WxApiCallback;
-  onPause: WxApiCallback;
-  onStop: WxApiCallback;
-  onEnded: WxApiCallback;
-  onTimeUpdate: WxApiCallback;
-  onError: WxApiCallback;
-  onWaiting: WxApiCallback;
-  onSeeking: WxApiCallback;
-  onSeeked: WxApiCallback;
+  onCanplay: (callback: ReturnCallBack) => void;
+  onPlay: (callback: ReturnCallBack) => void;
+  onPause: (callback: ReturnCallBack) => void;
+  onStop: (callback: ReturnCallBack) => void;
+  onEnded: (callback: ReturnCallBack) => void;
+  onTimeUpdate: (callback: ReturnCallBack) => void;
+  onError: (callback: createInnerAudioContextonErrorCallBack) => void;
+  onWaiting: (callback: ReturnCallBack) => void;
+  onSeeking: (callback: ReturnCallBack) => void;
+  onSeeked: (callback: ReturnCallBack) => void;
+  /**
+   * 以下方法支持的版本为1.9.0
+   */
+  offCanplay: (callback: ReturnCallBack) => void;
+  offPlay: (callback: ReturnCallBack) => void;
+  offPause: (callback: ReturnCallBack) => void;
+  offStop: (callback: ReturnCallBack) => void;
+  offEnded: (callback: ReturnCallBack) => void;
+  offTimeUpdate: (callback: ReturnCallBack) => void;
+  offError: (callback: ReturnCallBack) => void;
+  offWaiting: (callback: ReturnCallBack) => void;
+  offSeeking: (callback: ReturnCallBack) => void;
+  offSeeked: (callback: ReturnCallBack) => void;
 }
+
+interface getAvailableAudioSourcesRes {
+  audioSources: string[];
+}
+
+interface getAvailableAudioSourcesOpts extends WxApiCallback<getAvailableAudioSourcesRes>{}
 
 // Video 视频
 
@@ -495,14 +528,20 @@ interface Videodanmu {
   text: string;
   color: string;
 }
+
 interface createVideoContextOpts {
   play: ZeroParamVoidFunc;
   pause: ZeroParamVoidFunc;
-  seek: (position: number) => void;
-  sendDanmu: Videodanmu;
-  playbackRate: "0.5" | "0.8" | "1.0" | "1.25" | "1.5";
+  seek: (position: any) => void;
+  sendDanmu: (danmu: Videodanmu) => void;
+  playbackRate: (rate: any) => void;
   requestFullScreen: ZeroParamVoidFunc;
   exitFullScreen: ZeroParamVoidFunc;
+  /**
+   * 2.1.0仅在iOS全屏下有效
+   */
+  showStatusBar: ZeroParamVoidFunc;
+  hideStatusBar: ZeroParamVoidFunc;
 }
 
 interface takePhotoObj extends WxApiCallback {
@@ -510,7 +549,7 @@ interface takePhotoObj extends WxApiCallback {
 }
 
 interface startRecordObj extends WxApiCallback {
-  timeoutCallback: ZeroParamVoidFunc;
+  timeoutCallback?: ZeroParamVoidFunc;
 }
 
 interface stopRecordObj extends WxApiCallback {}
@@ -528,22 +567,42 @@ interface requestFullScreenObj extends WxApiCallback {
 interface exitFullScreen extends WxApiCallback {}
 
 interface createLivePlayerContextOpts {
-  play: createLiveObj;
-  stop: createLiveObj;
-  mute: createLiveObj;
-  requestFullScreen: requestFullScreenObj;
-  exitFullScreen: createLiveObj;
+  play: (options: createLiveObj) => void;
+  stop: (options: createLiveObj) => void;
+  mute: (options: createLiveObj) => void;
+  /**
+   * pause, resume只支持在版本1.9.90
+   */
+  pause: (options: createLiveObj) => void;
+  resume: (options: createLiveObj) => void;
+  requestFullScreen: (options: requestFullScreenObj) => void;
+  exitFullScreen: (options: createLiveObj) => void;
 }
 
 interface createLivePusherContextOpts {
-  start: createLiveObj;
-  stop: createLiveObj;
-  pause: createLiveObj;
-  resume: createLiveObj;
-  switchCamera: createLiveObj;
-  snapshot: createLiveObj;
+  start: (options: createLiveObj) => void;
+  stop: (options: createLiveObj) => void;
+  pause: (options: createLiveObj) => void;
+  resume: (options: createLiveObj) => void;
+  switchCamera: (options: createLiveObj) => void;
+  snapshot: (options: createLiveObj) => void;
+  toggleTorch: (options: createLiveObj) => void;
 }
 
+interface LoadFontFaceDesc {
+  style: any;
+  weight: any;
+  variant: any;
+}
+interface loadFontFaceRes {
+  status: any
+}
+
+interface loadFontFaceOpts extends WxApiCallback<loadFontFaceRes> {
+  family: string;
+  source: string;
+  desc?: LoadFontFaceDesc;
+}
 interface MediaAPIs {
   chooseImage: (options: chooseImageOpts) => void;
   previewImage: (options: previewImageOpts) => void;
@@ -590,30 +649,35 @@ interface MediaAPIs {
   /**
    * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
    */
-  onBackgroundAudioPlay: (callback: any) => void;
+  onBackgroundAudioPlay: (callback: ReturnCallBack) => void;
   /**
    * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
    */
-  onBackgroundAudioPause: (callback: any) => void;
+  onBackgroundAudioPause: (callback: ReturnCallBack) => void;
   /**
    * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
    */
-  onBackgroundAudioStop: (callback: any) => void;
-  getBackgroundAudioManager: getBackgroundAudioManagerOpts;
+  onBackgroundAudioStop: (callback: ReturnCallBack) => void;
+  getBackgroundAudioManager: () => getBackgroundAudioManagerOpts;
   /**
    * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
    */
-  createAudioContext: (audioId: string, that: IComponent) => void;
-  createInnerAudioContext: createInnerAudioContextOpts;
+  createAudioContext: (audioId: string, that?: IComponent) => void;
+  createInnerAudioContext: () => createInnerAudioContextOpts;
+  /**
+   * 2.1.0开始支持
+   */
+  getAvailableAudioSources: (options: getAvailableAudioSourcesOpts) => void;
   chooseVideo: (options: chooseVideoOpts) => void;
   saveVideoToPhotosAlbum: (options: saveVideoToPhotosAlbumOpts) => void;
   createVideoContext: (
     audioId: string,
-    that: IComponent
+    that?: IComponent
   ) => createVideoContextOpts;
   createCameraContext: () => createCameraContextOpts;
   createLivePlayerContext: (domid: string) => createLivePlayerContextOpts;
   createLivePusherContext: () => createLivePusherContextOpts;
+  loadFontFace: (options: loadFontFaceOpts) => void;
 }
 
 // File APIs
