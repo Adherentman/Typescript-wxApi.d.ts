@@ -36,5 +36,7 @@ Page({
         console.log(res.height)
       }
     })
+    wx.pauseVoice();
+    wx.stopVoice()
   }
 })
