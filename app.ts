@@ -59,6 +59,17 @@ Page({
         var downloadPercent = res.downloadPercent
       }
     })
+    wx.chooseImage({
+      success: function(res) {
+        var tempFilePaths = res.tempFilePaths
+        wx.saveFile({
+          tempFilePath: tempFilePaths[0],
+          success: function(res) {
+            var savedFilePath = res.savedFilePath
+          }
+        })
+      }
+    })
     wx.loadFontFace({
       family: 'Bitstream Vera Serif Bold',
       source: 'url("https://sungd.github.io/Pacifico.ttf")',

@@ -736,7 +736,7 @@ interface removeSavedFileOpts extends WxApiCallback {
 // openDocument
 interface openDocumentOpts extends WxApiCallback {
   filePath: string;
-  fileType: string;
+  fileType?: string;
 }
 
 interface FileAPIs {
@@ -1835,6 +1835,7 @@ interface DebuggingAPIs {
 // Declares
 declare let wx: NetworkAPIs &
   MediaAPIs &
+  FileAPIs &
   StorageAPIs &
   LocationAPIs &
   DeviceAPIs &

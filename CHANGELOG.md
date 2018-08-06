@@ -2,6 +2,10 @@
 利用业余时间每周一更新，与小程序文档核对API
 
 
+#### *2018-08-06*
+- 修复wx点不出文件Api
+- 修复`openDocument`的参数`filePath`为可选
+
 #### *2018-08-05*
 - 规范化`onBackgroundAudioPlay`, `onBackgroundAudioPause`, `onBackgroundAudioStop`返回`callback`值
 - 修复`BackgroundAudioManager`返回的值，并且它的对象属性列表增加一个`protocol`
