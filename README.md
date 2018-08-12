@@ -117,7 +117,7 @@
 
 <br/>
 <br/>
-持续更新，欢迎star，欢迎pr，欢迎issues。
+持续更新迭代，欢迎star，欢迎pr，欢迎issues。
 
 ## LICENSE
 
