@@ -101,6 +101,7 @@ Page({
         console.log(res.errMsg)
         console.log(res.errCode)
     })
+    const FileSystemManager = wx.getFileSystemManager();
   },
   audioPlay: function () {
     this.audioCtx.play()

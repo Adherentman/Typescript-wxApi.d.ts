@@ -121,7 +121,7 @@ interface uploadFileOpts extends WxApiCallback<uploadFileRes> {
 interface onProgressUpdateRes {
   progress: number,
   totalBytesSent: number,
-  totalBytesExpectedToSend: number
+  totalBytesExpectedToWrite: number
 }
 
 interface onProgressUpdateCallback {
@@ -141,6 +141,7 @@ interface downloadRes {
 interface downloadFileOpts extends WxApiCallback<downloadRes> {
   url: string;
   header?: object;
+  filePath: string;
 }
 
 interface downloadTask {
@@ -739,6 +740,190 @@ interface openDocumentOpts extends WxApiCallback {
   fileType?: string;
 }
 
+/**
+ * 更新于2018年9月14日
+ */
+interface mkdirOpts extends WxApiCallback {
+  dirPath: string;
+  recursive: boolean;
+}
+
+interface fileListObject {
+  filePath: string;
+  size: string;
+  createTime: string;
+}
+
+interface FileSystemManagerGetSavedFileListRes {
+  fileList: fileListObject[]
+}
+
+interface FileSystemManagerGetSavedFileListOpts extends WxApiCallback<FileSystemManagerGetSavedFileListRes>{}
+
+interface FileSystemManagerSaveFileRes {
+  savedFilePath: string;
+  errMsg: string
+}
+
+interface FileSystemManagerSaveFileOpts extends WxApiCallback<FileSystemManagerSaveFileRes> {
+  tempFilePath: string;
+  filePath: string;
+}
+
+interface FileSystemManagerRemoveSavedFileRes {
+  errMsg: string;
+}
+
+interface FileSystemManagerRemoveSavedFileOpts extends WxApiCallback<FileSystemManagerRemoveSavedFileRes> {
+  filePath: string;
+}
+
+interface copyFileRes {
+  errMsg: string;
+}
+
+interface copyFileOpts extends WxApiCallback<copyFileRes> {
+  srcPath: string;
+  destPath: string;
+}
+
+interface FileSystemManagerGetFileInfoRes {
+  size: number;
+  errMsg: string;
+}
+
+interface FileSystemManagerGetFileInfoOpts extends WxApiCallback<FileSystemManagerGetFileInfoRes> {
+  filePath: string;
+}
+
+interface accessRes {
+  errMsg: string;
+}
+
+interface accessOpts extends WxApiCallback<accessRes> {
+  path: string;
+}
+
+interface appendFileRes {
+  errMsg: string;
+}
+interface appendFileOpts extends WxApiCallback<appendFileRes> {
+  filePath: string;
+  data: string | ArrayBuffer;
+  encoding: string;
+}
+
+interface readFileRes {
+  data: string | ArrayBuffer;
+  errMsg: string
+}
+
+interface readFileOpts extends WxApiCallback<readFileRes> {
+  filePath: string;
+  encoding: string;
+}
+
+interface readdirRes {
+  files: string[];
+  errMsg: string
+}
+
+interface readdirOpts extends WxApiCallback<readdirRes> {
+  dirPath: string;
+}
+
+interface renameRes {
+  errMsg: string;
+}
+
+interface renameOpts extends WxApiCallback<renameRes> {
+  oldPath: string;
+  newPath: string;
+}
+
+interface rmdirRes {
+  errMsg: string;
+}
+
+interface rmdirOpts extends WxApiCallback<rmdirRes> {
+  dirPath: string;
+  recursive: boolean;
+}
+
+
+interface statRes {
+  stat: Stats;
+  errMsg: string
+}
+
+interface statOpts extends WxApiCallback<statRes> {
+  path: string;
+  recursive: boolean;
+}
+
+interface unlinkRes {
+  errMsg: string;
+}
+
+interface unlinkOpts extends WxApiCallback<unlinkRes> {
+  filePath: string
+}
+
+interface unzipRes {
+  errMsg: string;
+}
+
+interface unzipOpts extends WxApiCallback<unzipRes> {
+  zipFilePath: string;
+  targetPath: string;
+}
+
+interface writeFileRes {
+  errMsg: string;
+}
+
+interface writeFileOpts extends WxApiCallback<writeFileRes> {
+  filePath: string;
+  data: string | ArrayBuffer;
+  encoding: string;
+}
+
+interface getFileSystemManagerOpts {
+  mkdir: (opts: mkdirOpts) => void;
+  getSavedFileList: (opts: FileSystemManagerGetSavedFileListOpts) => void;
+  appendFileSync: (filePath: string, data: string | ArrayBuffer, encoding: string) => void;
+  saveFile: (opts: FileSystemManagerSaveFileOpts) => void;
+  removeSavedFile: (opts: FileSystemManagerRemoveSavedFileOpts) => void;
+  saveFileSync: (tempFilePath: string, filePath: string) => number;
+  copyFile: (opts: copyFileOpts) => void;
+  copyFileSync: (srcPath: string, destPath: string) => void;
+  getFileInfo: (opts: FileSystemManagerGetFileInfoOpts) => void;
+  access: (opts: accessOpts) => void;
+  appendFile: (opts: appendFileOpts) => void
+  accessSync: (path: string) => void;
+  mkdirSync: (dirPath: string, recursive: boolean) => void;
+  readFile: (opts: readFileOpts) => void;
+  readFileSync: (filePath: string, encoding: string) => void;
+  readdir: (opts: readdirOpts) => void;
+  readdirSync: (dirPath: string) => void;
+  rename: (opts: renameOpts) => void;
+  renameSync: (oldPath: string, newPath: string) => void;
+  rmdir: (opts: rmdirOpts) => void;
+  rmdirSync: (dirPath: string, recursive: boolean) => void;
+  stat: (opts: statOpts) => void;
+  statSync: (path: string, recursive: boolean) => void;
+  unlink: (opts: unlinkOpts) => void;
+  unlinkSync: (filePath: string) => void;
+  unzip: (opts: unzipOpts) => void;
+  writeFile: (opts: writeFileOpts) => void;
+  writeFileSync: (filePath: string, data: string | ArrayBuffer, encoding: string) => void;
+}
+
+interface Stats {
+  isDirectory: () => boolean;
+  isFile: () => boolean;
+}
+
 interface FileAPIs {
   saveFile: (options: saveFileOpts) => void;
   getFileInfo: (options: getFileInfoOpts) => void;
@@ -746,6 +931,7 @@ interface FileAPIs {
   getSavedFileInfoRes: (options: getSavedFileInfoOpts) => void;
   removeSavedFile: (options: removeSavedFileOpts) => void;
   openDocument: (options: openDocumentOpts) => void;
+  getFileSystemManager: () => getFileSystemManagerOpts
 }
 
 // Location APIs
