@@ -33,7 +33,7 @@ Page({
     let a = wx.request({url: "da", dataType: 'dada'})
     a.abort()
     let b = wx.uploadFile({url: 'dada', filePath: "daada", name: "dada"});
-    b.onProgressUpdate(res => console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent))
+    b.onProgressUpdate(res => console.log(res.progress, res.totalBytesSent))
     // wx.onSocketOpen(res => console.log(res.header))
     wx.onSocketMessage(res => console.log(res.data));
     wx.onSocketClose(res => console.log(res))
@@ -102,6 +102,9 @@ Page({
         console.log(res.errCode)
     })
     const FileSystemManager = wx.getFileSystemManager();
+    let Stata = FileSystemManager.stat({path: 'sss', recursive: false});
+    Stata.isDirectory()
+  
   },
   audioPlay: function () {
     this.audioCtx.play()

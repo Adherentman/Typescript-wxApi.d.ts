@@ -910,7 +910,7 @@ interface getFileSystemManagerOpts {
   renameSync: (oldPath: string, newPath: string) => void;
   rmdir: (opts: rmdirOpts) => void;
   rmdirSync: (dirPath: string, recursive: boolean) => void;
-  stat: (opts: statOpts) => void;
+  stat: (opts: statOpts) => Stats;
   statSync: (path: string, recursive: boolean) => void;
   unlink: (opts: unlinkOpts) => void;
   unlinkSync: (filePath: string) => void;
