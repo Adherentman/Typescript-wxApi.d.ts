@@ -953,7 +953,6 @@ interface getLocationOpts extends WxApiCallback<getLocationRes> {
   altitude?: boolean;
 }
 
-//chooseLocation
 interface chooseLocationRes {
   name: string;
   address: string;
@@ -963,7 +962,9 @@ interface chooseLocationRes {
 
 interface chooseLocationOpts extends WxApiCallback<chooseLocationRes> {}
 
-//查看位置
+/**
+ * 查看位置
+ */
 interface openLocationOpts extends WxApiCallback {
   latitude: number;
   longitude: number;
@@ -973,14 +974,28 @@ interface openLocationOpts extends WxApiCallback {
 }
 
 interface LocationAPIs {
+  /**
+   * 获取当前的地理位置、速度
+   */
   getLocation: (options: getLocationOpts) => void;
+  /**
+   * 打开地图选择位置
+   */
   chooseLocation: (options: chooseLocationOpts) => void;
+  /**
+   * ​使用微信内置地图查看位置
+   */
   openLocation: (options: openLocationOpts) => void;
+  /**
+   * 创建并返回 map 上下文 mapContext 对象
+   */
   createMapContext: any;
 }
 
-// Storage APIs
-
+/**
+ * 数据缓存 Storage APIs
+ * updateTime: 2018-09-16
+ */
 interface SetStorageOpts extends WxApiCallback {
   key: string;
   data: object | string;
@@ -1010,15 +1025,45 @@ interface ClearStorageOpts extends WxApiCallback {}
  * 本地数据存储的大小限制为 10MB
  */
 interface StorageAPIs {
+  /**
+   * 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口
+   */
   setStorage: (options: SetStorageOpts) => void;
+  /**
+   * 将 data 存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个同步接口。
+   */
   setStorageSync: (key: string, data: object | string) => void;
+  /**
+   * 从本地缓存中异步获取指定 key 对应的内容。
+   */
   getStorage: (options: GetStorageOpts) => void;
+  /**
+   * 从本地缓存中同步获取指定 key 对应的内容。
+   */
   getStorageSync: (key: string) => object | string;
+  /**
+   * 异步获取当前storage的相关信息
+   */
   getStorageInfo: (options: GetStorageInfoOpts) => void;
+  /**
+   * 同步获取当前storage的相关信息
+   */
   getStorageInfoSync: () => GetStorageInfoRes;
+  /**
+   * 从本地缓存中异步移除指定 key 。
+   */
   removeStorage: (options: RemoveStorageOpts) => void;
+  /**
+   * 从本地缓存中同步移除指定 key 。
+   */
   removeStorageSync: (key: string) => object | string;
-  clearStorage: (options: ClearStorageOpts) => void;
+  /**
+   * 清理本地数据缓存。
+   */
+  clearStorage: () => void;
+  /**
+   * 同步清理本地数据缓存
+   */
   clearStorageSync: () => void;
 }
 
