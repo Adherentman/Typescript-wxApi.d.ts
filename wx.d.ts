@@ -1006,6 +1006,9 @@ type RemoveStorageOpts = GetStorageOpts;
 
 interface ClearStorageOpts extends WxApiCallback {}
 
+/**
+ * 本地数据存储的大小限制为 10MB
+ */
 interface StorageAPIs {
   setStorage: (options: SetStorageOpts) => void;
   setStorageSync: (key: string, data: object | string) => void;
