@@ -3,7 +3,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 * git clone
-* 在app.ts中`<reference path="./typings/wx.d.ts" />`
+* 在app.ts中`import wx from 'wx'`
 * 完成🦉就可以愉快的感受到提示和类型约束啦！
 
 ## 如此：

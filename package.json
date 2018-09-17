@@ -1,0 +1,34 @@
+{
+  "name": "ts-wechat",
+  "version": "1.0.0",
+  "description": "Typescript defination for wechat 小程序",
+  "main": "index.d.ts",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adherentman/Typescript-wxApi.git"
+  },
+  "keywords": [
+    "wechat", 
+    "typescript", 
+    "ts", 
+    "wx", 
+    "wx.d.ts", 
+    "微信小程序", 
+    "DefinitelyTyped"
+  ],
+  "author": {
+    "name": "xzh",
+    "email": "adherentxu@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Adherentman/Typescript-wxApi/issues"
+  },
+  "homepage": "https://github.com/Adherentman/Typescript-wxApi#readme"
+}
