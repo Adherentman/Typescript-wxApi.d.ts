@@ -1,6 +1,6 @@
 {
   "name": "ts-wechat",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Typescript defination for wechat 小程序",
   "main": "index.d.ts",
   "directories": {
