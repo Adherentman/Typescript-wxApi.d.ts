@@ -1,4 +1,4 @@
-import wx from 'wx';
+/// <reference path="../index.d.ts">
 
 //在微信小程序的app.ts中这样用
 const options = {

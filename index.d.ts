@@ -2138,7 +2138,3 @@ declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
 declare function getApp(): IApp;
 declare function getCurrentPages(): IPage[];
-
-declare module 'wx' {
-  export = wx;
-}
