@@ -1,6 +1,6 @@
 {
   "name": "ts-wechat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Typescript defination for wechat 小程序",
   "main": "index.d.ts",
   "directories": {
@@ -14,12 +14,12 @@
     "url": "git+https://github.com/Adherentman/Typescript-wxApi.git"
   },
   "keywords": [
-    "wechat", 
-    "typescript", 
-    "ts", 
-    "wx", 
-    "wx.d.ts", 
-    "微信小程序", 
+    "wechat",
+    "typescript",
+    "ts",
+    "wx",
+    "wx.d.ts",
+    "微信小程序",
     "DefinitelyTyped"
   ],
   "author": {
