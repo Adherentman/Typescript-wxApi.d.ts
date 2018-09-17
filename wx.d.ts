@@ -973,6 +973,52 @@ interface openLocationOpts extends WxApiCallback {
   address?: string;
 }
 
+interface translateMarkerOpts {
+  markerId: number;
+  destination: {latitude: number, longitude: number};
+  autoRotate: boolean;
+  rotate: number;
+  duration: number;
+  animationEnd: () => void;
+  fail?: (err: any) => void;
+}
+
+interface includePointsOpts {
+  points: any;
+  padding: any;
+}
+
+interface createMapContextOpts {
+  /**
+   * 获取当前地图中心的经纬度，返回的是 gcj02 坐标系，可以用于 wx.openLocation
+   */
+  getCenterLocation: (opts: WxApiCallback) => void;
+  /**
+   * 将地图中心移动到当前定位点，需要配合map组件的show-location使用
+   */
+  moveToLocation: () => void;
+  /**
+   * 	平移marker，带动画
+   */
+  translateMarker: (opts: translateMarkerOpts) => void;
+  /**
+   * 缩放视野展示所有经纬度
+   */
+  includePoints: (object: includePointsOpts) => void;
+  /**
+   * 获取当前地图的视野范围
+   */
+  getRegion: (opts: WxApiCallback) => void;
+  /**
+   * 获取当前地图的缩放级别
+   */
+  getScale: (opts: WxApiCallback) => void;
+}
+
+/**
+ * 位置APIs
+ * updateTime: 2018-09-17
+ */
 interface LocationAPIs {
   /**
    * 获取当前的地理位置、速度
@@ -989,7 +1035,7 @@ interface LocationAPIs {
   /**
    * 创建并返回 map 上下文 mapContext 对象
    */
-  createMapContext: any;
+  createMapContext: (key: string) => createMapContextOpts;
 }
 
 /**

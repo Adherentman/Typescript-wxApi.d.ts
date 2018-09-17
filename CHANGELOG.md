@@ -1,6 +1,9 @@
 # CHANGELOG
 利用业余时间每周一更新，与小程序文档核对API
 
+#### *2018-09-17*
+- 更新位置API的`createMapContext`
+
 #### *2018-09-14*
 - 更新下载api
 - FileSystemManager的所有API更新

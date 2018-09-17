@@ -40,7 +40,8 @@ Page({
     const recorderManager = wx.getRecorderManager()
     recorderManager.onStop((res) => console.log(res.tempFilePath))
     recorderManager.onPause(() => console.log('dadadadad'))
-    recorderManager.start(options)
+    recorderManager.start(options);
+    const mapCtx = wx.createMapContext('myMap')
     wx.getImageInfo({
       src: 'images/a.jpg',
       success: function (res) {
@@ -58,6 +59,11 @@ Page({
         var duration = res.duration
         var downloadPercent = res.downloadPercent
       }
+    })
+    wx.showToast({
+      title: '成功',
+      icon: 'none',
+      duration: 2000
     })
     wx.chooseImage({
       success: function(res) {
