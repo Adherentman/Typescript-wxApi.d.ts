@@ -3,6 +3,7 @@
   "version": "1.0.3",
   "description": "Typescript defination for wechat 小程序",
   "main": "wx.d.ts",
+  "types": "wx.d.ts",
   "directories": {
     "example": "example"
   },

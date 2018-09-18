@@ -1168,9 +1168,12 @@ interface getNetworkTypeRes {
 interface getNetworkTypeOpts extends WxApiCallback<getNetworkTypeRes> {}
 
 // onNetworkStatusChange
-interface onNetworkStatusChangeOpts {
+interface onNetworkStatusChangeCallBack {
   isConnected: boolean;
-  networkType: "wifi" | "2g" | "3g" | "4g" | "none" | "unknown";
+  networkType: string;
+}
+interface onNetworkStatusChangeOpts {
+  (res: onNetworkStatusChangeCallBack): void;
 }
 
 /**
@@ -1191,12 +1194,15 @@ interface startAccelerometerOpts extends WxApiCallback {
    * 基础库2.1.0开始支持。
    * 监听加速度数据回调函数的执行频率。game约为20ms/次，ui约为60ms/次，normal约为200ms/次
    */
-  interval?: "game" | "ui" | "normal";
+  interval?: string;
 }
 
 //罗盘
-interface onCompassChangeOpts {
-  direction: number;
+interface onCompassChangeOpts{
+  direction: number
+}
+interface onCompassChangeCallBack {
+  (res: onCompassChangeOpts): void;
 }
 
 // 拨打电话
@@ -1546,21 +1552,78 @@ interface onWifiConnectedCb {
   wifi: wifiInfo
 }
 
+interface onMemoryWarningOpts {
+  level: number
+}
+
+interface onMemoryWarningCallBack {
+  (res: onMemoryWarningOpts): void
+}
+
 interface DeviceAPIs {
+  /**
+   * 获取系统信息
+   */
   getSystemInfo: (options: getSystemInfoOpts) => void;
+  /**
+   * 获取系统信息同步接口
+   */
   getSystemInfoSync: () => getSystemInfoSyncRes;
+  /**
+   * 判断小程序的API，回调，参数，组件等是否在当前版本可用
+   */
   canIUse: (string: any) => void;
+  /**
+   * 监听内存不足的告警事件，Android下有告警等级划分，只有LOW和CRITICAL会回调开发者；iOS无等级划分。
+   */
+  onMemoryWarning: (cb: onMemoryWarningCallBack) => void;
+  /**
+   * 获取网络类型
+   */
   getNetworkType: (options: getNetworkTypeOpts) => void;
-  onNetworkStatusChange: (res: onNetworkStatusChangeOpts) => void;
-  onAccelerometerChange: (res: onAccelerometerChangeCallback) => void;
+  /**
+   * 监听网络状态变化。
+   */
+  onNetworkStatusChange: (cb: onNetworkStatusChangeOpts) => void;
+  /**
+   * 监听加速度数据，频率：5次/秒，接口调用后会自动开始监听，可使用 wx.stopAccelerometer 停止监听
+   */
+  onAccelerometerChange: (cb: onAccelerometerChangeCallback) => void;
+  /**
+   * 开始监听加速度数据。
+   */
   startAccelerometer: (options: startAccelerometerOpts) => void;
+  /**
+   * 停止监听加速度数据
+   */
   stopAccelerometer: (options: WxApiCallback) => void;
-  onCompassChange: (cb) => onCompassChangeOpts;
+  /**
+   * 监听罗盘数据，频率：5次/秒，接口调用后会自动开始监听，可使用wx.stopCompass停止监听。
+   */
+  onCompassChange: (cb: onCompassChangeCallBack) => void;
+  /**
+   * 开始监听罗盘数据。
+   */
   startCompass: (options: WxApiCallback) => void;
+  /**
+   * 停止监听罗盘数据。
+   */
   stopCompass: (options: WxApiCallback) => void;
+  /**
+   *  拨打电话
+   */
   makePhoneCall: (options: makePhoneCallOpts) => void;
+  /**
+   * 调起客户端扫码界面，扫码成功后返回对应的结果
+   */
   scanCode: (options: scanCodeOpts) => void;
+  /**
+   * 设置系统剪贴板的内容
+   */
   setClipboardData: (options: setClipboardDataOpts) => void;
+  /**
+   * 获取系统剪贴板内容
+   */
   getClipboardData: (options: getClipboardDataOpts) => void;
   openBluetoothAdapter: (options: WxApiCallback) => void;
   closeBluetoothAdapter: (options: WxApiCallback) => void;
@@ -1612,6 +1675,9 @@ interface DeviceAPIs {
   setWifiList: (options: setWifiListOpts) => void;
   onWifiConnected: (cb: onWifiConnectedCb) => void;
   getConnectedWifi: any;
+  /**
+   * 设置屏幕亮度
+   */
   setScreenBrightness: (options: setScreenBrightnessOpts) => void;
   getScreenBrightness: (options: getScreenBrightnessOpts) => void;
   setKeepScreenOn: (options: setKeepScreenOnOpts) => void;
