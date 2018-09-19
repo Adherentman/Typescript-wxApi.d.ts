@@ -1248,6 +1248,9 @@ interface onBluetoothAdapterStateChangeCb {
   available: boolean;
   discovering: boolean;
 }
+interface onBluetoothAdapterStateChangeOpts {
+  (res: onBluetoothAdapterStateChangeCb): void;
+}
 
 interface startBluetoothDevicesDiscoveryRes {
   errMsg: string;
@@ -1257,7 +1260,7 @@ interface startBluetoothDevicesDiscoveryOpts
   extends WxApiCallback<startBluetoothDevicesDiscoveryRes> {
   services?: any[];
   allowDuplicatesKey?: boolean;
-  interval: number;
+  interval?: number;
 }
 
 interface stopBluetoothDevicesDiscoveryRes {
@@ -1267,16 +1270,39 @@ interface stopBluetoothDevicesDiscoveryRes {
 interface stopBluetoothDevicesDiscoveryOpts
   extends WxApiCallback<stopBluetoothDevicesDiscoveryRes> {}
 
+interface devicesArray {
+  [key: string]: any;
+  name: string;
+  deviceld: string;
+  RSSI: number;
+  advertisData: ArrayBuffer;
+  advertisServiceUUIDs: any[];
+  localName: string;
+  serviceData: ArrayBuffer;
+}
+
 interface getBluetoothDevicesRes {
-  devices: any[];
+  devices: devicesArray[];
   errMsg: string;
 }
 
 interface getBluetoothDevicesOpts
   extends WxApiCallback<getBluetoothDevicesRes> {}
 
+interface onBluetoothDeviceFoundOpts {
+  devices: devicesArray[];
+}
+
+interface onBluetoothDeviceFoundCallBack {
+  (res: onBluetoothDeviceFoundOpts): void;
+}
+interface getConnectedBluetoothDevicesArray {
+  name: string;
+  deviceld: string;
+}
+
 interface getConnectedBluetoothDevicesRes {
-  devices: any[];
+  devices: getConnectedBluetoothDevicesArray[];
   errMsg: string;
 }
 
@@ -1385,15 +1411,18 @@ interface onBLEConnectionStateChangeOpts {
   deviceId: string;
   connected: boolean;
 }
+
 interface onBLEConnectionStateChangeCallback {
   (res: onBLEConnectionStateChangeOpts): void
 }
+
 interface onBLECharacteristicValueChangeOpts {
   deviceId: string;
   serviceId: string;
   characteristicId: string;
   value: ArrayBuffer;
 }
+
 interface onBLECharacteristicValueChangeCallback {
   (res: onBLECharacteristicValueChangeOpts): void;
 }
@@ -1404,7 +1433,7 @@ interface startBeaconDiscoveryRes {
 }
 
 interface startBeaconDiscoveryOpts extends WxApiCallback<startBeaconDiscoveryRes> {
-  uuid: any
+  uuid: any[]
 } 
 
 interface stopBeaconDiscoveryRes {
@@ -1413,13 +1442,39 @@ interface stopBeaconDiscoveryRes {
 
 interface stopBeaconDiscoveryOpts extends WxApiCallback<stopBeaconDiscoveryRes> {}
 
+interface beaconsObject {
+  [key: string]: string | number;
+  uuid: string;
+  major: string;
+  minor: string;
+  proximity: number;
+  accuracy: number;
+  rssi: number;
+}
+
 interface getBeaconsRes {
-  beacons: any;
+  beacons: beaconsObject[];
   errMsg: string;
 }
 
 interface getBeaconsOpts extends WxApiCallback<getBeaconsRes> {}
 
+interface onBeaconUpdateOpts {
+  beacons: beaconsObject[];
+}
+
+interface onBeaconUpdateCallback {
+  (res: onBeaconUpdateOpts): void;
+}
+
+interface onBeaconServiceChangeOpts {
+  avaliable: boolean;
+  discovering: boolean;
+}
+
+interface onBeaconServiceChangeCallBack {
+  (res: onBeaconServiceChangeOpts): void;
+}
 // 屏幕亮度
 interface setScreenBrightnessOpts extends WxApiCallback {
   value: number;
@@ -1504,10 +1559,21 @@ interface stopHCERes {
 
 interface stopHCEOpts extends WxApiCallback<stopHCERes> {}
 
+interface onHCEMessageOpts {
+  messageType: number;
+  data: ArrayBuffer;
+  reason: number;
+}
+
+interface onHCEMessageCallBack {
+  (res: onHCEMessageOpts): void;
+}
+
 interface sendHCEMessageRes {
   errMsg: string;
   errCode: number;
 }
+
 interface sendHCEMessageOpts extends WxApiCallback<sendHCEMessageRes> {
   data: ArrayBuffer;
 }
@@ -1533,12 +1599,22 @@ interface wifiLs {
   signalStrength: number;
 }
 
-interface onGetWifiListCb {
-  wifiList: wifiLs
+interface onGetWifiListOpts {
+  wifiList: wifiLs[];
+}
+
+interface onGetWifiListCallBack {
+  (res: onGetWifiListOpts): void;
+}
+
+interface setWifiListArray {
+  SSID: string;
+  BSSID: string;
+  password: string;
 }
 
 interface setWifiListOpts extends WxApiCallback {
-  wifiList: wifiLs
+  wifiList: setWifiListArray[]
 }
 
 interface wifiInfo {
@@ -1548,8 +1624,12 @@ interface wifiInfo {
   signalStrength: number;
 }
 
+interface onWifiConnectedOpts {
+  wifi: wifiInfo;
+}
+
 interface onWifiConnectedCb {
-  wifi: wifiInfo
+  (res: onWifiConnectedOpts): void;
 }
 
 interface onMemoryWarningOpts {
@@ -1559,6 +1639,12 @@ interface onMemoryWarningOpts {
 interface onMemoryWarningCallBack {
   (res: onMemoryWarningOpts): void
 }
+
+interface getConnectedWifiRes {
+  wifi: wifiInfo
+}
+
+interface getConnectedWifiOpts extends WxApiCallback<getConnectedWifiRes> {}
 
 interface DeviceAPIs {
   /**
@@ -1625,64 +1711,190 @@ interface DeviceAPIs {
    * 获取系统剪贴板内容
    */
   getClipboardData: (options: getClipboardDataOpts) => void;
+  /**
+   * 初始化小程序蓝牙模块，生效周期为调用wx.openBluetoothAdapter至调用wx.closeBluetoothAdapter或小程序被销毁为止。 
+   */
   openBluetoothAdapter: (options: WxApiCallback) => void;
+  /**
+   * 关闭蓝牙模块，使其进入未初始化状态。调用该方法将断开所有已建立的链接并释放系统资源。建议在使用小程序蓝牙流程后调用，与wx.openBluetoothAdapter成对调用。
+   */
   closeBluetoothAdapter: (options: WxApiCallback) => void;
+  /**
+   * 获取本机蓝牙适配器状态
+   */
   getBluetoothAdapterState: (options: getBluetoothAdapterStateOpts) => void;
-  onBluetoothAdapterStateChange: (cb) => onBluetoothAdapterStateChangeCb;
+  /**
+   * 监听蓝牙适配器状态变化事件
+   */
+  onBluetoothAdapterStateChange: (cb: onBluetoothAdapterStateChangeOpts) => void;
+  /**
+   * 开始搜寻附近的蓝牙外围设备
+   */
   startBluetoothDevicesDiscovery: (
     options: startBluetoothDevicesDiscoveryOpts
   ) => void;
+  /**
+   * 停止搜寻附近的蓝牙外围设备。若已经找到需要的蓝牙设备并不需要继续搜索时，建议调用该接口停止蓝牙搜索。
+   */
   stopBluetoothDevicesDiscovery: (
     options: stopBluetoothDevicesDiscoveryOpts
   ) => void;
+  /**
+   * 获取在小程序蓝牙模块生效期间所有已发现的蓝牙设备，包括已经和本机处于连接状态的设备。
+   */
   getBluetoothDevices: (options: getBluetoothDevicesRes) => void;
+  /**
+   * 根据 uuid 获取处于已连接状态的设备
+   */
   getConnectedBluetoothDevices: (
     options: getConnectedBluetoothDevicesOpts
   ) => void;
-  onBluetoothDeviceFound: any;
+  /**
+   * 监听寻找到新设备的事件
+   */
+  onBluetoothDeviceFound:(cb: onBluetoothDeviceFoundCallBack) => void;
+  /**
+   * 连接低功耗蓝牙设备。
+   */
   createBLEConnection: (options: createBLEConnectionOpts) => void;
+  /**
+   * 断开与低功耗蓝牙设备的连接
+   */
   closeBLEConnection: (options: closeBLEConnectionOpts) => void;
+  /**
+   * 获取蓝牙设备所有 service（服务）
+   */
   getBLEDeviceServices: (options: getBLEDeviceServicesOpts) => void;
+  /**
+   * 获取蓝牙设备某个服务中的所有 characteristic（特征值）
+   */
   getBLEDeviceCharacteristics: (
     options: getBLEDeviceCharacteristicsOpts
   ) => void;
+  /**
+   * 读取低功耗蓝牙设备的特征值的二进制数据值。注意：必须设备的特征值支持read才可以成功调用，具体参照 characteristic 的 properties 属性
+   */
   readBLECharacteristicValue: (options: readBLECharacteristicValueOpts) => void;
+  /**
+   * 向低功耗蓝牙设备特征值中写入二进制数据。注意：必须设备的特征值支持write才可以成功调用，具体参照 characteristic 的 properties 属性
+   */
   writeBLECharacteristicValue: (
     options: writeBLECharacteristicValueOpts
   ) => void;
+  /**
+   * 启用低功耗蓝牙设备特征值变化时的 notify 功能，订阅特征值。注意：必须设备的特征值支持notify或者indicate才可以成功调用，具体参照 characteristic 的 properties 属性
+   * 另外，必须先启用notify才能监听到设备 characteristicValueChange 事件
+   */
   notifyBLECharacteristicValueChange: (
     options: notifyBLECharacteristicValueChangeOpts
   ) => void;
+  /**
+   * 监听低功耗蓝牙连接状态的改变事件，包括开发者主动连接或断开连接，设备丢失，连接异常断开等等
+   */
   onBLEConnectionStateChange: (callback: onBLEConnectionStateChangeCallback) => void;
+  /**
+   * 监听低功耗蓝牙设备的特征值变化。必须先启用notify接口才能接收到设备推送的notification。
+   */
   onBLECharacteristicValueChange: (callback: onBLECharacteristicValueChangeCallback) => void;
+  /**
+   * 开始搜索附近的iBeacon设备
+   */
   startBeaconDiscovery: (options: startBeaconDiscoveryOpts) => void;
+  /**
+   * 停止搜索附近的iBeacon设备
+   */
   stopBeaconDiscovery: (options: stopBeaconDiscoveryOpts) => void;
+  /**
+   * 获取所有已搜索到的iBeacon设备
+   */
   getBeacons: (options: getBeaconsOpts) => void;
-  onBeaconUpdate: any;
-  onBeaconServiceChange: any;
-  onUserCaptureScreen: any;
-  addPhoneContact: (options: addPhoneContactOpts) => void;
-  getHCEState: (options: getHCEStateOpts) => void;
-  startHCE: (options: startHCEOpts) => void;
-  stopHCE: (options: startHCEOpts) => void;
-  onHCEMessage: any;
-  sendHCEMessage: (options: sendHCEMessageOpts) => void;
-  startWifi: (options: startWifiOpts) => void;
-  stopWifi: (options: stopWifiOpts) => void;
-  connectWifi: (options: connectWifiOpts) => void;
-  getWifiList: (options: getWifiListOpts) => void;
-  onGetWifiList: (options: onGetWifiListCb) => void;
-  setWifiList: (options: setWifiListOpts) => void;
-  onWifiConnected: (cb: onWifiConnectedCb) => void;
-  getConnectedWifi: any;
+  /**
+   * 监听 iBeacon 设备的更新事件
+   */
+  onBeaconUpdate: (cb: onBeaconUpdateCallback) => void;
+  /**
+   * 监听 iBeacon 服务的状态变化
+   */
+  onBeaconServiceChange: (cb: onBeaconServiceChangeCallBack) => void;
   /**
    * 设置屏幕亮度
    */
   setScreenBrightness: (options: setScreenBrightnessOpts) => void;
+  /**
+   * 获取屏幕亮度。
+   */
   getScreenBrightness: (options: getScreenBrightnessOpts) => void;
+  /**
+   * 设置是否保持常亮状态。仅在当前小程序生效，离开小程序后设置失效
+   */
   setKeepScreenOn: (options: setKeepScreenOnOpts) => void;
+  /**
+   * 监听用户主动截屏事件，用户使用系统截屏按键截屏时触发此事件
+   */
+  onUserCaptureScreen: () => void;
+  /**
+   * 使手机发生较长时间的振动（400ms）
+   */
   vibrateLong: (options: vibrateLongOpts) => void;
+  /**
+   * 使手机发生较短时间的振动（15ms）
+   */
   vibrateShort: (options: vibrateShortOpts) => void;
+  /**
+   * 调用后，用户可以选择将该表单以“新增联系人”或“添加到已有联系人”的方式，写入手机系统通讯录，完成手机通讯录联系人和联系方式的增加。
+   */
+  addPhoneContact: (options: addPhoneContactOpts) => void;
+  /**
+   * 判断当前设备是否支持 HCE 能力。
+   */
+  getHCEState: (options: getHCEStateOpts) => void;
+  /**
+   * 初始化 NFC 模块。
+   */
+  startHCE: (options: startHCEOpts) => void;
+  /**
+   * 关闭 NFC 模块
+   */
+  stopHCE: (options: stopHCEOpts) => void;
+  /**
+   * 监听 NFC 设备的消息回调，并在回调中处理。返回参数中 messageType 表示消息类型，目前有如下值：
+   * 1：消息为HCE Apdu Command类型，小程序需对此指令进行处理，并调用 sendHCEMessage 接口返回处理指令；
+   * 2：消息为设备离场事件
+   */
+  onHCEMessage: (cb: onHCEMessageCallBack) => void;
+  /**
+   * 发送 NFC 消息。仅在安卓系统下有效。
+   */
+  sendHCEMessage: (options: sendHCEMessageOpts) => void;
+  /**
+   * 初始化 Wi-Fi 模块。
+   */
+  startWifi: (options: startWifiOpts) => void;
+  /**
+   * 关闭 Wi-Fi 模块。
+   */
+  stopWifi: (options: stopWifiOpts) => void;
+  /**
+   * 连接 Wi-Fi。若已知 Wi-Fi 信息，可以直接利用该接口连接。仅 Android 与 iOS 11 以上版本支持。
+   */
+  connectWifi: (options: connectWifiOpts) => void;
+  /**
+   * 请求获取 Wi-Fi 列表，在 onGetWifiList 注册的回调中返回 wifiList 数据。iOS 将跳转到系统的 Wi-Fi 界面，Android 不会跳转。 iOS 11.0 及 iOS 11.1 两个版本因系统问题，该方法失效。但在 iOS 11.2 中已修复。
+   */
+  getWifiList: (options: getWifiListOpts) => void;
+  /**
+   * 监听在获取到 Wi-Fi 列表数据时的事件，在回调中将返回 wifiList。
+   */
+  onGetWifiList: (cb: onGetWifiListCallBack) => void;
+  /**
+   * OS特有接口 在 onGetWifiList 回调后，利用接口设置 wifiList 中 AP 的相关信息。
+   */
+  setWifiList: (options: setWifiListOpts) => void;
+  /**
+   * 监听连接上 Wi-Fi 的事件。
+   */
+  onWifiConnected: (cb: onWifiConnectedCb) => void;
+  getConnectedWifi: (options: getConnectedWifiOpts) => void;
 }
 
 /**
