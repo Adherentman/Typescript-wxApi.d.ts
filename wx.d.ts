@@ -1894,6 +1894,9 @@ interface DeviceAPIs {
    * 监听连接上 Wi-Fi 的事件。
    */
   onWifiConnected: (cb: onWifiConnectedCb) => void;
+  /**
+   * 获取已连接中的 Wi-Fi 信息
+   */
   getConnectedWifi: (options: getConnectedWifiOpts) => void;
 }
 
