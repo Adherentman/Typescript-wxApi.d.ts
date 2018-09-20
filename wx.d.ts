@@ -1906,7 +1906,7 @@ interface DeviceAPIs {
 // Interactive feedback 交互反馈
 interface ShowToastOpts extends WxApiCallback {
   title: string;
-  icon?: "success" | "loading" | "none";
+  icon?: string;
   image?: string;
   duration?: number;
   mask?: boolean;
@@ -1937,8 +1937,8 @@ interface ShowActionSheetRes {
 }
 
 interface ShowActionSheetOpts extends WxApiCallback<ShowActionSheetRes> {
-  itemList: string | any[];
-  itemColor?: string;
+  itemList: string[];
+  itemColor?: any;
 }
 
 // Navigation bar 设置导航条
@@ -1956,15 +1956,15 @@ interface setNavigationBarColorRes {
 }
 
 interface animationOpts {
-  duration: number;
-  timingFunc: "linear" | "easeIn" | "easeOut" | "easeInOut";
+  duration?: number;
+  timingFunc?: string;
 }
 
 interface setNavigationBarColorOpts
   extends WxApiCallback<setNavigationBarColorRes> {
   frontColor: string;
   backgroundColor: string;
-  animation: animationOpts;
+  animation?: animationOpts;
 }
 
 // TabBar 设置tabBar
@@ -1987,10 +1987,10 @@ interface hideTabBarRedDotOpts extends WxApiCallback {
 }
 
 interface setTabBarStyleOpts extends WxApiCallback {
-  color?: string;
-  selectedColor?: string;
-  backgroundColor?: string;
-  borderStyle?: "black" | "white";
+  color?: any;
+  selectedColor?: any;
+  backgroundColor?: any;
+  borderStyle?: string;
 }
 
 interface setTabBarItemOpts extends WxApiCallback {
@@ -2001,11 +2001,11 @@ interface setTabBarItemOpts extends WxApiCallback {
 }
 
 interface showTabBarOpts extends WxApiCallback {
-  animation: boolean;
+  animation?: boolean;
 }
 
 interface hideTabBarOpts extends WxApiCallback {
-  animation: boolean;
+  animation?: boolean;
 }
 
 // navigate 导航
@@ -2061,23 +2061,77 @@ interface createIntersectionObserverAPIs {
 }
 
 interface UIAPIs {
+  /**
+   * 显示消息提示框
+   */
   showToast: (options: ShowToastOpts) => void;
+  /**
+   * 显示 loading 提示框, 需主动调用 wx.hideLoading 才能关闭提示框
+   */
   showLoading: (options: ShowLoadingOpts) => void;
+  /**
+   * 隐藏消息提示框
+   */
   hideToast: ZeroParamVoidFunc;
+  /**
+   * 隐藏 loading 提示框
+   */
   hideLoading: ZeroParamVoidFunc;
+  /**
+   * 显示模态弹窗
+   */
   showModal: (options: ShowModalOpts) => void;
+  /**
+   * 显示操作菜单
+   */
   showActionSheet: (options: ShowActionSheetOpts) => void;
+  /**
+   * 动态设置当前页面的标题
+   */
   setNavigationBarTitle: (options: setNavigationBarTitleOpts) => void;
+  /**
+   * 在当前页面显示导航条加载动画。
+   */
   showNavigationBarLoading: ZeroParamVoidFunc;
+  /**
+   * 隐藏导航条加载动画。
+   */
   hideNavigationBarLoading: ZeroParamVoidFunc;
+  /**
+   * 设置导航条的颜色
+   */
   setNavigationBarColor: (options: setNavigationBarColorOpts) => void;
+  /**
+   * 为 tabBar 某一项的右上角添加文本
+   */
   setTabBarBadge: (options: setTabBarBadgeOpts) => void; //1.9.0
+  /**
+   * 移除 tabBar 某一项右上角的文本
+   */
   removeTabBarBadge: (options: removeTabBarBadgeOpts) => void; //1.9.0
+  /**
+   * 显示 tabBar 某一项的右上角的红点
+   */
   showTabBarRedDot: (options: showTabBarRedDotOpts) => void; //1.9.0
+  /**
+   * 隐藏 tabBar 某一项的右上角的红点
+   */
   hideTabBarRedDot: (options: hideTabBarRedDotOpts) => void; //1.9.0
+  /**
+   * 动态设置 tabBar 的整体样式
+   */
   setTabBarStyle: (options: setTabBarStyleOpts) => void; //1.9.0
+  /**
+   * 动态设置 tabBar 某一项的内容
+   */
   setTabBarItem: (options: setTabBarItemOpts) => void; //1.9.0
+  /**
+   * 显示 tabBar
+   */
   showTabBar: (options: showTabBarOpts) => void; //1.9.0
+  /**
+   * 隐藏 tabBar
+   */
   hideTabBar: (options: hideTabBarOpts) => void; //1.9.0
   setTopBarText: (options: setTopBarTextOpts) => void;
   navigateTo: (options: navigateOpts) => void;
