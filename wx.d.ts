@@ -2008,6 +2008,16 @@ interface hideTabBarOpts extends WxApiCallback {
   animation?: boolean;
 }
 
+interface setBackgroundColorOpts {
+  backgroundColor: string;
+  backgroundColorTop: string;
+  backgroundColorBottom: string;
+}
+
+interface setBackgroundTextStyleOpts {
+  textStyle: string;
+}
+
 // navigate 导航
 
 interface navigateOpts extends WxApiCallback {
@@ -2018,18 +2028,14 @@ interface navigateOpts extends WxApiCallback {
 
 interface createAnimationOpts {
   duration?: number;
-  timingFunction?:
-    | "linear"
-    | "ease"
-    | "ease-in"
-    | "ease-in-out"
-    | "ease-out"
-    | "step-start"
-    | "step-end";
+  timingFunction?: string;
   delay?: number;
   transformOrigin?: string;
 }
 // todo animation实例
+interface animationObject {
+
+}
 
 interface startPullDownRefreshRes {
   errMsg: string;
@@ -2133,13 +2139,47 @@ interface UIAPIs {
    * 隐藏 tabBar
    */
   hideTabBar: (options: hideTabBarOpts) => void; //1.9.0
+  /**
+   * 动态设置窗口的背景色
+   */
+  setBackgroundColor: (options: setBackgroundColorOpts) => void;
+  /**
+   * 动态设置下拉背景字体、loading 图的样式
+   */
+  setBackgroundTextStyle: (options: setBackgroundTextStyleOpts) => void;
+  /**
+   * 动态设置置顶栏文字内容，只有当前小程序被置顶时能生效，如果当前小程序没有被置顶，也能调用成功，但是不会立即生效，只有在用户将这个小程序置顶后才换上设置的文字内容
+   */
   setTopBarText: (options: setTopBarTextOpts) => void;
+  /**
+   * 保留当前页面，跳转到应用内的某个页面，使用wx.navigateBack可以返回到原页面。
+   */
   navigateTo: (options: navigateOpts) => void;
+  /**
+   * 关闭当前页面，跳转到应用内的某个页面。
+   */
   redirectTo: (options: navigateOpts) => void;
+  /**
+   * 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+   */
   switchTab: (options: navigateOpts) => void;
+  /**
+   * 关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages() 获取当前的页面栈，决定需要返回几层。
+   */
   navigateBack: (delta: number) => void;
+  /**
+   * 关闭所有页面，打开到应用内的某个页面。
+   */
   reLaunch: (options: navigateOpts) => void;
+  /**
+   * TOdo：
+   * 链式调用
+   * 创建一个动画实例animation。调用实例的方法来描述动画。最后通过动画实例的export方法导出动画数据传递给组件的animation属性。
+   */
   createAnimation: (options: createAnimationOpts) => void;
+  /**
+   * 将页面滚动到目标位置。
+   */
   pageScrollTo: (scrollTop: number, duration: number) => void;
   //todo 绘图
   createCanvasContext: any;
