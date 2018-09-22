@@ -49,6 +49,9 @@ interface PageOpts<Data = {}> {
   onShow?: ZeroParamVoidFunc;
   onHide?: ZeroParamVoidFunc;
   onUnload?: ZeroParamVoidFunc;
+  /**
+   * 在 Page 中定义 onPullDownRefresh 处理函数，监听该页面用户下拉刷新事件。
+   */
   onPullDownRefresh?: ZeroParamVoidFunc;
   onReachBottom?: ZeroParamVoidFunc;
   onShareAppMessage?: ZeroParamVoidFunc;
@@ -2045,19 +2048,18 @@ interface startPullDownRefreshOpts
   extends WxApiCallback<startPullDownRefreshRes> {}
 
   // WXML节点信息
-interface selectorQueryAPIs {
+  
+interface createSelectorQueryOpts {
   in: any;
   select: any;
   selectAll: any;
   selectViewport: any;
   exec: any;
-}
-
-interface nodesRefAPIs {
   boundingClientRect: any;
   scrollOffset: any;
   fields: any;
 }
+
 
 interface createIntersectionObserverAPIs {
   relativeTo: any;
@@ -2189,10 +2191,23 @@ interface UIAPIs {
   canvasToTempFilePath: any;
   canvasGetImageData: any;
   canvasPutImageData: any;
+  /**
+   * 开始下拉刷新，调用后触发下拉刷新动画，效果与用户手动下拉刷新一致
+   */
   startPullDownRefresh: (options: startPullDownRefreshOpts) => void;
+  /**
+   * 停止当前页面下拉刷新。
+   */
   stopPullDownRefresh: ZeroParamVoidFunc;
-  createSelectorQuery: ZeroParamVoidFunc;
-  createIntersectionObserver: createIntersectionObserverAPIs;
+  /**
+   * 返回一个SelectorQuery对象实例。可以在这个实例上使用select等方法选择节点，并使用boundingClientRect等方法选择需要查询的信息。
+   */
+  createSelectorQuery: () => createSelectorQueryOpts;
+  /**
+   * 节点布局交叉状态API可用于监听两个或多个组件节点在布局位置上的相交状态。这一组API常常可以用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见。
+   */
+  createIntersectionObserver: () => createIntersectionObserverAPIs;
+  nextTick: (c: Function) => void;
 }
 
 interface canvasContextApi {
@@ -2503,8 +2518,7 @@ declare let wx: NetworkAPIs &
   DebuggingAPIs;
 
 declare let SocketTask: SocketTaskAPIs;
-declare let selectorQuery: selectorQueryAPIs;
-declare let nodesRef: nodesRefAPIs;
+// declare let nodesRef: nodesRefAPIs;
 declare let updateManager: updateManagerAPIs;
 declare let worker: workerAPIs;
 declare let canvasContext: canvasContextApi;
