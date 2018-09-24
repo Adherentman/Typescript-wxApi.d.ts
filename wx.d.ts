@@ -2269,7 +2269,7 @@ interface getExtConfigOpts extends WxApiCallback<getExtConfigRes>{}
 
 interface ThirdPartyAPIs {
   getExtConfig: (options: getExtConfigOpts) => void;
-  getExtConfigSync: any;
+  getExtConfigSync: (extConfig: any) => void;
 }
 
 /**
@@ -2329,7 +2329,7 @@ interface getUserInfoRes {
 }
 
 interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
-  withCredentials: boolean;
+  withCredentials?: boolean;
   lang?: string;
   timeout?: number;
 }
@@ -2426,10 +2426,32 @@ interface checkIsSupportSoterAuthenticationRes{
 interface checkIsSupportSoterAuthenticationOpts extends WxApiCallback<checkIsSupportSoterAuthenticationRes>{}
 
 interface OpenInterfaceAPIs {
+  /**
+   * 调用接口wx.login() 获取临时登录凭证（code）
+   */
   login: (options: LoginOpts) => void;
+  /**
+   * 校验用户当前session_key是否有效。
+   */
   checkSession: (options: CheckSessionOpts) => void;
+  /**
+   * 提前向用户发起授权请求。调用后会立刻弹窗询问用户是否同意授权小程序使用某项功能或获取用户的某些数据，
+   * 但不会实际调用对应接口。
+   * 如果用户之前已经同意授权，则不会出现弹窗，直接返回成功。
+   */
   authorize: (optiona: AuthorizeOpts) => void;
+  /**
+   * 当用户未授权过，调用该接口将直接进入fail回调
+   * 当用户授权过，可以使用该接口获取用户信息
+   */
   getUserInfo: (options: getUserInfoOpts) => void;
+  /**
+   * 获取微信用户绑定的手机号，需先调用login接口。
+   */
+  getPhoneNumber: (e: any) => void;
+  /**
+   * 发起微信支付
+   */
   requestPayment: (options: requestPaymentOpts) => void;
   showShareMenu: (options: showShareMenuOpts) => void;
   hideShareMenu: () => WxApiCallback;
