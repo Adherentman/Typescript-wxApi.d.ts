@@ -54,6 +54,9 @@ interface PageOpts<Data = {}> {
    */
   onPullDownRefresh?: ZeroParamVoidFunc;
   onReachBottom?: ZeroParamVoidFunc;
+  /**
+   * 在 Page 中定义 onShareAppMessage 事件处理函数，自定义该页面的转发内容。
+   */
   onShareAppMessage?: ZeroParamVoidFunc;
   onPageScroll?: ZeroParamVoidFunc;
   onTabItemTap?: (item: any) => void;
@@ -2353,7 +2356,7 @@ interface updateShareMenuOpts extends WxApiCallback {
 
 interface getShareInfoOpts extends WxApiCallback {
   shareTicket:	string;
-  timeout: number;
+  timeout?: number;
 }
 
 interface chooseAddressRes {
@@ -2453,10 +2456,25 @@ interface OpenInterfaceAPIs {
    * 发起微信支付
    */
   requestPayment: (options: requestPaymentOpts) => void;
+  /**
+   * 显示当前页面的转发按钮
+   */
   showShareMenu: (options: showShareMenuOpts) => void;
-  hideShareMenu: () => WxApiCallback;
+  /**
+   * 隐藏转发按钮
+   */
+  hideShareMenu: (optinos: WxApiCallback) => void;
+  /**
+   * 更新转发属性
+   */
   updateShareMenu: (options: updateShareMenuOpts) => void;
+  /**
+   * 获取转发详细信息
+   */
   getShareInfo: (options: getShareInfoOpts) => void;
+  /**
+   * 调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
+   */
   chooseAddress: (options: chooseAddressOpts) => void;
   addCard: any;
   openCard: any;
