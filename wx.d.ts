@@ -2389,6 +2389,7 @@ interface getWeRunDataRes {
   encryptedData: string;
   iv:	string;
 }
+
 interface getWeRunDataOpts extends WxApiCallback<getWeRunDataRes>{
   timeout?: number
 }
@@ -2396,11 +2397,18 @@ interface getWeRunDataOpts extends WxApiCallback<getWeRunDataRes>{
 interface navigateToMiniProgramRes {
   errMsg: string
 }
+
+interface extraDataOpts {
+  encrypt_card_id: string;
+  outer_str: string;
+  biz: string;
+}
+
 interface navigateToMiniProgramOpts extends WxApiCallback<navigateToMiniProgramRes>{
   appId: string;
-  path:	string;
-  extraData:	any;
-  envVersion:	string;
+  extraData:	extraDataOpts[];
+  path: string;
+  envVersion: string;
 }
 interface navigateBackMiniProgramRes {
   errMsg: string;
@@ -2423,10 +2431,66 @@ interface chooseInvoiceTitleRes{
 interface chooseInvoiceTitleOpts extends WxApiCallback<chooseInvoiceTitleRes>{}
 
 interface checkIsSupportSoterAuthenticationRes{
-  supportMode: 'fingerPrint' | 'facial' |	'speech'; // 人脸识别（暂未支持）声纹识别（暂未支持）
+  supportMode: string[]; // 人脸识别（暂未支持）声纹识别（暂未支持）
   errMsg:	string;
 }
+
 interface checkIsSupportSoterAuthenticationOpts extends WxApiCallback<checkIsSupportSoterAuthenticationRes>{}
+
+interface startSoterAuthenticationRes {
+  errCode: number;
+  authMode: string;
+  resultJSON: string;
+  resultJSONSignature: string;
+  errMsg: string;
+}
+
+interface startSoterAuthenticationOpts extends WxApiCallback<startSoterAuthenticationRes> {
+  requestAuthMode: string[];
+  challenge: string;
+  authContent: string;
+}
+
+interface checkIsSoterEnrolledInDeviceRes {
+  inEnrolled: boolean;
+  errMsg: string;
+}
+
+interface checkIsSoterEnrolledInDeviceOpts extends WxApiCallback<checkIsSoterEnrolledInDeviceRes> {
+  checkAuthMode: string;
+}
+
+interface cardListOpts {
+  cardId: string;
+  cardExt: string;
+}
+
+interface addCardOpts extends WxApiCallback {
+  cardList: cardListOpts[];
+}
+
+interface openCardListOpts {
+  cardId: string;
+  code: string;
+}
+
+interface openCardOpts extends WxApiCallback {
+  cardList: openCardListOpts[];
+}
+
+interface miniProgramObj {
+  appId: string;
+}
+
+interface pluginObj {
+  appid: string;
+  version: string;
+}
+
+interface getAccountInfoSyncOpts {
+  miniProgram: miniProgramObj;
+  plugin: pluginObj;
+}
 
 interface OpenInterfaceAPIs {
   /**
@@ -2476,17 +2540,54 @@ interface OpenInterfaceAPIs {
    * 调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址。
    */
   chooseAddress: (options: chooseAddressOpts) => void;
-  addCard: any;
-  openCard: any;
+  /**
+   * 批量添加卡券。
+   */
+  addCard: (options: addCardOpts) => void;
+  /**
+   * 查看微信卡包中的卡券。
+   */
+  openCard: (options: openCardOpts) => void;
+  /**
+   * 调起客户端小程序设置界面，返回用户设置的操作结果。
+   */
   openSetting: (options: openSettingOpts) => void;
+  /**
+   * 获取用户的当前设置。
+   */
   getSetting: (options: getSettingOpts) => void;
+  /**
+   * 获取用户过去三十天微信运动步数，需要先调用 wx.login 接口。
+   */
   getWeRunData: (options: getWeRunDataOpts) => void;
+  /**
+   * 访问当前小程序或插件帐号信息。
+   */
+  getAccountInfoSync: (options: getAccountInfoSyncOpts) => void;
+  /**
+   * 开发者可以在小程序内调用该接口拉起会员开卡组件，方便用户快速填写会员注册信息并领卡。
+   */
   navigateToMiniProgram: (options: navigateToMiniProgramOpts) => void;
+  /**
+   * 返回到上一个小程序，只有在当前小程序是被其他小程序打开时可以调用成功
+   */
   navigateBackMiniProgram: (options: navigateBackMiniProgramOpts) => void;
+  /**
+   * 选择用户的发票抬头。
+   */
   chooseInvoiceTitle: (options: chooseInvoiceTitleOpts) => void;
+  /**
+   * 获取本机支持的 SOTER 生物认证方式
+   */
   checkIsSupportSoterAuthentication: (options: checkIsSupportSoterAuthenticationOpts) => void;
-  startSoterAuthentication: any;
-  checkIsSoterEnrolledInDevice: any;
+  /**
+   * 开始 SOTER 生物认证
+   */
+  startSoterAuthentication: (options: startSoterAuthenticationOpts) => void;
+  /**
+   * 获取设备内是否录入如指纹等生物信息的接口
+   */
+  checkIsSoterEnrolledInDevice: (options: checkIsSoterEnrolledInDeviceOpts) => void;
 }
 
 /**
