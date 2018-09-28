@@ -2606,13 +2606,25 @@ interface DataAPIs {
  * Update APIs
  */
 interface UpdateAPIs {
-  getUpdateManager: any;
+  getUpdateManager: () => updateManagerAPIs;
 }
 
 interface updateManagerAPIs {
-  onCheckForUpdate: ZeroParamVoidFunc;
-  onUpdateReady: ZeroParamVoidFunc;
-  onUpdateFailed: ZeroParamVoidFunc;
+  /**
+   * 监听向微信后台请求检查更新结果事件。微信在小程序冷启动时自动检查更新，不需由开发者主动触发。
+   */
+  onCheckForUpdate: any;
+  /**
+   * 监听小程序有版本更新事件。客户端主动触发下载（无需开发者触发），下载成功后回调
+   */
+  onUpdateReady: any;
+  /**
+   * 监听小程序更新失败事件。小程序有新版本，客户端主动触发下载（无需开发者触发），下载失败（可能是网络原因等）后回调
+   */
+  onUpdateFailed: any;
+  /**
+   * 当小程序新版本下载完成后（即收到 onUpdateReady 回调），强制小程序重启并使用新版本
+   */
   applyUpdate: any;
 }
 
@@ -2627,6 +2639,13 @@ interface workerAPIs {
   postMessage: any;
   onMessage: ZeroParamVoidFunc;
   terminate: ZeroParamVoidFunc;
+}
+
+interface MonitorAPIs {
+  /**
+   * 自定义业务数据监控上报接口。
+   */
+  reportMonitor: (name: string, value: number) => void;
 }
 
 /**
@@ -2656,11 +2675,11 @@ declare let wx: NetworkAPIs &
   DataAPIs &
   UpdateAPIs &
   MultithreadingAPIs &
+  MonitorAPIs &
   DebuggingAPIs;
 
 declare let SocketTask: SocketTaskAPIs;
 // declare let nodesRef: nodesRefAPIs;
-declare let updateManager: updateManagerAPIs;
 declare let worker: workerAPIs;
 declare let canvasContext: canvasContextApi;
 
