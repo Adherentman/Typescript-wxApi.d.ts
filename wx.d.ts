@@ -2632,7 +2632,10 @@ interface updateManagerAPIs {
  * Multithreading APIs
  */
 interface MultithreadingAPIs {
-  createWorker: (scriptPath: string) => void;
+  /**
+   * 创建一个 Worker 线程，并返回 Worker 实例，目前限制最多只能创建一个 Worker，创建下一个 Worker 前请调用 Worker.terminate。
+   */
+  createWorker: (scriptPath: string) => workerAPIs;
 }
 
 interface workerAPIs {
@@ -2659,7 +2662,24 @@ interface setEnableDebugOpts extends WxApiCallback<setEnableDebugRes>{
   enableDebug: boolean;
 }
 interface DebuggingAPIs {
+  /**
+   * 设置是否打开调试开关，此开关对正式版也能生效。
+   */
   setEnableDebug: (options: setEnableDebugOpts) => void;
+}
+
+interface LogManager {
+  log: any;
+  info: any;
+  warn: any;
+  debug: any
+}
+
+interface LogApis {
+  /**
+   * 获取日志管理器 logManager 对象。
+   */
+  getLogManager: () => LogManager;
 }
 
 // Declares
@@ -2676,11 +2696,12 @@ declare let wx: NetworkAPIs &
   UpdateAPIs &
   MultithreadingAPIs &
   MonitorAPIs &
-  DebuggingAPIs;
+  DebuggingAPIs & 
+  LogApis;
 
 declare let SocketTask: SocketTaskAPIs;
 // declare let nodesRef: nodesRefAPIs;
-declare let worker: workerAPIs;
+// declare let worker: workerAPIs;
 declare let canvasContext: canvasContextApi;
 
 declare function App(app: AppOpts): void;

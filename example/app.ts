@@ -43,6 +43,8 @@ Page({
     recorderManager.onStop((res) => console.log(res.tempFilePath))
     recorderManager.onPause(() => console.log('dadadadad'))
     recorderManager.start(options);
+    const worker = wx.createWorker("a");
+    worker.onMessage
     const mapCtx = wx.createMapContext('myMap')
     wx.getImageInfo({
       src: 'images/a.jpg',
