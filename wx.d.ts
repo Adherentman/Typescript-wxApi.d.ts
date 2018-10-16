@@ -2043,6 +2043,10 @@ interface animationObject {
 
 }
 
+interface pageScrollToOpts extends WxApiCallback {
+  scrollTop?: number;
+  duration?: number;
+}
 interface startPullDownRefreshRes {
   errMsg: string;
 }
@@ -2185,7 +2189,7 @@ interface UIAPIs {
   /**
    * 将页面滚动到目标位置。
    */
-  pageScrollTo: (scrollTop: number, duration: number) => void;
+  pageScrollTo: (options: pageScrollToOpts) => void;
   //todo 绘图
   createCanvasContext: any;
   createLinearGradient: any;
