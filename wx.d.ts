@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) xzh <https://github.com/Adherentman>
+ * project: https://github.com/Adherentman/Typescript-wxApi.d.ts
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 // Common Types
 interface string2AnyMap {
   [key: string]: any;

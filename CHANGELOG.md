@@ -1,6 +1,9 @@
 # CHANGELOG
 利用业余时间每周一更新，与小程序文档核对API
 
+#### *2018-10-16*
+- fix the type of the `wx.pageScrollTo` function [#6](https://github.com/Adherentman/Typescript-wxApi.d.ts/pull/6)
+
 #### *2018-09-30*
 完善和修改以下API
 - 监控Api
