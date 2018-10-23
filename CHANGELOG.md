@@ -5,7 +5,6 @@
 #### _2018-10-23_
 
 - 更新录音管理中`getRecorderManager`的所有 APIS
-
   - start
   - pause
   - resume
