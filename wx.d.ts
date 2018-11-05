@@ -115,6 +115,9 @@ interface NetworkRequestOpts extends WxApiCallback<NetworkRequestRes> {
 }
 
 interface requestTask {
+  /**
+   * 中断请求任务
+   */
   abort: ZeroParamVoidFunc;
 }
 
@@ -142,7 +145,13 @@ interface onProgressUpdateCallback {
   (res: onProgressUpdateRes): void
 }
 interface uploadTask {
-  onProgressUpdate(res: onProgressUpdateCallback): void 
+  /**
+   * 监听下载进度变化事件
+   */
+  onProgressUpdate(res: onProgressUpdateCallback): void
+  /**
+   * 中断上传任务
+   */
   abort: ZeroParamVoidFunc;
 }
 
@@ -159,7 +168,13 @@ interface downloadFileOpts extends WxApiCallback<downloadRes> {
 }
 
 interface downloadTask {
+  /**
+   * 监听下载进度变化事件
+   */
   onProgressUpdate(res: onProgressUpdateCallback): void 
+  /**
+   * 中断下载任务
+   */
   abort: ZeroParamVoidFunc;
 }
 
@@ -618,10 +633,33 @@ interface loadFontFaceOpts extends WxApiCallback<loadFontFaceRes> {
   source: string;
   desc?: LoadFontFaceDesc;
 }
+
+interface compressImageOpts extends WxApiCallback {
+  src: string;
+  quality?: number;
+}
+
 interface MediaAPIs {
+  /**
+   * 从本地相册选择图片或使用相机拍照。
+   */
   chooseImage: (options: chooseImageOpts) => void;
-  previewImage: (options: previewImageOpts) => void;
+  /**
+   * 支持版本 >= 2.4.0
+   * 压缩图片接口，可选压缩质量
+   */
+  compressImage: (options: compressImageOpts) => void;
+  /**
+   * 获取图片信息。网络图片需先配置download域名才能生效。
+   */
   getImageInfo: (options: getImageInfoOpts) => void;
+  /**
+   * 在新页面中全屏预览图片。预览的过程中用户可以进行保存图片、发送给朋友等操作。
+   */
+  previewImage: (options: previewImageOpts) => void;
+  /**
+   * 保存图片到系统相册。
+   */
   saveImageToPhotosAlbum: (options: saveImageToPhotosAlbumOpts) => void;
   startRecord: (options: startRecordOpts) => void;
   stopRecord: ZeroParamVoidFunc;

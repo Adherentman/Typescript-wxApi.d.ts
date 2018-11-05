@@ -1,6 +1,12 @@
 # CHANGELOG
 利用业余时间每周一更新，与小程序文档核对API
 
+#### *2018-11-05*
+- 增加`wx.compressImage`API，压缩图片接口，可选压缩质量
+- 增加图片API的注释
+- 增加下载，发起请求，上传API的注释
+
+
 #### *2018-10-16*
 - fix the type of the `wx.pageScrollTo` function [#6](https://github.com/Adherentman/Typescript-wxApi.d.ts/pull/6)
 
