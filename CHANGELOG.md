@@ -3,6 +3,17 @@
 
 #### *2018-11-05*
 - 增加`wx.compressImage`API，压缩图片接口，可选压缩质量
+- 增加mDNS相关API
+  - offLocalServiceDiscoveryStop
+  - offLocalServiceFound
+  - offLocalServiceLost
+  - offLocalServiceResolveFail
+  - onLocalServiceDiscoveryStop
+  - onLocalServiceFound
+  - onLocalServiceLost
+  - onLocalServiceResolveFail
+  - startLocalServiceDiscovery
+  - stopLocalServiceDiscovery
 - 增加图片API的注释
 - 增加下载，发起请求，上传API的注释
 

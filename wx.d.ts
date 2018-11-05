@@ -224,12 +224,114 @@ interface onSocketCloseCallBack {
   (res: any): void;
 }
 
+interface offLocalServiceDiscoveryStopCallBack {
+  (res: any): void;
+}
+
+interface offLocalServiceFoundCallBack {
+  (res: any): void;
+}
+
+interface offLocalServiceLostCallBack {
+  (res: any): void;
+}
+
+interface offLocalServiceResolveFailCallBack {
+  (res: any): void;
+}
+
+interface onLocalServiceDiscoveryStopCallBack {
+  (res: any): void;
+}
+
+interface onLocalServiceFoundCallBackRes {
+  serviceType?: string;
+  serviceName?: string;
+  ip?: string;
+  port?: string;
+}
+
+interface onLocalServiceFoundCallBack {
+  (res: onLocalServiceFoundCallBackRes): void;
+}
+
+interface onLocalServiceLostCallBackRes {
+  serviceType?: string;
+  serviceName?: string;
+}
+
+interface onLocalServiceLostCallBack {
+  (res: onLocalServiceLostCallBackRes): void;
+}
+
+interface onLocalServiceResolveFailCallBackRes {
+  serviceType?: string;
+  serviceName?: string;
+}
+
+interface onLocalServiceResolveFailCallBack {
+  (res: onLocalServiceResolveFailCallBackRes): void;
+}
+
+interface startLocalServiceDiscoveryOpts extends WxApiCallback {
+  serviceType: string;
+}
+
+interface stopLocalServiceDiscoveryOpts extends WxApiCallback {}
+
 interface NetworkAPIs {
-  // 发起请求
+  /**
+   * 发起请求
+   */
   request: (options: NetworkRequestOpts) => requestTask;
-  // 上传、下载
+  /**
+   * 上传
+   */
   uploadFile: (options: uploadFileOpts) => uploadTask;
+  /**
+   * 下载
+   */
   downloadFile: (options: downloadFileOpts) => downloadTask;
+  /**
+   * 取消监听mDNS 服务停止搜索的事件
+   */
+  offLocalServiceDiscoveryStop: (callback: offLocalServiceDiscoveryStopCallBack) => void;
+  /**
+   * 取消监听mDNS 服务发现的事件
+   */
+  offLocalServiceFound: (callback: offLocalServiceFoundCallBack) => void;
+  /**
+   * 取消监听mDNS 服务离开的事件
+   */
+  offLocalServiceLost: (callback: offLocalServiceLostCallBack) => void;
+  /**
+   * 取消监听mDNS 服务解析失败的事件
+   */
+  offLocalServiceResolveFail: (callback: offLocalServiceResolveFailCallBack) => void;
+  /**
+   * 监听mDNS 服务停止搜索的事件
+   */
+  onLocalServiceDiscoveryStop: (callback: onLocalServiceDiscoveryStopCallBack) => void;
+  /**
+   * 监听mDNS 服务发现的事件
+   */
+  onLocalServiceFound: (callback: onLocalServiceFoundCallBack) => void;
+  /**
+   * 监听mDNS 服务离开的事件
+   */
+  onLocalServiceLost: (callback: onLocalServiceLostCallBack) => void;
+  /**
+   * 监听mDNS 服务解析失败的事件
+   */
+  onLocalServiceResolveFail: (callback: onLocalServiceResolveFailCallBack) => void;
+  /**
+   * 开始搜索局域网下的 mDNS 服务。搜索的结果会通过 wx.onLocalService* 事件返回。
+   */
+  startLocalServiceDiscovery: (options: startLocalServiceDiscoveryOpts) => void;
+  /**
+   * 
+   */
+  stopLocalServiceDiscovery: (options: stopLocalServiceDiscoveryOpts) => void;
   // WebSocket
   connectSocket: (options: connectSocketOpts) => void;
   onSocketOpen: (callback: onSocketOpenCallBack) => void;
