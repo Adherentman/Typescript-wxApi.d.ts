@@ -18,7 +18,7 @@ interface string2stringMap {
 type ZeroParamVoidFunc = () => void;
 
 interface ReturnCallBack {
-  (res: ZeroParamVoidFunc)
+  (res: ZeroParamVoidFunc);
 }
 interface createLiveObj extends WxApiCallback {}
 
@@ -136,13 +136,13 @@ interface uploadFileOpts extends WxApiCallback<uploadFileRes> {
 }
 
 interface onProgressUpdateRes {
-  progress: number,
-  totalBytesSent: number,
-  totalBytesExpectedToWrite: number
+  progress: number;
+  totalBytesSent: number;
+  totalBytesExpectedToWrite: number;
 }
 
 interface onProgressUpdateCallback {
-  (res: onProgressUpdateRes): void
+  (res: onProgressUpdateRes): void;
 }
 interface uploadTask {
   /**
@@ -188,7 +188,7 @@ interface connectSocketOpts extends WxApiCallback {
 
 // 监听WebSocket连接打开事件。
 interface onSocketOpenRes {
-  header?: object
+  header?: object;
 }
 interface onSocketOpenCallBack {
   (res: onSocketOpenRes): void;
@@ -209,7 +209,7 @@ interface onSocketMessageRes {
   data: string | ArrayBuffer;
 }
 interface onSocketMessageCallback {
-  (res: onSocketMessageRes): void
+  (res: onSocketMessageRes): void;
 }
 
 //closeSocket
@@ -353,7 +353,7 @@ interface sendRes {
 }
 
 interface onOpenRes {
-  header: object
+  header: object;
 }
 
 interface onOpenCallBack {
@@ -369,7 +369,7 @@ interface closeRes {
 
 // onClose
 interface onCloseCallBack {
-  (res: any): void
+  (res: any): void;
 }
 
 //onError
@@ -378,7 +378,7 @@ interface onErrorOpts {
 }
 
 interface onErrorCallBack {
-  (res: onErrorOpts): void
+  (res: onErrorOpts): void;
 }
 
 //onMessage
@@ -387,7 +387,7 @@ interface onMessageOpts {
 }
 
 interface onMessageCallBack {
-  (res: onMessageOpts): void
+  (res: onMessageOpts): void;
 }
 interface SocketTaskAPIs {
   send: (options?: sendOpts) => void;
@@ -429,7 +429,7 @@ interface getImageInfoRes {
   path: string;
   /**
    * 1.9.90
-  */
+   */
   orientation:
     | "up"
     | "down"
@@ -441,7 +441,7 @@ interface getImageInfoRes {
     | "right-mirrored";
   /**
    * 1.9.90
-  */
+   */
   type: string;
 }
 
@@ -477,7 +477,7 @@ interface RecordStartOpts {
    */
   format?: string;
   frameSize?: number;
-  audioSource?: string
+  audioSource?: string;
 }
 
 interface RecordOnStopRes {
@@ -485,9 +485,8 @@ interface RecordOnStopRes {
 }
 
 interface RecordOnStopCallBack {
-  (res: RecordOnStopRes): void
+  (res: RecordOnStopRes): void;
 }
-
 
 interface onFrameRecordedRes {
   frameBuffer: ArrayBuffer;
@@ -495,7 +494,7 @@ interface onFrameRecordedRes {
 }
 
 interface onFrameRecordedCallBack {
-  (res: onFrameRecordedRes): void
+  (res: onFrameRecordedRes): void;
 }
 
 interface RecordOnErrorRes {
@@ -503,16 +502,58 @@ interface RecordOnErrorRes {
 }
 
 interface RecordOnErrorCallBack {
-  (res: RecordOnErrorRes): void
+  (res: RecordOnErrorRes): void;
 }
 
 interface getRecorderManagerOpts {
+  /**
+   * 开始录音
+   */
   start: (options: RecordStartOpts) => void;
+  /**
+   * 暂停录音
+   */
+  pause: ZeroParamVoidFunc;
+  /**
+   * 继续录音
+   */
+  resume: ZeroParamVoidFunc;
+  /**
+   *  停止录音
+   */
+  stop: ZeroParamVoidFunc;
+  /**
+   * 监听录音开始事件
+   */
   onStart: ReturnCallBack;
+  /**
+   * 监听录音继续事件
+   */
+  onResume: ReturnCallBack;
+  /**
+   * 监听录音暂停事件
+   */
   onPause: ReturnCallBack;
+  /**
+   * 监听录音结束事件
+   */
   onStop: (res: RecordOnStopCallBack) => void;
+  /**
+   * 监听已录制完指定帧大小的文件事件。如果设置了 frameSize，则会回调此事件。
+   */
   onFrameRecorded: (res: onFrameRecordedRes) => void;
+  /**
+   * 监听录音错误事件
+   */
   onError: (res: RecordOnErrorCallBack) => void;
+  /**
+   * 监听录音因为受到系统占用而被中断开始事件。
+   */
+  onInterruptionBegin: ReturnCallBack;
+  /**
+   * 监听录音中断结束事件。
+   */
+  onInterruptionEnd: ReturnCallBack;
 }
 
 // Voice 音频
@@ -576,10 +617,10 @@ interface getBackgroundAudioManagerOpts {
 
 interface createInnerAudioContextonErrorRes {
   errMsg: any;
-  errCode: any
+  errCode: any;
 }
 interface createInnerAudioContextonErrorCallBack {
-  (callback: createInnerAudioContextonErrorRes)
+  (callback: createInnerAudioContextonErrorRes);
 }
 interface createInnerAudioContextOpts {
   src: string;
@@ -594,7 +635,7 @@ interface createInnerAudioContextOpts {
   /**
    * 支持版本1.9.90
    */
-  volume: number; 
+  volume: number;
   play: ZeroParamVoidFunc;
   pause: ZeroParamVoidFunc;
   stop: ZeroParamVoidFunc;
@@ -629,7 +670,8 @@ interface getAvailableAudioSourcesRes {
   audioSources: string[];
 }
 
-interface getAvailableAudioSourcesOpts extends WxApiCallback<getAvailableAudioSourcesRes>{}
+interface getAvailableAudioSourcesOpts
+  extends WxApiCallback<getAvailableAudioSourcesRes> {}
 
 // Video 视频
 
@@ -727,7 +769,7 @@ interface LoadFontFaceDesc {
   variant: any;
 }
 interface loadFontFaceRes {
-  status: any
+  status: any;
 }
 
 interface loadFontFaceOpts extends WxApiCallback<loadFontFaceRes> {
@@ -772,12 +814,13 @@ interface MediaAPIs {
   playVoice: (options: playVoiceOpts) => void;
   /**
    * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
-   */ 
+   */
+
   pauseVoice: ZeroParamVoidFunc;
   /**
    * 注意：1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext 接口
    */
-  stopVoice: ZeroParamVoidFunc; 
+  stopVoice: ZeroParamVoidFunc;
   /**
    * 注意：1.2.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getBackgroundAudioManager 接口
    */
@@ -909,17 +952,19 @@ interface fileListObject {
 }
 
 interface FileSystemManagerGetSavedFileListRes {
-  fileList: fileListObject[]
+  fileList: fileListObject[];
 }
 
-interface FileSystemManagerGetSavedFileListOpts extends WxApiCallback<FileSystemManagerGetSavedFileListRes>{}
+interface FileSystemManagerGetSavedFileListOpts
+  extends WxApiCallback<FileSystemManagerGetSavedFileListRes> {}
 
 interface FileSystemManagerSaveFileRes {
   savedFilePath: string;
-  errMsg: string
+  errMsg: string;
 }
 
-interface FileSystemManagerSaveFileOpts extends WxApiCallback<FileSystemManagerSaveFileRes> {
+interface FileSystemManagerSaveFileOpts
+  extends WxApiCallback<FileSystemManagerSaveFileRes> {
   tempFilePath: string;
   filePath: string;
 }
@@ -928,7 +973,8 @@ interface FileSystemManagerRemoveSavedFileRes {
   errMsg: string;
 }
 
-interface FileSystemManagerRemoveSavedFileOpts extends WxApiCallback<FileSystemManagerRemoveSavedFileRes> {
+interface FileSystemManagerRemoveSavedFileOpts
+  extends WxApiCallback<FileSystemManagerRemoveSavedFileRes> {
   filePath: string;
 }
 
@@ -946,7 +992,8 @@ interface FileSystemManagerGetFileInfoRes {
   errMsg: string;
 }
 
-interface FileSystemManagerGetFileInfoOpts extends WxApiCallback<FileSystemManagerGetFileInfoRes> {
+interface FileSystemManagerGetFileInfoOpts
+  extends WxApiCallback<FileSystemManagerGetFileInfoRes> {
   filePath: string;
 }
 
@@ -969,7 +1016,7 @@ interface appendFileOpts extends WxApiCallback<appendFileRes> {
 
 interface readFileRes {
   data: string | ArrayBuffer;
-  errMsg: string
+  errMsg: string;
 }
 
 interface readFileOpts extends WxApiCallback<readFileRes> {
@@ -979,7 +1026,7 @@ interface readFileOpts extends WxApiCallback<readFileRes> {
 
 interface readdirRes {
   files: string[];
-  errMsg: string
+  errMsg: string;
 }
 
 interface readdirOpts extends WxApiCallback<readdirRes> {
@@ -1004,10 +1051,9 @@ interface rmdirOpts extends WxApiCallback<rmdirRes> {
   recursive: boolean;
 }
 
-
 interface statRes {
   stat: Stats;
-  errMsg: string
+  errMsg: string;
 }
 
 interface statOpts extends WxApiCallback<statRes> {
@@ -1020,7 +1066,7 @@ interface unlinkRes {
 }
 
 interface unlinkOpts extends WxApiCallback<unlinkRes> {
-  filePath: string
+  filePath: string;
 }
 
 interface unzipRes {
@@ -1045,7 +1091,11 @@ interface writeFileOpts extends WxApiCallback<writeFileRes> {
 interface getFileSystemManagerOpts {
   mkdir: (opts: mkdirOpts) => void;
   getSavedFileList: (opts: FileSystemManagerGetSavedFileListOpts) => void;
-  appendFileSync: (filePath: string, data: string | ArrayBuffer, encoding: string) => void;
+  appendFileSync: (
+    filePath: string,
+    data: string | ArrayBuffer,
+    encoding: string
+  ) => void;
   saveFile: (opts: FileSystemManagerSaveFileOpts) => void;
   removeSavedFile: (opts: FileSystemManagerRemoveSavedFileOpts) => void;
   saveFileSync: (tempFilePath: string, filePath: string) => number;
@@ -1053,7 +1103,7 @@ interface getFileSystemManagerOpts {
   copyFileSync: (srcPath: string, destPath: string) => void;
   getFileInfo: (opts: FileSystemManagerGetFileInfoOpts) => void;
   access: (opts: accessOpts) => void;
-  appendFile: (opts: appendFileOpts) => void
+  appendFile: (opts: appendFileOpts) => void;
   accessSync: (path: string) => void;
   mkdirSync: (dirPath: string, recursive: boolean) => void;
   readFile: (opts: readFileOpts) => void;
@@ -1070,7 +1120,11 @@ interface getFileSystemManagerOpts {
   unlinkSync: (filePath: string) => void;
   unzip: (opts: unzipOpts) => void;
   writeFile: (opts: writeFileOpts) => void;
-  writeFileSync: (filePath: string, data: string | ArrayBuffer, encoding: string) => void;
+  writeFileSync: (
+    filePath: string,
+    data: string | ArrayBuffer,
+    encoding: string
+  ) => void;
 }
 
 interface Stats {
@@ -1085,7 +1139,7 @@ interface FileAPIs {
   getSavedFileInfoRes: (options: getSavedFileInfoOpts) => void;
   removeSavedFile: (options: removeSavedFileOpts) => void;
   openDocument: (options: openDocumentOpts) => void;
-  getFileSystemManager: () => getFileSystemManagerOpts
+  getFileSystemManager: () => getFileSystemManagerOpts;
 }
 
 // Location APIs
@@ -1129,7 +1183,7 @@ interface openLocationOpts extends WxApiCallback {
 
 interface translateMarkerOpts {
   markerId: number;
-  destination: {latitude: number, longitude: number};
+  destination: { latitude: number; longitude: number };
   autoRotate: boolean;
   rotate: number;
   duration: number;
@@ -1271,7 +1325,8 @@ interface StorageAPIs {
 
 /**
  * 系统信息
- */ 
+ */
+
 // getSystemInfo
 interface getSystemInfoRes {
   brand: string;
@@ -1310,7 +1365,6 @@ interface getSystemInfoSyncRes {
   SDKVersion: any;
 }
 
- 
 /**
  * 网络状态
  */
@@ -1352,8 +1406,8 @@ interface startAccelerometerOpts extends WxApiCallback {
 }
 
 //罗盘
-interface onCompassChangeOpts{
-  direction: number
+interface onCompassChangeOpts {
+  direction: number;
 }
 interface onCompassChangeCallBack {
   (res: onCompassChangeOpts): void;
@@ -1567,7 +1621,7 @@ interface onBLEConnectionStateChangeOpts {
 }
 
 interface onBLEConnectionStateChangeCallback {
-  (res: onBLEConnectionStateChangeOpts): void
+  (res: onBLEConnectionStateChangeOpts): void;
 }
 
 interface onBLECharacteristicValueChangeOpts {
@@ -1586,15 +1640,17 @@ interface startBeaconDiscoveryRes {
   errMsg: string;
 }
 
-interface startBeaconDiscoveryOpts extends WxApiCallback<startBeaconDiscoveryRes> {
-  uuid: any[]
-} 
-
-interface stopBeaconDiscoveryRes {
-  errMsg: string
+interface startBeaconDiscoveryOpts
+  extends WxApiCallback<startBeaconDiscoveryRes> {
+  uuid: any[];
 }
 
-interface stopBeaconDiscoveryOpts extends WxApiCallback<stopBeaconDiscoveryRes> {}
+interface stopBeaconDiscoveryRes {
+  errMsg: string;
+}
+
+interface stopBeaconDiscoveryOpts
+  extends WxApiCallback<stopBeaconDiscoveryRes> {}
 
 interface beaconsObject {
   [key: string]: string | number;
@@ -1657,7 +1713,7 @@ interface vibrateShortOpts extends WxApiCallback {}
 interface addPhoneContactOpts extends WxApiCallback {
   photoFilePath: string;
   nickName: string;
-  lastName:	string;
+  lastName: string;
   middleName: string;
   firstName: string;
   remark: string;
@@ -1703,7 +1759,7 @@ interface startHCERes {
 }
 
 interface startHCEOpts extends WxApiCallback<startHCERes> {
-  aid_list: any[];  
+  aid_list: any[];
 }
 
 interface stopHCERes {
@@ -1745,7 +1801,6 @@ interface connectWifiOpts extends WxApiCallback {
 
 interface getWifiListOpts extends WxApiCallback {}
 
-
 interface wifiLs {
   SSID: string;
   BSSID: string;
@@ -1768,7 +1823,7 @@ interface setWifiListArray {
 }
 
 interface setWifiListOpts extends WxApiCallback {
-  wifiList: setWifiListArray[]
+  wifiList: setWifiListArray[];
 }
 
 interface wifiInfo {
@@ -1787,15 +1842,15 @@ interface onWifiConnectedCb {
 }
 
 interface onMemoryWarningOpts {
-  level: number
+  level: number;
 }
 
 interface onMemoryWarningCallBack {
-  (res: onMemoryWarningOpts): void
+  (res: onMemoryWarningOpts): void;
 }
 
 interface getConnectedWifiRes {
-  wifi: wifiInfo
+  wifi: wifiInfo;
 }
 
 interface getConnectedWifiOpts extends WxApiCallback<getConnectedWifiRes> {}
@@ -1866,7 +1921,7 @@ interface DeviceAPIs {
    */
   getClipboardData: (options: getClipboardDataOpts) => void;
   /**
-   * 初始化小程序蓝牙模块，生效周期为调用wx.openBluetoothAdapter至调用wx.closeBluetoothAdapter或小程序被销毁为止。 
+   * 初始化小程序蓝牙模块，生效周期为调用wx.openBluetoothAdapter至调用wx.closeBluetoothAdapter或小程序被销毁为止。
    */
   openBluetoothAdapter: (options: WxApiCallback) => void;
   /**
@@ -1880,7 +1935,9 @@ interface DeviceAPIs {
   /**
    * 监听蓝牙适配器状态变化事件
    */
-  onBluetoothAdapterStateChange: (cb: onBluetoothAdapterStateChangeOpts) => void;
+  onBluetoothAdapterStateChange: (
+    cb: onBluetoothAdapterStateChangeOpts
+  ) => void;
   /**
    * 开始搜寻附近的蓝牙外围设备
    */
@@ -1906,7 +1963,7 @@ interface DeviceAPIs {
   /**
    * 监听寻找到新设备的事件
    */
-  onBluetoothDeviceFound:(cb: onBluetoothDeviceFoundCallBack) => void;
+  onBluetoothDeviceFound: (cb: onBluetoothDeviceFoundCallBack) => void;
   /**
    * 连接低功耗蓝牙设备。
    */
@@ -1945,11 +2002,15 @@ interface DeviceAPIs {
   /**
    * 监听低功耗蓝牙连接状态的改变事件，包括开发者主动连接或断开连接，设备丢失，连接异常断开等等
    */
-  onBLEConnectionStateChange: (callback: onBLEConnectionStateChangeCallback) => void;
+  onBLEConnectionStateChange: (
+    callback: onBLEConnectionStateChangeCallback
+  ) => void;
   /**
    * 监听低功耗蓝牙设备的特征值变化。必须先启用notify接口才能接收到设备推送的notification。
    */
-  onBLECharacteristicValueChange: (callback: onBLECharacteristicValueChangeCallback) => void;
+  onBLECharacteristicValueChange: (
+    callback: onBLECharacteristicValueChangeCallback
+  ) => void;
   /**
    * 开始搜索附近的iBeacon设备
    */
@@ -2187,9 +2248,7 @@ interface createAnimationOpts {
   transformOrigin?: string;
 }
 // todo animation实例
-interface animationObject {
-
-}
+interface animationObject {}
 
 interface pageScrollToOpts extends WxApiCallback {
   scrollTop?: number;
@@ -2202,8 +2261,8 @@ interface startPullDownRefreshRes {
 interface startPullDownRefreshOpts
   extends WxApiCallback<startPullDownRefreshRes> {}
 
-  // WXML节点信息
-  
+// WXML节点信息
+
 interface createSelectorQueryOpts {
   in: any;
   select: any;
@@ -2214,7 +2273,6 @@ interface createSelectorQueryOpts {
   scrollOffset: any;
   fields: any;
 }
-
 
 interface createIntersectionObserverAPIs {
   relativeTo: any;
@@ -2342,7 +2400,7 @@ interface UIAPIs {
   createCanvasContext: any;
   createLinearGradient: any;
   createContext: any; // 不推荐使用
-  drawCanvas: any;  // 不推荐使用
+  drawCanvas: any; // 不推荐使用
   canvasToTempFilePath: any;
   canvasGetImageData: any;
   canvasPutImageData: any;
@@ -2401,8 +2459,8 @@ interface canvasContextApi {
   save: any;
   restore: any;
   draw: any;
-  getActions: any;  //不推荐使用
-  clearActions: any;  //不推荐使用
+  getActions: any; //不推荐使用
+  clearActions: any; //不推荐使用
   measureText: any;
   globalCompositeOperation: any;
   arcTo: any;
@@ -2420,7 +2478,7 @@ interface getExtConfigRes {
   errMsg: string;
   extConfig: any;
 }
-interface getExtConfigOpts extends WxApiCallback<getExtConfigRes>{}
+interface getExtConfigOpts extends WxApiCallback<getExtConfigRes> {}
 
 interface ThirdPartyAPIs {
   getExtConfig: (options: getExtConfigOpts) => void;
@@ -2499,55 +2557,55 @@ interface requestPaymentOpts extends WxApiCallback {
 }
 
 interface showShareMenuOpts extends WxApiCallback {
-  withShareTicket?: boolean; 
+  withShareTicket?: boolean;
 }
 
 interface updateShareMenuOpts extends WxApiCallback {
-  withShareTicket?: boolean; 
+  withShareTicket?: boolean;
 }
 
 interface getShareInfoOpts extends WxApiCallback {
-  shareTicket:	string;
+  shareTicket: string;
   timeout?: number;
 }
 
 interface chooseAddressRes {
-  errMsg:	string;
-  userName:	string;
-  postalCode:	string;
-  provinceName:	string;
-  cityName:	string;
-  countyName:	string;
-  detailInfo:	string;
-  nationalCode:	string;
+  errMsg: string;
+  userName: string;
+  postalCode: string;
+  provinceName: string;
+  cityName: string;
+  countyName: string;
+  detailInfo: string;
+  nationalCode: string;
   telNumber: string;
 }
-interface chooseAddressOpts extends WxApiCallback<chooseAddressRes>{}
+interface chooseAddressOpts extends WxApiCallback<chooseAddressRes> {}
 
 interface openSettingRes {
   authSetting: any;
 }
 
-interface openSettingOpts extends WxApiCallback<openSettingRes>{}
+interface openSettingOpts extends WxApiCallback<openSettingRes> {}
 
 interface getSettingRes {
   authSetting: any;
 }
 
-interface getSettingOpts extends WxApiCallback<getSettingRes>{}
+interface getSettingOpts extends WxApiCallback<getSettingRes> {}
 
 interface getWeRunDataRes {
   errMsg: string;
   encryptedData: string;
-  iv:	string;
+  iv: string;
 }
 
-interface getWeRunDataOpts extends WxApiCallback<getWeRunDataRes>{
-  timeout?: number
+interface getWeRunDataOpts extends WxApiCallback<getWeRunDataRes> {
+  timeout?: number;
 }
 
 interface navigateToMiniProgramRes {
-  errMsg: string
+  errMsg: string;
 }
 
 interface extraDataOpts {
@@ -2556,38 +2614,41 @@ interface extraDataOpts {
   biz: string;
 }
 
-interface navigateToMiniProgramOpts extends WxApiCallback<navigateToMiniProgramRes>{
+interface navigateToMiniProgramOpts
+  extends WxApiCallback<navigateToMiniProgramRes> {
   appId: string;
-  extraData:	extraDataOpts[];
+  extraData: extraDataOpts[];
   path: string;
   envVersion: string;
 }
 interface navigateBackMiniProgramRes {
   errMsg: string;
 }
-interface navigateBackMiniProgramOpts extends WxApiCallback<navigateBackMiniProgramRes>{
+interface navigateBackMiniProgramOpts
+  extends WxApiCallback<navigateBackMiniProgramRes> {
   extraData: any;
 }
 
-interface chooseInvoiceTitleRes{
-  type:	string;
+interface chooseInvoiceTitleRes {
+  type: string;
   title: string;
   taxNumber: string;
-  companyAddress:	string;
+  companyAddress: string;
   telephone: string;
-  bankName:	string;
+  bankName: string;
   bankAccount: string;
-  errMsg:	string;
+  errMsg: string;
 }
 
-interface chooseInvoiceTitleOpts extends WxApiCallback<chooseInvoiceTitleRes>{}
+interface chooseInvoiceTitleOpts extends WxApiCallback<chooseInvoiceTitleRes> {}
 
-interface checkIsSupportSoterAuthenticationRes{
+interface checkIsSupportSoterAuthenticationRes {
   supportMode: string[]; // 人脸识别（暂未支持）声纹识别（暂未支持）
-  errMsg:	string;
+  errMsg: string;
 }
 
-interface checkIsSupportSoterAuthenticationOpts extends WxApiCallback<checkIsSupportSoterAuthenticationRes>{}
+interface checkIsSupportSoterAuthenticationOpts
+  extends WxApiCallback<checkIsSupportSoterAuthenticationRes> {}
 
 interface startSoterAuthenticationRes {
   errCode: number;
@@ -2597,7 +2658,8 @@ interface startSoterAuthenticationRes {
   errMsg: string;
 }
 
-interface startSoterAuthenticationOpts extends WxApiCallback<startSoterAuthenticationRes> {
+interface startSoterAuthenticationOpts
+  extends WxApiCallback<startSoterAuthenticationRes> {
   requestAuthMode: string[];
   challenge: string;
   authContent: string;
@@ -2608,7 +2670,8 @@ interface checkIsSoterEnrolledInDeviceRes {
   errMsg: string;
 }
 
-interface checkIsSoterEnrolledInDeviceOpts extends WxApiCallback<checkIsSoterEnrolledInDeviceRes> {
+interface checkIsSoterEnrolledInDeviceOpts
+  extends WxApiCallback<checkIsSoterEnrolledInDeviceRes> {
   checkAuthMode: string;
 }
 
@@ -2731,7 +2794,9 @@ interface OpenInterfaceAPIs {
   /**
    * 获取本机支持的 SOTER 生物认证方式
    */
-  checkIsSupportSoterAuthentication: (options: checkIsSupportSoterAuthenticationOpts) => void;
+  checkIsSupportSoterAuthentication: (
+    options: checkIsSupportSoterAuthenticationOpts
+  ) => void;
   /**
    * 开始 SOTER 生物认证
    */
@@ -2739,7 +2804,9 @@ interface OpenInterfaceAPIs {
   /**
    * 获取设备内是否录入如指纹等生物信息的接口
    */
-  checkIsSoterEnrolledInDevice: (options: checkIsSoterEnrolledInDeviceOpts) => void;
+  checkIsSoterEnrolledInDevice: (
+    options: checkIsSoterEnrolledInDeviceOpts
+  ) => void;
 }
 
 /**
@@ -2810,7 +2877,7 @@ interface setEnableDebugRes {
   errMsg: string;
 }
 
-interface setEnableDebugOpts extends WxApiCallback<setEnableDebugRes>{
+interface setEnableDebugOpts extends WxApiCallback<setEnableDebugRes> {
   enableDebug: boolean;
 }
 interface DebuggingAPIs {
@@ -2824,7 +2891,7 @@ interface LogManager {
   log: any;
   info: any;
   warn: any;
-  debug: any
+  debug: any;
 }
 
 interface LogApis {
@@ -2848,7 +2915,7 @@ declare let wx: NetworkAPIs &
   UpdateAPIs &
   MultithreadingAPIs &
   MonitorAPIs &
-  DebuggingAPIs & 
+  DebuggingAPIs &
   LogApis;
 
 declare let SocketTask: SocketTaskAPIs;
