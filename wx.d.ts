@@ -2717,7 +2717,7 @@ interface OpenInterfaceAPIs {
    */
   getAccountInfoSync: (options: getAccountInfoSyncOpts) => void;
   /**
-   * 开发者可以在小程序内调用该接口拉起会员开卡组件，方便用户快速填写会员注册信息并领卡。
+   * 打开另一个小程序
    */
   navigateToMiniProgram: (options: navigateToMiniProgramOpts) => void;
   /**
