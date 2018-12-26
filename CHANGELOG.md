@@ -1,6 +1,12 @@
 # CHANGELOG
 
+#### *2018-12-26*
+
+- 增加小程序生命周期的Api
+- 增加小程序应用级事件的Api
+
 #### *2018-11-05*
+
 - 增加`wx.compressImage`API，压缩图片接口，可选压缩质量
 - 增加mDNS相关API
   - offLocalServiceDiscoveryStop
@@ -18,6 +24,7 @@
 
 
 #### *2018-10-16*
+
 - fix the type of the `wx.pageScrollTo` function [#6](https://github.com/Adherentman/Typescript-wxApi.d.ts/pull/6)
 
 #### _2018-09-30_

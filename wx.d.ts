@@ -2832,7 +2832,9 @@ interface updateManagerAPIs {
   /**
    * 监听向微信后台请求检查更新结果事件。微信在小程序冷启动时自动检查更新，不需由开发者主动触发。
    */
-  onCheckForUpdate: any;
+  onCheckForUpdate: {
+    (res: {hasUpdate: boolean})
+  };
   /**
    * 监听小程序有版本更新事件。客户端主动触发下载（无需开发者触发），下载成功后回调
    */
@@ -2844,7 +2846,7 @@ interface updateManagerAPIs {
   /**
    * 当小程序新版本下载完成后（即收到 onUpdateReady 回调），强制小程序重启并使用新版本
    */
-  applyUpdate: any;
+  applyUpdate: ZeroParamVoidFunc;
 }
 
 /**
@@ -2901,8 +2903,58 @@ interface LogApis {
   getLogManager: () => LogManager;
 }
 
+interface WxApplicationProps {
+  path: string, 
+  scene: number, 
+  query: any, 
+  shareTicket: string, 
+  referrerInfo: {
+    appId: string, 
+    extraData: any
+  }
+}
+
+/**
+ * wx应用级事件Api
+ */
+interface WxApplicationLevel {
+  getLaunchOptionsSync: () => WxApplicationProps;
+  /**
+   * 小程序要打开的页面不存在事件的回调函数
+   */
+  offPageNotFound: any;
+  /**
+   * 小程序要打开的页面不存在事件的回调函数
+   */
+  onPageNotFound: any;
+  /**
+   * 取消监听小程序错误事件。
+   */
+  offError: any;
+  /**
+   * 监听小程序错误事件。
+   */
+  onError: any;
+  /**
+   * 取消监听小程序切前台事件
+   */
+  offAppShow: any;
+  /**
+   * 监听小程序切前台事件。
+   */
+  onAppShow: {(res: WxApplicationProps)}
+  /**
+   *   取消监听小程序切后台事件
+   */
+  offAppHide: any;
+  /**
+   * 监听小程序切后台事件。
+   */
+  onAppHide: any;
+}
 // Declares
-declare let wx: NetworkAPIs &
+declare let wx: NetworkAPIs & 
+  WxApplicationLevel &
   MediaAPIs &
   FileAPIs &
   StorageAPIs &
