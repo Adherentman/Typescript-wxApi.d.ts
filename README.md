@@ -1,6 +1,7 @@
 ## Typescript-wxApi.d.ts	
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts?ref=badge_shield)
 
 * git clone
 * 在app.ts中`/// <reference path="../index.d.ts">`
@@ -128,3 +129,6 @@
 ## LICENSE
 
 **MIT@xuzihao**
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts?ref=badge_large)
