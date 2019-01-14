@@ -126,5 +126,4 @@
 持续更新迭代，欢迎star，欢迎pr，欢迎issues。
 
 ## LICENSE
-
-**MIT@xuzihao**
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts?ref=badge_large)
