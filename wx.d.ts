@@ -2544,7 +2544,6 @@ interface getUserInfoRes {
 interface getUserInfoOpts extends WxApiCallback<getUserInfoRes> {
   withCredentials?: boolean;
   lang?: string;
-  timeout?: number;
 }
 
 // 微信支付
