@@ -2890,10 +2890,10 @@ interface DebuggingAPIs {
 }
 
 interface LogManager {
-  log: any;
-  info: any;
-  warn: any;
-  debug: any;
+  log: object | Array<any> | number | string;
+  info: object | Array<any> | number | string;
+  warn: object | Array<any> | number | string;
+  debug: object | Array<any> | number | string;
 }
 
 interface LogApis {
@@ -2952,6 +2952,20 @@ interface WxApplicationLevel {
    */
   onAppHide: any;
 }
+
+/**
+ * 调试Console
+ */
+interface ConsoleApis {
+  debug: (args: any) => void;
+  error: (args: any) => void;
+  group: (label: string) => void;
+  groupEnd: () => void;
+  info: (args: any) => void;
+  log: (args: any) => void;
+  warn: (args: any) => void;
+}
+
 // Declares
 declare let wx: NetworkAPIs & 
   WxApplicationLevel &
@@ -2974,6 +2988,8 @@ declare let SocketTask: SocketTaskAPIs;
 // declare let nodesRef: nodesRefAPIs;
 // declare let worker: workerAPIs;
 declare let canvasContext: canvasContextApi;
+
+declare let console: ConsoleApis;
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;

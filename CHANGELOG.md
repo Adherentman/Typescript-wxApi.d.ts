@@ -1,11 +1,15 @@
 # CHANGELOG
 
-#### *2018-12-26*
+## 2019-01-25
+
+- 增加console的Api
+
+## *2018-12-26*
 
 - 增加小程序生命周期的Api
 - 增加小程序应用级事件的Api
 
-#### *2018-11-05*
+## *2018-11-05*
 
 - 增加`wx.compressImage`API，压缩图片接口，可选压缩质量
 - 增加mDNS相关API
@@ -22,12 +26,11 @@
 - 增加图片API的注释
 - 增加下载，发起请求，上传API的注释
 
-
-#### *2018-10-16*
+## *2018-10-16*
 
 - fix the type of the `wx.pageScrollTo` function [#6](https://github.com/Adherentman/Typescript-wxApi.d.ts/pull/6)
 
-#### _2018-09-30_
+## _2018-09-30_
 
 完善和修改以下 API
 
@@ -35,14 +38,14 @@
 - 调试接口 Api
 - 日志 Api
 
-#### _2018-09-28_
+## _2018-09-28_
 
 完善和修改以下 API
 
 - 数据 Apis
 - 更新 Apis
 
-#### _2018-09-26_
+## _2018-09-26_
 
 完善和修改以下 API
 
@@ -56,7 +59,7 @@
 - 附近
 - 内容安全
 
-#### _2018-09-24_
+## _2018-09-24_
 
 完善和修改以下 API
 
@@ -65,7 +68,7 @@
 - 用户信息
 - 微信支付
 
-#### _2018-09-22_
+## _2018-09-22_
 
 完善和修改以下 API
 
@@ -74,7 +77,7 @@
 - WXML 节点布局相交状态
 - 自定义组件
 
-#### _2018-09-21_
+## _2018-09-21_
 
 完善和修改以下 API
 
@@ -85,7 +88,7 @@
   - todo 链式调用未解决
 - 位置
 
-#### _2018-09-20_
+## _2018-09-20_
 
 完善和修改以下 API
 
@@ -93,7 +96,7 @@
 - 设置导航条
 - 设置 tabBar
 
-#### _2018-09-19_
+## _2018-09-19_
 
 完善和修改以下 API
 
@@ -106,7 +109,7 @@
 - NFC
 - Wi-Fi
 
-#### _2018-09-18_
+## _2018-09-18_
 
 完善和修改以下 API
 
@@ -119,21 +122,21 @@
 - 扫码
 - 剪贴板
 
-#### _2018-09-17_
+## _2018-09-17_
 
 - 更新位置 API 的`createMapContext`
 
-#### _2018-09-14_
+## _2018-09-14_
 
 - 更新下载 api
 - FileSystemManager 的所有 API 更新
 
-#### _2018-08-06_
+## _2018-08-06_
 
 - 修复 wx 点不出文件 Api
 - 修复`openDocument`的参数`filePath`为可选
 
-#### _2018-08-05_
+## _2018-08-05_
 
 - 规范化`onBackgroundAudioPlay`, `onBackgroundAudioPause`, `onBackgroundAudioStop`返回`callback`值
 - 修复`BackgroundAudioManager`返回的值，并且它的对象属性列表增加一个`protocol`
@@ -159,7 +162,7 @@
 - 增加支持在版本 2.1.0 里的`createLivePusherContext`的一个方法`toggleTorch`
 - 增加在版本 2.1.0 中添加的`loadFontFaceRes`动态加载字体 Api
 
-#### _2018-08-04_
+## _2018-08-04_
 
 - 增加一基础类型`ReturnCallBack`
 - `RecordStart`增加一个`options` `audioSource`.
@@ -171,7 +174,7 @@
   - onFrameRecorded: (res: onFrameRecordedRes) => void;
   - onError: (res: RecordOnErrorCallBack) => void;
 
-#### _2018-08-03_
+## _2018-08-03_
 
 - 修复`connectSocket`返回空函数
 - 修复`onSocketOpen`返回一个回调函数
@@ -183,7 +186,7 @@
 - 修复`onError`返回一个回调函数
 - 修复`onMessage`返回一个回调函数
 
-#### _2018-08-02_
+## _2018-08-02_
 
 ### Api Fixes
 
