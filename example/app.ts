@@ -93,7 +93,7 @@ Page({
       }
     });
     let TestAnimation = wx.createAnimation({delay: 1})
-    TestAnimation.opacity(1)
+    TestAnimation.opacity(1).export()
     wx.onBackgroundAudioPlay((res) => console.log())
     const backgroundAudioManager = wx.getBackgroundAudioManager()
     backgroundAudioManager.onError((res) => console.log(res))
