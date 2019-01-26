@@ -2909,7 +2909,7 @@ interface WxApplicationProps {
   shareTicket: string, 
   referrerInfo: {
     appId: string, 
-    extraData: any
+    extraData: object
   }
 }
 
@@ -2989,6 +2989,23 @@ declare let SocketTask: SocketTaskAPIs;
 declare let canvasContext: canvasContextApi;
 
 declare let console: ConsoleApis;
+
+/**
+ * 取消由 setInterval 设置的定时器。
+ */
+declare function clearInterval(intervalID: number): void
+/**
+ * 取消由 setTimeout 设置的定时器。
+ */
+declare function clearTimeout(timeoutID: number): void
+/**
+ * 设定一个定时器。
+ */
+declare function setInterval(callback: () => void, delay: number, rest: any): number
+/**
+ * 设定一个定时器。
+ */
+declare function setTimeout(callback: () => void, delay: number, rest: any): number
 
 declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
