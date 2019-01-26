@@ -4,8 +4,6 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts?ref=badge_shield)
 
-
-
 * git clone
 * 在app.ts中`/// <reference path="../index.d.ts">`
 * 完成🦉就可以愉快的感受到提示和类型约束啦！
