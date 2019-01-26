@@ -2553,6 +2553,9 @@ interface UIAPIs {
    * 节点布局交叉状态API可用于监听两个或多个组件节点在布局位置上的相交状态。这一组API常常可以用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见。
    */
   createIntersectionObserver: () => createIntersectionObserverAPIs;
+  /**
+   * 延迟一部分操作到下一个时间片再执行。
+   */
   nextTick: (c: Function) => void;
 }
 
@@ -3085,18 +3088,6 @@ interface WxApplicationLevel {
   onAppHide: any;
 }
 
-/**
- * 调试Console
- */
-interface ConsoleApis {
-  debug: (args: any) => void;
-  error: (args: any) => void;
-  group: (label: string) => void;
-  groupEnd: () => void;
-  info: (args: any) => void;
-  log: (args: any) => void;
-  warn: (args: any) => void;
-}
 
 // Declares
 declare let wx: NetworkAPIs & 
@@ -3120,8 +3111,6 @@ declare let SocketTask: SocketTaskAPIs;
 // declare let nodesRef: nodesRefAPIs;
 // declare let worker: workerAPIs;
 declare let canvasContext: canvasContextApi;
-
-declare let console: ConsoleApis;
 
 /**
  * 取消由 setInterval 设置的定时器。

@@ -29,7 +29,6 @@ Page({
     wx.onBLEConnectionStateChange(function(res){
       res.deviceId
     }),
-
     wx.nextTick(() => {this.setData({number: 3})})
     wx.onBLECharacteristicValueChange((res) => console.log(res.deviceId))
     let a = wx.request({url: "da", dataType: 'dada'})
