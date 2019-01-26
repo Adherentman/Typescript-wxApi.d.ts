@@ -2281,6 +2281,139 @@ interface createIntersectionObserverAPIs {
   disconnect: any;
 }
 
+type timingFunctionType = 'linear' | 'ease'	| 'ease-in' | 'ease-in-out' | 'ease-out' | 'step-start'	| 'step-end';
+
+interface stepOpts {
+  duration: number,
+  timingFunction: timingFunctionType,
+  delay: number,
+  transformOrigin: string
+}
+
+declare class WxAnimation {
+  /**
+   * 同 transform-function matrix3d
+   */
+  matrix3d(n1: number,n2: number,n3: number,n4: number,n5: number,n6: number, n7: number,n8: number,n9: number,n10: number,n11: number,n12: number,n13: number,n14: number,n15: number,n16: number): this
+  /**
+   * 设置透明度
+   */
+  opacity(value: number): this
+  /**
+   * 设置 right 值
+   */
+  right(value: number | string): this
+  /**
+   * 从原点顺时针旋转一个角度
+   */
+  rotate(angle: number): this
+  /**
+   * 从 X 轴顺时针旋转一个角度
+   */
+  rotate3d(x: number, y: number, z: number, angle: number): this
+  /**
+   * 从 X 轴顺时针旋转一个角度zaos
+   */
+  rotateX(angle: number): this
+  /**
+   * 从 Y 轴顺时针旋转一个角度
+   */
+  rotateY(angle: number): this
+  /**
+   * 从 Z 轴顺时针旋转一个角度
+   */
+  rotateZ(angle: number): this
+  /**
+   * 缩放 
+   */
+  scale(sx: number, sy: number): this
+  /**
+   * 3d 缩放
+   */
+  scale3d(sx: number, sy: number, sz: number): this
+  /**
+   * 缩放 X 轴
+   */
+  scaleX(scale: number): this
+  /**
+   * 缩放 Y 轴
+   */
+  scaleY(scale: number): this
+  /**
+   * 缩放 Z 轴
+   */
+  scaleZ(scale: number): this
+  /**
+   * 对X、 Y轴进行倾斜
+   */
+  skew(ax: number, ay: number): this
+  /**
+   * 对X轴坐标进行倾斜
+   */
+  skewX(angle: number): this
+  /**
+   * 对Y轴坐标进行倾斜
+   */
+  skewY(angle: number): this
+  /**
+   * 表示一组动画完成。可以在一组动画中调用任意多个动画方法，一组动画中的所有动画会同时开始，一组动画完成后才会进行下一组动画。
+   */
+  step(options: stepOpts): this
+  /**
+   * 设置 top 值
+   */
+  top(value: number | string): this
+  /**
+   * 平移变换
+   */
+  translate(tx: number, ty: number): this
+  /**
+   * 对 xyz 坐标进行平移变换
+   */
+  translate3d(tx: number, ty: number, tz: number): this
+  /**
+   * 对 X 轴平移
+   */
+  translateX(translation: number): this
+  /**
+   * 对 Y 轴平移
+   */
+  translateY(translation: number): this
+  /**
+   * 对 Z 轴平移
+   */
+  translateZ(translation: number): this
+  /**
+   * 设置宽度
+   */
+  width(value: number | string): this
+  /**
+   * 设置背景色
+   */
+  backgroundColor(value: string): this
+  /**
+   * 设置bottom值
+   */
+  bottom(value: number | string): this
+  /**
+   * 导出动画队列。
+   * export 方法每次调用后会清掉之前的动画操作。
+   */
+  export(): Array<object>
+  /**
+   * 设置高度
+   */
+  height(value: number | string): this
+  /**
+   * 设置 left 值
+   */
+  left(value: number | string): this
+  /**
+   * 同 transform-function matrix
+   */
+  matrix(a: number, b: number, c: number, d: number, tx: number, ty: number): this
+}
+
 interface UIAPIs {
   /**
    * 显示消息提示框
@@ -2387,11 +2520,11 @@ interface UIAPIs {
    */
   reLaunch: (options: navigateOpts) => void;
   /**
-   * TOdo：
    * 链式调用
-   * 创建一个动画实例animation。调用实例的方法来描述动画。最后通过动画实例的export方法导出动画数据传递给组件的animation属性。
+   * 创建一个动画实例animation。
+   * 调用实例的方法来描述动画。最后通过动画实例的export方法导出动画数据传递给组件的animation属性。
    */
-  createAnimation: (options: createAnimationOpts) => void;
+  createAnimation: (options: createAnimationOpts) => WxAnimation;
   /**
    * 将页面滚动到目标位置。
    */
