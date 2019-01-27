@@ -3,8 +3,6 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FAdherentman%2FTypescript-wxApi.d.ts?ref=badge_shield)
-[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?label=Stars&style=social)
-[![Github forks](https://img.shields.io/github/forks/badges/shields.svg?label=Fork&style=social)
 
 * git clone
 * 在app.ts中`/// <reference path="../index.d.ts">`
