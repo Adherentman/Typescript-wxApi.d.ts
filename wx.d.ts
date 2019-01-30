@@ -611,6 +611,9 @@ interface getBackgroundAudioManagerOpts {
   onTimeUpdate: (callback: ReturnCallBack) => void;
   onPrev: (callback: ReturnCallBack) => void;
   onNext: (callback: ReturnCallBack) => void;
+  /**
+   * AudioManager onError
+   */
   onError: (callback: ReturnCallBack) => void;
   onWaiting: (callback: ReturnCallBack) => void;
 }
