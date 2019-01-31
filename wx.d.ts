@@ -3037,8 +3037,9 @@ interface LogManager {
 interface LogApis {
   /**
    * 获取日志管理器 logManager 对象。
+   * @param level 默认值为0
    */
-  getLogManager: () => LogManager;
+  getLogManager: ({ level }: {level: number}) => LogManager;
 }
 
 interface WxApplicationProps {
