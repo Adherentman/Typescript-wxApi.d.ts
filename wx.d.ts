@@ -2122,9 +2122,11 @@ interface DeviceAPIs {
  * UI APIs
  */
 // Interactive feedback 交互反馈
+type ShowToastIconType = 'success' | 'loading' | 'none';
+
 interface ShowToastOpts extends WxApiCallback {
   title: string;
-  icon?: string;
+  icon?: ShowToastIconType;
   image?: string;
   duration?: number;
   mask?: boolean;
