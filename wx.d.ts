@@ -2549,7 +2549,11 @@ interface UIAPIs {
   /**
    * 监听窗口尺寸变化事件
    */
-  onWindowResize: (c: Function)  => void
+  onWindowResize: (c: Function)  => void;
+  /**
+   * 监听键盘高度变化
+   */
+  onKeyboardHeightChange: (c: Function) => void;
 }
 
 interface canvasContextApi {
