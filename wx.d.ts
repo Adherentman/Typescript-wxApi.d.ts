@@ -2546,6 +2546,10 @@ interface UIAPIs {
    * 获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点。
    */
   getMenuButtonBoundingClientRect: () => getMenuButtonBoundingClientRectRes;
+  /**
+   * 监听窗口尺寸变化事件
+   */
+  onWindowResize: (c: Function)  => void
 }
 
 interface canvasContextApi {
