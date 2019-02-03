@@ -2514,7 +2514,7 @@ interface UIAPIs {
 	 * 将页面滚动到目标位置。
 	 */
 	pageScrollTo: (options: pageScrollToOpts) => void;
-	//todo 绘图
+	//TODO: 绘图
 	createCanvasContext: any;
 	createLinearGradient: any;
 	createContext: any; // 不推荐使用

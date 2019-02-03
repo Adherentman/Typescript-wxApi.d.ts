@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2019-02-03
+
+- 增加`getMenuButtonBoundingClientRect`Apis
+- 增加`onWindowResize` Apis
+- 增加`onKeyboardHeightChange` Apis
+
 ## 2019-01-26
 
 - 加定时器Api
