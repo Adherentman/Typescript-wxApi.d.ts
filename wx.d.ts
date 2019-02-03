@@ -757,9 +757,9 @@ interface createLivePusherContextOpts {
 }
 
 interface LoadFontFaceDesc {
-	style: any;
-	weight: any;
-	variant: any;
+	style?: string;
+	weight?: string;
+	variant?: string;
 }
 interface loadFontFaceRes {
 	status: any;
@@ -2152,9 +2152,9 @@ interface hideTabBarRedDotOpts extends WxApiCallback {
 }
 
 interface setTabBarStyleOpts extends WxApiCallback {
-	color?: any;
-	selectedColor?: any;
-	backgroundColor?: any;
+	color?: string;
+	selectedColor?: string;
+	backgroundColor?: string;
 	borderStyle?: string;
 }
 
@@ -2174,13 +2174,13 @@ interface hideTabBarOpts extends WxApiCallback {
 }
 
 interface setBackgroundColorOpts {
-	backgroundColor: string;
-	backgroundColorTop: string;
-	backgroundColorBottom: string;
+	backgroundColor?: string;
+	backgroundColorTop?: string;
+	backgroundColorBottom?: string;
 }
 
 interface setBackgroundTextStyleOpts {
-	textStyle: string;
+	textStyle: 'dark' | 'light';
 }
 
 // navigate 导航
@@ -2193,15 +2193,13 @@ interface navigateOpts extends WxApiCallback {
 
 interface createAnimationOpts {
 	duration?: number;
-	timingFunction?: string;
+	timingFunction?: timingFunctionType;
 	delay?: number;
 	transformOrigin?: string;
 }
-// todo animation实例
-interface animationObject {}
 
 interface pageScrollToOpts extends WxApiCallback {
-	scrollTop?: number;
+	scrollTop: number;
 	duration?: number;
 }
 interface startPullDownRefreshRes {
@@ -2393,6 +2391,14 @@ interface UIHideAndShowArgs {
 	complete: () => void;
 }
 
+interface getMenuButtonBoundingClientRectRes {
+  width: number;
+  height: number;
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
 interface UIAPIs {
 	/**
 	 * 显示消息提示框
@@ -2523,7 +2529,7 @@ interface UIAPIs {
 	/**
 	 * 停止当前页面下拉刷新。
 	 */
-	stopPullDownRefresh: ZeroParamVoidFunc;
+	stopPullDownRefresh: (options: WxApiCallback) => void;
 	/**
 	 * 返回一个SelectorQuery对象实例。可以在这个实例上使用select等方法选择节点，并使用boundingClientRect等方法选择需要查询的信息。
 	 */
@@ -2535,7 +2541,11 @@ interface UIAPIs {
 	/**
 	 * 延迟一部分操作到下一个时间片再执行。
 	 */
-	nextTick: (c: Function) => void;
+  nextTick: (c: Function) => void;
+  /**
+   * 获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点。
+   */
+  getMenuButtonBoundingClientRect: () => getMenuButtonBoundingClientRectRes;
 }
 
 interface canvasContextApi {
