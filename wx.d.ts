@@ -2411,11 +2411,11 @@ interface UIAPIs {
 	/**
 	 * 隐藏消息提示框
 	 */
-	hideToast: (args: UIHideAndShowArgs) => void;
+	hideToast: (args?: UIHideAndShowArgs) => void;
 	/**
 	 * 隐藏 loading 提示框
 	 */
-	hideLoading: (args: UIHideAndShowArgs) => void;
+	hideLoading: (args?: UIHideAndShowArgs) => void;
 	/**
 	 * 显示模态弹窗
 	 */
@@ -2525,11 +2525,11 @@ interface UIAPIs {
 	/**
 	 * 开始下拉刷新，调用后触发下拉刷新动画，效果与用户手动下拉刷新一致
 	 */
-	startPullDownRefresh: (options: startPullDownRefreshOpts) => void;
+	startPullDownRefresh: (options?: startPullDownRefreshOpts) => void;
 	/**
 	 * 停止当前页面下拉刷新。
 	 */
-	stopPullDownRefresh: (options: WxApiCallback) => void;
+	stopPullDownRefresh: (options?: WxApiCallback) => void;
 	/**
 	 * 返回一个SelectorQuery对象实例。可以在这个实例上使用select等方法选择节点，并使用boundingClientRect等方法选择需要查询的信息。
 	 */
