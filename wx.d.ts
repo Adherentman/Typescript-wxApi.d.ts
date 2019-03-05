@@ -2210,9 +2210,28 @@ interface startPullDownRefreshOpts extends WxApiCallback<startPullDownRefreshRes
 
 // WXML节点信息
 
+
+// TODO: NodesRef
+
+interface fieldsTypes {
+	id?: boolean;
+	dataset?: boolean;
+	rect?: boolean;
+	size?: boolean;
+	scrollOffset?: boolean;
+	properties?: string[];
+	computedStyle?: string[];
+	context?: boolean;
+}
+
+interface NodesRef {
+	fields: (fields: fieldsTypes) => void
+}
+
+// TODO: createSelectorQueryOpts
 interface createSelectorQueryOpts {
-	in: any;
-	select: any;
+	in: (component: any) => void;
+	select: (selector: string) => NodesRef;
 	selectAll: any;
 	selectViewport: any;
 	exec: any;
@@ -2221,11 +2240,26 @@ interface createSelectorQueryOpts {
 	fields: any;
 }
 
+interface marginsTypes {
+	left?: number;
+	right?: number;
+	top?: number;
+	botton?: number;
+}
+
+interface observeCallBackRes {
+	intersectionRatio: number;
+	intersectionRect: marginsTypes;
+	boundingClientRect: marginsTypes;
+	relativeRect: marginsTypes;
+	time: number;
+}
+
 interface createIntersectionObserverAPIs {
-	relativeTo: any;
-	relativeToViewport: any;
-	observe: any;
-	disconnect: any;
+	relativeTo: (selector: string, margins: marginsTypes) => void;
+	relativeToViewport: (margins: marginsTypes) => void;
+	observe: (targetSelector: string, callback: (res: observeCallBackRes) => void) => void;
+	disconnect: () => void;
 }
 
 type timingFunctionType =
@@ -2537,7 +2571,7 @@ interface UIAPIs {
 	/**
 	 * 节点布局交叉状态API可用于监听两个或多个组件节点在布局位置上的相交状态。这一组API常常可以用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见。
 	 */
-	createIntersectionObserver: () => createIntersectionObserverAPIs;
+	createIntersectionObserver: (this: any, options: {thresholds?: number[], initialRatio?: number, observeAll?: boolean}) => createIntersectionObserverAPIs;
 	/**
 	 * 延迟一部分操作到下一个时间片再执行。
 	 */
@@ -2549,7 +2583,7 @@ interface UIAPIs {
   /**
    * 监听窗口尺寸变化事件
    */
-  onWindowResize: (c: Function)  => void;
+  onWindowResize: (c: (size: {windowWidth: number, windowHeight: number}) => void)  => void;
   /**
    * 监听键盘高度变化
    */

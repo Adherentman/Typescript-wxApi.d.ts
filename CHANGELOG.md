@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-03-05
+
+- 更新`createIntersectionObserverAPIs`的参数
+
 ## 2019-02-03
 
 - 增加`getMenuButtonBoundingClientRect`Apis
