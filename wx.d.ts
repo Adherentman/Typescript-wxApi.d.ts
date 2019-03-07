@@ -2224,20 +2224,57 @@ interface fieldsTypes {
 	context?: boolean;
 }
 
-interface NodesRef {
-	fields: (fields: fieldsTypes) => void
+interface boundingClientRectRes {
+	id: string;
+	dataset: object;
+	left: number;
+	right: number;
+	top: number;
+	bottom: number;
+	width: number;
+	height: number;
 }
 
-// TODO: createSelectorQueryOpts
+interface NodesRef {
+	/**
+	 * 获取节点的相关信息。
+	 */
+	fields: (fields: fieldsTypes) => createSelectorQueryOpts;
+	/**
+	 * 添加节点的布局位置的查询请求。
+	 */
+	boundingClientRect: (callback: (res: fieldsTypes) => void) => createSelectorQueryOpts;
+	/**
+	 * 添加节点的滚动位置查询请求。
+	 */
+	scrollOffset: (callback: (res: {id: string;dataset: object;scrollLeft: number;scrollTop: number}) => void) => createSelectorQueryOpts;
+	/**
+	 * 添加节点的 Context 对象查询请求。
+	 */
+	context: (callback: (res: {context: object})=> void) => createSelectorQueryOpts;
+}
+
 interface createSelectorQueryOpts {
+	/**
+	 * 将选择器的选取范围更改为自定义组件 component 内。
+	 */
 	in: (component: any) => void;
+	/**
+	 * 在当前页面下选择第一个匹配选择器 selector 的节点
+	 */
 	select: (selector: string) => NodesRef;
-	selectAll: any;
-	selectViewport: any;
-	exec: any;
-	boundingClientRect: any;
-	scrollOffset: any;
-	fields: any;
+	/**
+	 * 在当前页面下选择匹配选择器 selector 的所有节点。
+	 */
+	selectAll: (selector: string) => NodesRef;
+	/**
+	 * 选择显示区域。
+	 */
+	selectViewport: () => NodesRef;
+	/**
+	 * 执行所有的请求。
+	 */
+	exec: (callback: Function) => NodesRef;
 }
 
 interface marginsTypes {

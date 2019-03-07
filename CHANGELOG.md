@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-03-07
+
+- 更新`createSelectorQueryOpts Apis`的方法
+
 ## 2019-03-05
 
 - 更新`createIntersectionObserverAPIs`的参数
