@@ -68,6 +68,8 @@ Page({
       icon: 'none',
       duration: 2000
     })
+    let add = wx.getUpdateManager()
+    add.onCheckForUpdate(res => console.log(res.hasUpdate))
     wx.chooseImage({
       success: function(res) {
         var tempFilePaths = res.tempFilePaths
