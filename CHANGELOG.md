@@ -4,6 +4,10 @@
 
 - 新增 小程序音频中断开始和结束事件 wx.onAudioInterruptionBegin、wx.onAudioInterruptionEnd
 
+## 2019-03-18
+
+- 更新 API wx.chooseMessageFile
+
 ## 2019-03-08
 
 - 更新`getUpdateManager Apis`的方法

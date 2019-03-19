@@ -776,28 +776,46 @@ interface compressImageOpts extends WxApiCallback {
 	quality?: number;
 }
 
+interface chooseMessageFileRes {
+	path: string;
+	size: number;
+	name: string;
+	type: 'video' | 'image' | 'file';
+	time: number;
+}
+
+interface chooseMessageFileOpts extends WxApiCallback<chooseMessageFileRes> {
+	count: number;
+	type?: 'all' | 'video' | 'image' | 'file';
+	extension?: string[];
+}
+
 interface MediaAPIs {
 	/**
-	 * 从本地相册选择图片或使用相机拍照。
+	 * 保存图片到系统相册。
 	 */
-	chooseImage: (options: chooseImageOpts) => void;
+	saveImageToPhotosAlbum: (options: saveImageToPhotosAlbumOpts) => void;
+	/**
+	 * 在新页面中全屏预览图片。预览的过程中用户可以进行保存图片、发送给朋友等操作。
+	 */
+	previewImage: (options: previewImageOpts) => void;
+	/**
+	 * 获取图片信息。网络图片需先配置download域名才能生效。
+	 */
+	getImageInfo: (options: getImageInfoOpts) => void;
 	/**
 	 * 支持版本 >= 2.4.0
 	 * 压缩图片接口，可选压缩质量
 	 */
 	compressImage: (options: compressImageOpts) => void;
 	/**
-	 * 获取图片信息。网络图片需先配置download域名才能生效。
+	 * 从客户端会话选择文件。
 	 */
-	getImageInfo: (options: getImageInfoOpts) => void;
+	chooseMessageFile: (options: chooseMessageFileOpts) => void;
 	/**
-	 * 在新页面中全屏预览图片。预览的过程中用户可以进行保存图片、发送给朋友等操作。
+	 * 从本地相册选择图片或使用相机拍照。
 	 */
-	previewImage: (options: previewImageOpts) => void;
-	/**
-	 * 保存图片到系统相册。
-	 */
-	saveImageToPhotosAlbum: (options: saveImageToPhotosAlbumOpts) => void;
+	chooseImage: (options: chooseImageOpts) => void;
 	startRecord: (options: startRecordOpts) => void;
 	stopRecord: ZeroParamVoidFunc;
 	getRecorderManager: () => getRecorderManagerOpts;
