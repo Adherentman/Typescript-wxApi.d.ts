@@ -52,6 +52,8 @@ Page({
         console.log(res.height)
       }
     })
+    wx.onAppHide(() => {console.log('s')})
+    wx.onAppShow((res)=> {console.log(res.path)})
     wx.pauseVoice();
     wx.stopVoice();
     wx.getBackgroundAudioPlayerState({

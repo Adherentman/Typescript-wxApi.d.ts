@@ -18,7 +18,7 @@ interface string2stringMap {
 type ZeroParamVoidFunc = () => void;
 
 interface ReturnCallBack {
-	(res: ZeroParamVoidFunc);
+	(res: ZeroParamVoidFunc): void;
 }
 interface createLiveObj extends WxApiCallback {}
 
@@ -3111,6 +3111,9 @@ interface WxApplicationProps {
 	};
 }
 
+interface onAppShowCb {
+	(res: WxApplicationProps): void
+}
 /**
  * wx应用级事件Api
  */
@@ -3119,35 +3122,51 @@ interface WxApplicationLevel {
 	/**
 	 * 小程序要打开的页面不存在事件的回调函数
 	 */
-	offPageNotFound: any;
+	offPageNotFound: (cb: Function) => void;
 	/**
 	 * 小程序要打开的页面不存在事件的回调函数
 	 */
-	onPageNotFound: any;
+	onPageNotFound: (cb: Function) => void;
 	/**
 	 * 取消监听小程序错误事件。
 	 */
-	offError: any;
+	offError: (cb: Function) => void;
 	/**
 	 * 监听小程序错误事件。
 	 */
-	onError: any;
+	onError: (cb: Function) => void;
 	/**
 	 * 取消监听小程序切前台事件
 	 */
-	offAppShow: any;
+	offAppShow: (cb: Function) => void;
 	/**
 	 * 监听小程序切前台事件。
 	 */
-	onAppShow: { (res: WxApplicationProps) };
+	onAppShow:  (cb: onAppShowCb) => void;
 	/**
 	 *   取消监听小程序切后台事件
 	 */
-	offAppHide: any;
+	offAppHide: (cb: Function) => void;
 	/**
 	 * 监听小程序切后台事件。
 	 */
-	onAppHide: any;
+	onAppHide: (cb: Function) => void;
+	/**
+	 * 监听音频因为受到系统占用而被中断开始事件。
+	 */
+	onAudioInterruptionBegin: (cb: Function) => void;
+	/**
+	 * 取消监听音频因为受到系统占用而被中断开始事件
+	 */
+	offAudioInterruptionBegin: (cb: Function) => void;
+	/**
+	 * 监听音频中断结束事件。
+	 */
+	onAudioInterruptionEnd: (cb: Function) => void;
+	/**
+	 * 取消监听音频中断结束事件
+	 */
+	offAudioInterruptionEnd: (cb: Function) => void;
 }
 
 // Declares
