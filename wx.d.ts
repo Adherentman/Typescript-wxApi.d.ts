@@ -611,8 +611,7 @@ interface getBackgroundAudioManagerOpts {
 }
 
 interface createInnerAudioContextonErrorRes {
-	errMsg: any;
-	errCode: any;
+	errCode: number;
 }
 interface createInnerAudioContextonErrorCallBack {
 	(callback: createInnerAudioContextonErrorRes);
