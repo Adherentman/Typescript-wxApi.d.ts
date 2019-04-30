@@ -591,22 +591,70 @@ interface getBackgroundAudioManagerOpts {
 	 * 支持版本1.9.94
 	 */
 	protocol: string;
+	/**
+	 * 播放音乐
+	 */
 	play: ZeroParamVoidFunc;
+	/**
+	 * 暂停音乐
+	 */
 	pause: ZeroParamVoidFunc;
+	/**
+	 * 停止音乐
+	 */
 	stop: ZeroParamVoidFunc;
-	seek: (position: any) => void;
+	/**
+	 * 跳转到指定位置
+	 * currentTime 跳转的位置，单位 s。精确到小数点后 3 位，即支持 ms 级别精确度
+	 */
+	seek: (currentTime: number) => void;
+	/**
+	 * 监听背景音频进入可播放状态事件。但不保证后面可以流畅播放
+	 */
 	onCanplay: (callback: ReturnCallBack) => void;
-	onPlay: (callback: ReturnCallBack) => void;
-	onPause: (callback: ReturnCallBack) => void;
-	onStop: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频自然播放结束事件
+	 */
 	onEnded: (callback: ReturnCallBack) => void;
-	onTimeUpdate: (callback: ReturnCallBack) => void;
-	onPrev: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频播放错误事件
+	 */
+	onErroe: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听用户在系统音乐播放面板点击下一曲事件（仅iOS）
+	 */
 	onNext: (callback: ReturnCallBack) => void;
 	/**
-	 * AudioManager onError
+	 * 监听背景音频暂停事件
 	 */
-	onError: (callback: ReturnCallBack) => void;
+	onPause: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频播放事件
+	 */
+	onPlay: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听用户在系统音乐播放面板点击上一曲事件（仅iOS）
+	 */
+	onPrev: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频完成跳转操作事件
+	 */
+	onSeeked: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频开始跳转操作事件
+	 */
+	onSeeking: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频停止事件
+	 */
+	onStop: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听背景音频播放进度更新事件
+	 */
+	onTimeUpdate: (callback: ReturnCallBack) => void;
+	/**
+	 * 监听音频加载中事件。当音频因为数据不足，需要停下来加载时会触发
+	 */
 	onWaiting: (callback: ReturnCallBack) => void;
 }
 

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-04-30
+
+- 更新 `getBackgroundAudioManager` 相关Api
+
 ## 2019-03-19
 
 - 新增 小程序音频中断开始和结束事件 wx.onAudioInterruptionBegin、wx.onAudioInterruptionEnd
