@@ -3268,8 +3268,46 @@ interface RewardedVideoAd {
 
 }
 
+interface InterstitialAd {
+	/**
+	 * 取消监听插屏广告关闭事件
+	 */
+	offClose: (cb: ReturnCallBack) => void;
+	/**
+	 * 取消监听插屏错误事件
+	 */
+	offError: (cb: ReturnCallBack) => void;
+	/**
+	 * 取消监听插屏广告加载事件
+	 */
+	offLoad: (cb: ReturnCallBack) => void;
+	/**
+	 * 监听插屏广告关闭事件
+	 */
+	onClose: (cb: ReturnCallBack) => void;
+	/**
+	 * 监听插屏错误事件
+	 */
+	onError: (res: {errMsg: string, errCode: number}) => void;
+	/**
+	 * 监听插屏广告加载事件
+	 */
+	onLoad: (cb: ReturnCallBack) => void;
+	/**
+	 * 显示插屏广告。
+	 */
+	show: () => Promise<any>
+}
+
 interface createRewardedVideoAdAPIs {
+	/**
+	 * 创建激励视频广告组件
+	 */
 	createRewardedVideoAd: (obj: { adUnitId: string}) => RewardedVideoAd
+	/**
+	 * 创建插屏广告组件
+	 */
+	createInterstitialAd: (obj: { adUnitId: string}) => InterstitialAd
 }
 
 // Declares

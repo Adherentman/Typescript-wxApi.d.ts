@@ -4,6 +4,7 @@
 
 - 更新 `getBackgroundAudioManager` 相关Api
 - 增加 `RewardedVideoAd` 相关Api
+- 增加 `InterstitialAd` 相关Api
 
 ## 2019-03-19
 
