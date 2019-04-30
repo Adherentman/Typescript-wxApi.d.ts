@@ -2267,6 +2267,7 @@ interface pageScrollToOpts extends WxApiCallback {
 	scrollTop: number;
 	duration?: number;
 }
+
 interface startPullDownRefreshRes {
 	errMsg: string;
 }
@@ -2274,7 +2275,6 @@ interface startPullDownRefreshRes {
 interface startPullDownRefreshOpts extends WxApiCallback<startPullDownRefreshRes> {}
 
 // WXML节点信息
-
 
 // TODO: NodesRef
 
@@ -3232,6 +3232,44 @@ interface WxApplicationLevel {
 	 * 取消监听音频中断结束事件
 	 */
 	offAudioInterruptionEnd: (cb: Function) => void;
+}
+
+// RewardedVideoAd Api
+
+interface RewardedVideoAd {
+	/**
+	 * 加载激励视频广告
+	 */
+	load: ZeroParamVoidFunc;
+	/**
+	 * 取消监听用户点击 关闭广告 按钮的事件
+	 */
+	offClose: (cb: ReturnCallBack) => void;
+	/**
+	 * 取消监听激励视频错误事件
+	 */
+	offError: (cb: ReturnCallBack) => void;
+	/**
+	 * 监听用户点击 关闭广告 按钮的事件
+	 */
+	onClose: (cb: ReturnCallBack) => void;
+	/**
+	 * 监听激励视频错误事件
+	 */
+	onError: (obj: {errMsg: string, errCode: number}) => void;
+	/**
+	 * 监听激励视频广告加载事件
+	 */
+	onLoad: (cb: ReturnCallBack) => void;
+	/**
+	 * 显示激励视频广告。激励视频广告将从屏幕下方推入。
+	 */
+	show: (cb: ReturnCallBack) => void;
+
+}
+
+interface createRewardedVideoAdAPIs {
+	createRewardedVideoAd: (obj: { adUnitId: string}) => RewardedVideoAd
 }
 
 // Declares

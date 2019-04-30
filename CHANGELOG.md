@@ -3,6 +3,7 @@
 ## 2019-04-30
 
 - 更新 `getBackgroundAudioManager` 相关Api
+- 增加 `RewardedVideoAd` 相关Api
 
 ## 2019-03-19
 
