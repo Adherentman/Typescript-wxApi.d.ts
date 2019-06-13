@@ -619,7 +619,7 @@ interface getBackgroundAudioManagerOpts {
 	/**
 	 * 监听背景音频播放错误事件
 	 */
-	onErroe: (callback: ReturnCallBack) => void;
+	onError: (callback: ReturnCallBack) => void;
 	/**
 	 * 监听用户在系统音乐播放面板点击下一曲事件（仅iOS）
 	 */
@@ -3354,3 +3354,19 @@ declare function App(app: AppOpts): void;
 declare function Page(page: PageOpts): void;
 declare function getApp(): IApp;
 declare function getCurrentPages(): IPage[];
+
+/** 模块化 */
+
+/**
+ * 引入模块。返回模块通过 module.exports 或 exports 暴露的接口。
+ * @param path 文件路径
+ */
+declare function require(path: string): any;
+/**
+ * 当前模块对象
+ */
+declare const module: { exports: any };
+/**
+ * module.exports 的引用
+ */
+declare const exports: any;
