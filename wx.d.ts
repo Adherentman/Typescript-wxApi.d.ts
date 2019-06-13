@@ -3310,6 +3310,19 @@ interface createRewardedVideoAdAPIs {
 	createInterstitialAd: (obj: { adUnitId: string}) => InterstitialAd
 }
 
+/** 基本功能 */
+
+interface basicFunction {
+	/**
+	 * 小程序环境变量对象
+	 * ```typescript
+	 * wx.env.NODE_ENV = 'production'
+	 * ```
+   * 文件系统中的用户目录路径
+	 */
+	env: any
+}
+
 // Declares
 declare let wx: NetworkAPIs &
 	WxApplicationLevel &
@@ -3326,6 +3339,7 @@ declare let wx: NetworkAPIs &
 	MultithreadingAPIs &
 	MonitorAPIs &
 	DebuggingAPIs &
+	basicFunction & 
 	LogApis;
 
 declare let SocketTask: SocketTaskAPIs;
