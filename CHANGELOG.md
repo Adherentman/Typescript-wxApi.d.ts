@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2019-06-21
+
+- 修复`Worker`Api的问题
+
 ## 2019-06-13
 
 - 解决ISSUE[Need not to declare `require` function for d.ts?](https://github.com/Adherentman/Typescript-wxApi.d.ts/issues/12)

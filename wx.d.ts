@@ -20,6 +20,7 @@ type ZeroParamVoidFunc = () => void;
 interface ReturnCallBack {
 	(res: ZeroParamVoidFunc): void;
 }
+
 interface createLiveObj extends WxApiCallback {}
 
 // App Types
@@ -3121,8 +3122,8 @@ interface MultithreadingAPIs {
 }
 
 interface workerAPIs {
-	postMessage: any;
-	onMessage: ZeroParamVoidFunc;
+	postMessage: ({msg: string}) => void;
+	onMessage: any;
 	terminate: ZeroParamVoidFunc;
 }
 
