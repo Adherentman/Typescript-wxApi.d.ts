@@ -1,19 +1,25 @@
 # CHANGELOG
 
+## 2019-08-27
+
+- 修复 `updateShareMenu` 的参数问题
+- 增加 `shareAppMessage` api
+- 增加 `offShareAppMessage` api
+
 ## 2019-06-21
 
-- 修复`Worker`Api的问题
+- 修复`Worker`Api 的问题
 
 ## 2019-06-13
 
-- 解决ISSUE[Need not to declare `require` function for d.ts?](https://github.com/Adherentman/Typescript-wxApi.d.ts/issues/12)
+- 解决 ISSUE[Need not to declare `require` function for d.ts?](https://github.com/Adherentman/Typescript-wxApi.d.ts/issues/12)
 - 增加`wx.env` Api
 
 ## 2019-04-30
 
-- 更新 `getBackgroundAudioManager` 相关Api
-- 增加 `RewardedVideoAd` 相关Api
-- 增加 `InterstitialAd` 相关Api
+- 更新 `getBackgroundAudioManager` 相关 Api
+- 增加 `RewardedVideoAd` 相关 Api
+- 增加 `InterstitialAd` 相关 Api
 
 ## 2019-03-19
 
@@ -43,22 +49,22 @@
 
 ## 2019-01-26
 
-- 加定时器Api
+- 加定时器 Api
 - 增加创建动画实例，以及链式调用
 
 ## 2019-01-25
 
-- 增加console的Api
+- 增加 console 的 Api
 
-## *2018-12-26*
+## _2018-12-26_
 
-- 增加小程序生命周期的Api
-- 增加小程序应用级事件的Api
+- 增加小程序生命周期的 Api
+- 增加小程序应用级事件的 Api
 
-## *2018-11-05*
+## _2018-11-05_
 
 - 增加`wx.compressImage`API，压缩图片接口，可选压缩质量
-- 增加mDNS相关API
+- 增加 mDNS 相关 API
   - offLocalServiceDiscoveryStop
   - offLocalServiceFound
   - offLocalServiceLost
@@ -69,10 +75,10 @@
   - onLocalServiceResolveFail
   - startLocalServiceDiscovery
   - stopLocalServiceDiscovery
-- 增加图片API的注释
-- 增加下载，发起请求，上传API的注释
+- 增加图片 API 的注释
+- 增加下载，发起请求，上传 API 的注释
 
-## *2018-10-16*
+## _2018-10-16_
 
 - fix the type of the `wx.pageScrollTo` function [#6](https://github.com/Adherentman/Typescript-wxApi.d.ts/pull/6)
 
@@ -239,18 +245,18 @@
 - 修复`uploadTask`中的`onProgressUpdate`方法无法`res.`出后面三个`progress`，`totalBytesExpectedToSend`， `totalBytesSent`
 
 ```typescript
-let a = wx.uploadFile({ url: "dada", filePath: "daada", name: "dada" });
+let a = wx.uploadFile({ url: 'dada', filePath: 'daada', name: 'dada' });
 a.onProgressUpdate(res =>
-  console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent)
+	console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent)
 );
 ```
 
 - 修复`downloadTask`中的`onProgressUpdate`方法无法`res.`出后面三个`progress`，`totalBytesExpectedToSend`， `totalBytesSent`
 
 ```typescript
-let a = wx.downloadTask({ url: "dada" });
+let a = wx.downloadTask({ url: 'dada' });
 a.onProgressUpdate(res =>
-  console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent)
+	console.log(res.progress, res.totalBytesExpectedToSend, res.totalBytesSent)
 );
 ```
 

@@ -2313,11 +2313,13 @@ interface NodesRef {
 	/**
 	 * 添加节点的滚动位置查询请求。
 	 */
-	scrollOffset: (callback: (res: {id: string;dataset: object;scrollLeft: number;scrollTop: number}) => void) => createSelectorQueryOpts;
+	scrollOffset: (
+		callback: (res: { id: string; dataset: object; scrollLeft: number; scrollTop: number }) => void
+	) => createSelectorQueryOpts;
 	/**
 	 * 添加节点的 Context 对象查询请求。
 	 */
-	context: (callback: (res: {context: object})=> void) => createSelectorQueryOpts;
+	context: (callback: (res: { context: object }) => void) => createSelectorQueryOpts;
 }
 
 interface createSelectorQueryOpts {
@@ -2529,12 +2531,12 @@ interface UIHideAndShowArgs {
 }
 
 interface getMenuButtonBoundingClientRectRes {
-  width: number;
-  height: number;
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
+	width: number;
+	height: number;
+	top: number;
+	right: number;
+	bottom: number;
+	left: number;
 }
 interface UIAPIs {
 	/**
@@ -2568,11 +2570,11 @@ interface UIAPIs {
 	/**
 	 * 在当前页面显示导航条加载动画。
 	 */
-	showNavigationBarLoading:  (args: UIHideAndShowArgs) => void;
+	showNavigationBarLoading: (args: UIHideAndShowArgs) => void;
 	/**
 	 * 隐藏导航条加载动画。
 	 */
-	hideNavigationBarLoading:  (args: UIHideAndShowArgs) => void;
+	hideNavigationBarLoading: (args: UIHideAndShowArgs) => void;
 	/**
 	 * 设置导航条的颜色
 	 */
@@ -2674,23 +2676,26 @@ interface UIAPIs {
 	/**
 	 * 节点布局交叉状态API可用于监听两个或多个组件节点在布局位置上的相交状态。这一组API常常可以用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见。
 	 */
-	createIntersectionObserver: (this: any, options: {thresholds?: number[], initialRatio?: number, observeAll?: boolean}) => createIntersectionObserverAPIs;
+	createIntersectionObserver: (
+		this: any,
+		options: { thresholds?: number[]; initialRatio?: number; observeAll?: boolean }
+	) => createIntersectionObserverAPIs;
 	/**
 	 * 延迟一部分操作到下一个时间片再执行。
 	 */
-  nextTick: (c: Function) => void;
-  /**
-   * 获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点。
-   */
-  getMenuButtonBoundingClientRect: () => getMenuButtonBoundingClientRectRes;
-  /**
-   * 监听窗口尺寸变化事件
-   */
-  onWindowResize: (c: (size: {windowWidth: number, windowHeight: number}) => void)  => void;
-  /**
-   * 监听键盘高度变化
-   */
-  onKeyboardHeightChange: (c: Function) => void;
+	nextTick: (c: Function) => void;
+	/**
+	 * 获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点。
+	 */
+	getMenuButtonBoundingClientRect: () => getMenuButtonBoundingClientRectRes;
+	/**
+	 * 监听窗口尺寸变化事件
+	 */
+	onWindowResize: (c: (size: { windowWidth: number; windowHeight: number }) => void) => void;
+	/**
+	 * 监听键盘高度变化
+	 */
+	onKeyboardHeightChange: (c: Function) => void;
 }
 
 interface canvasContextApi {
@@ -2830,11 +2835,20 @@ interface showShareMenuOpts extends WxApiCallback {
 }
 
 interface updateShareMenuOpts extends WxApiCallback {
+	/** 是否使用带 shareTicket 的转发详情	*/
 	withShareTicket?: boolean;
+	/** 是否是动态消息，详见动态消息 */
+	isUpdatableMessage?: boolean;
+	/** 动态消息的 activityId。通过 updatableMessage.createActivityId 接口获取 */
+	activityId?: string;
+	/** 动态消息的模板信息 */
+	templateInfo?: { parameterList: Array<{ name: string; value: string }> };
 }
 
 interface getShareInfoOpts extends WxApiCallback {
+	/** shareTicket */
 	shareTicket: string;
+	/** 超时时间，单位 ms */
 	timeout?: number;
 }
 
@@ -2972,6 +2986,16 @@ interface getAccountInfoSyncOpts {
 	plugin: pluginObj;
 }
 
+interface shareAppMessageOpts {
+	/** 转发标题，不传则默认使用当前小游戏的昵称。 */
+	title: string;
+	/** 转发显示图片的链接，可以是网络图片路径或本地图片文件路径或相对代码包根目录的图片文件路径。显示图片长宽比是 5:4 */
+	imageUrl: string;
+	/** 查询字符串，从这条转发消息进入后，可通过 wx.getLaunchOptionsSync() 或 wx.onShow() 获取启动参数中的 query。必须是 key1=val1&key2=val2 的格式。 */
+	query: string;
+	/** 审核通过的图片 ID，详见 使用审核通过的转发图片 */
+	imageUrlId: string;
+}
 interface OpenInterfaceAPIs {
 	/**
 	 * 调用接口wx.login() 获取临时登录凭证（code）
@@ -3012,6 +3036,14 @@ interface OpenInterfaceAPIs {
 	 * 更新转发属性
 	 */
 	updateShareMenu: (options: updateShareMenuOpts) => void;
+	/**
+	 * 取消监听用户点击右上角菜单的「转发」按钮时触发的事件
+	 */
+	offShareAppMessage: (callback: () => void) => void;
+	/**
+	 * 主动拉起转发，进入选择通讯录界面
+	 */
+	shareAppMessage: (options: shareAppMessageOpts) => void;
 	/**
 	 * 获取转发详细信息
 	 */
@@ -3096,7 +3128,7 @@ interface updateManagerAPIs {
 	/**
 	 * 监听向微信后台请求检查更新结果事件。微信在小程序冷启动时自动检查更新，不需由开发者主动触发。
 	 */
-	onCheckForUpdate: (callback: (res: {hasUpdate: boolean}) => void) => void;
+	onCheckForUpdate: (callback: (res: { hasUpdate: boolean }) => void) => void;
 	/**
 	 * 监听小程序有版本更新事件。客户端主动触发下载（无需开发者触发），下载成功后回调
 	 */
@@ -3122,7 +3154,7 @@ interface MultithreadingAPIs {
 }
 
 interface workerAPIs {
-	postMessage: ({msg: string}) => void;
+	postMessage: ({ msg: string }) => void;
 	onMessage: any;
 	terminate: ZeroParamVoidFunc;
 }
@@ -3178,7 +3210,7 @@ interface WxApplicationProps {
 }
 
 interface onAppShowCb {
-	(res: WxApplicationProps): void
+	(res: WxApplicationProps): void;
 }
 /**
  * wx应用级事件Api
@@ -3208,7 +3240,7 @@ interface WxApplicationLevel {
 	/**
 	 * 监听小程序切前台事件。
 	 */
-	onAppShow:  (cb: onAppShowCb) => void;
+	onAppShow: (cb: onAppShowCb) => void;
 	/**
 	 *   取消监听小程序切后台事件
 	 */
@@ -3257,7 +3289,7 @@ interface RewardedVideoAd {
 	/**
 	 * 监听激励视频错误事件
 	 */
-	onError: (obj: {errMsg: string, errCode: number}) => void;
+	onError: (obj: { errMsg: string; errCode: number }) => void;
 	/**
 	 * 监听激励视频广告加载事件
 	 */
@@ -3266,7 +3298,6 @@ interface RewardedVideoAd {
 	 * 显示激励视频广告。激励视频广告将从屏幕下方推入。
 	 */
 	show: (cb: ReturnCallBack) => void;
-
 }
 
 interface InterstitialAd {
@@ -3289,7 +3320,7 @@ interface InterstitialAd {
 	/**
 	 * 监听插屏错误事件
 	 */
-	onError: (res: {errMsg: string, errCode: number}) => void;
+	onError: (res: { errMsg: string; errCode: number }) => void;
 	/**
 	 * 监听插屏广告加载事件
 	 */
@@ -3297,18 +3328,18 @@ interface InterstitialAd {
 	/**
 	 * 显示插屏广告。
 	 */
-	show: () => Promise<any>
+	show: () => Promise<any>;
 }
 
 interface createRewardedVideoAdAPIs {
 	/**
 	 * 创建激励视频广告组件
 	 */
-	createRewardedVideoAd: (obj: { adUnitId: string}) => RewardedVideoAd
+	createRewardedVideoAd: (obj: { adUnitId: string }) => RewardedVideoAd;
 	/**
 	 * 创建插屏广告组件
 	 */
-	createInterstitialAd: (obj: { adUnitId: string}) => InterstitialAd
+	createInterstitialAd: (obj: { adUnitId: string }) => InterstitialAd;
 }
 
 /** 基本功能 */
@@ -3319,9 +3350,9 @@ interface basicFunction {
 	 * ```typescript
 	 * wx.env.NODE_ENV = 'production'
 	 * ```
-   * 文件系统中的用户目录路径
+	 * 文件系统中的用户目录路径
 	 */
-	env: any
+	env: any;
 }
 
 // Declares
@@ -3340,7 +3371,7 @@ declare let wx: NetworkAPIs &
 	MultithreadingAPIs &
 	MonitorAPIs &
 	DebuggingAPIs &
-	basicFunction & 
+	basicFunction &
 	LogApis;
 
 declare let SocketTask: SocketTaskAPIs;
